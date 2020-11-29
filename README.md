@@ -1,6 +1,6 @@
-<center><h1>http-request-codegen</h1></center>
+<h1 align="center">http-request-codegen</h1>
 
-<center><p>**http-request-codegen** generates HTTP request code snippets for different
-implementations. It's perfect if you want to include examples documenting APIs.</p></center>
+<p align="center">HTTP request code snippets generator for different
+implementations. It's perfect if you want to include examples documenting APIs.</p>
 
-<center><h2><a href="https://mondeja.github.io/http-request-codegen">:book: Documentation</a></h2></center>
+<h2 align="center"><a href="https://mondeja.github.io/http-request-codegen">:book: Documentation</a></h2>
