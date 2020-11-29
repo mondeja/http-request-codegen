@@ -11,10 +11,19 @@ copyright: Copyright &copy; 2020 Álvaro Mondéjar
 docs_dir: docs
 theme:
   name: material
+  features:
+    - navigation.tabs
+  icon:
+    repo: fontawesome/brands/github
 
 nav:
-  - Overview: index.md
-  - Support: support.md
+  - Description: index.md
+  - Setup:
+    - Installation: install.md
+  - Demo:
+    - Available generators: demo.md
+  - Support:
+    - Supported features: support.md
 
 markdown_extensions:
   - pymdownx.tabbed
@@ -24,5 +33,9 @@ markdown_extensions:
   - meta
 
 plugins:
+  - search
   - macros:
       module_name: docs_macros
+  - minify:
+      minify_html: true
+      minify_js: true

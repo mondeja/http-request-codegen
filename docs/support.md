@@ -1,8 +1,4 @@
----
-title: Support
----
-
-# Support
+# Supported features
 
 {% for lang, impls in http_request_codegen.supported_features().items() %}
 === "{{lang|capitalize}}"
