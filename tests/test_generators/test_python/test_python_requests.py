@@ -20,6 +20,7 @@ from http_request_codegen.python.requests import get as requests_get
         'indent',
         'quote_char',
         'seed',
+        'init',
         'oneline',
         'kwargs',
         'result_regex',
@@ -34,6 +35,7 @@ from http_request_codegen.python.requests import get as requests_get
             DEFAULT_INDENT,
             DEFAULT_QUOTE_CHAR,
             None,
+            True,
             False,
             {},
             '''import requests
@@ -56,6 +58,7 @@ req = requests.get(
             DEFAULT_INDENT,
             DEFAULT_QUOTE_CHAR,
             None,
+            True,
             False,
             {'stream': True, 'timeout': 2.5},
             re.escape('''import requests
@@ -83,6 +86,7 @@ req = requests.get(
             DEFAULT_INDENT,
             DEFAULT_QUOTE_CHAR,
             None,
+            True,
             False,
             {},
             '''import requests
@@ -106,6 +110,7 @@ req = requests.get(
             DEFAULT_INDENT,
             DEFAULT_QUOTE_CHAR,
             None,
+            True,
             False,
             {},
             '''import requests
@@ -131,6 +136,7 @@ req = requests.get(
             '  ',
             DEFAULT_QUOTE_CHAR,
             None,
+            True,
             False,
             {},
             '''import requests
@@ -156,6 +162,7 @@ req = requests.get(
             DEFAULT_INDENT,
             '"',
             None,
+            True,
             False,
             {},
             '''import requests
@@ -182,6 +189,7 @@ req = requests.get(
             DEFAULT_QUOTE_CHAR,
             None,
             True,
+            True,
             {'stream': True, 'timeout': 2.5},
             ('import requests;req = requests.get(\'localhost\', headers={'
              '\'Content-Type\': \'application/json\','
@@ -192,7 +200,7 @@ req = requests.get(
     )
 )
 def test_python_requests_get(url, parameters, headers, indent, quote_char,
-                             seed, oneline, kwargs, result_regex,
+                             seed, init, oneline, kwargs, result_regex,
                              possible_groups):
     result = requests_get(
         url,
@@ -200,6 +208,7 @@ def test_python_requests_get(url, parameters, headers, indent, quote_char,
         headers=headers,
         indent=indent,
         quote_char=quote_char,
+        init=init,
         seed=seed,
         oneline=oneline,
         **kwargs

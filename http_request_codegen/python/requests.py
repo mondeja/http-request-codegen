@@ -10,18 +10,22 @@ from http_request_codegen.valuer import value_by_parameter
 
 
 def get(url, parameters=[], headers={}, indent=None, quote_char=None,
-        oneline=False, seed=None, locale=None, **kwargs):
+        init=True, oneline=False, seed=None, locale=None, **kwargs):
     """GET method code generator for python requests library."""
     quote_char = quote_char or DEFAULT_QUOTE_CHAR
     indent = indent or DEFAULT_INDENT
-    response = ('import requests%(separator)s%(newline)s%(newline)s'
-                'req = requests.get(%(newline)s%(indent)s%(quote_char)s'
-                '%(url)s%(quote_char)s') % {
+    response = ''
+    if init:
+        response += 'import requests%(separator)s%(newline)s%(newline)s' % {
+            'separator': ';' if oneline else '',
+            'newline': '\n' if not oneline else '',
+        }
+    response += ('req = requests.get(%(newline)s%(indent)s%(quote_char)s'
+                 '%(url)s%(quote_char)s') % {
         'url': url,
         'indent': indent if not oneline else '',
         'quote_char': quote_char,
         'newline': '\n' if not oneline else '',
-        'separator': ';' if oneline else '',
     }
     if headers or parameters or kwargs:
         response += ',%(space)s%(newline)s' % {

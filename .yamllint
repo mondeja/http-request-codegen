@@ -25,6 +25,7 @@ rules:
     spaces: consistent
     ignore: |
       mkdocs.yml
+      .github
   key-duplicates: enable
   key-ordering:
     ignore: |

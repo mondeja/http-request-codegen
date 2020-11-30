@@ -17,13 +17,8 @@ theme:
     repo: fontawesome/brands/github
 
 nav:
-  - Description: index.md
-  - Setup:
-    - Installation: install.md
-  - Demo:
-    - Available generators: demo.md
-  - Support:
-    - Supported features: support.md
+  - Basic: index.md
+  - Development: dev.md
 
 markdown_extensions:
   - pymdownx.tabbed
@@ -39,3 +34,12 @@ plugins:
   - minify:
       minify_html: true
       minify_js: true
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          rendering:
+            show_source: false
+            show_root_toc_entry: false
+      watch:
+      - http_request_codegen
