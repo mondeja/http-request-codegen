@@ -111,13 +111,12 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
             'newline': '\n' if not oneline else '',
         }
         for i, (pname, pvalue) in enumerate(parameters_keys.items()):
-            response += ('%(indent)s%(indent)s%(quote_char)s'
-                         '%(parameter_name)s%(quote_char)s:'
-                         ' %(quote_char)s%(value)s%(quote_char)s%(comma)s') % {
+            response += ('%(indent)s%(quote_char)s%(parameter_name)s'
+                         '%(quote_char)s: %(value)s%(comma)s') % {
                 # TODO: Multiple possible parameter names by list, function
                 # or list of functions
                 'parameter_name': pname,
-                'indent': indent if not oneline else '',
+                'indent': indent * 2 if not oneline else '',
                 'quote_char': quote_char,
                 'value': pvalue if oneline else raw_str_definition(
                     pvalue, indent=indent * 2, quote_char=quote_char,
