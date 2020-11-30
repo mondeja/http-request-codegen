@@ -6,7 +6,7 @@ from http_request_codegen.generators.python._utils import (
     DEFAULT_INDENT,
     DEFAULT_QUOTE_CHAR,
     DEFAULT_WRAP,
-    escape_quote,
+    escape_by_quote,
     raw_str_definition,
     repr_dict_kwarg,
     repr_kwarg
@@ -40,8 +40,8 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
         parameters_keys = OrderedDict({})
         parameters_line_length = 9  # 'params={}'
         for parameter in parameters:
-            name = escape_quote(parameter['name'], quote_char)
-            value = escape_quote(
+            name = escape_by_quote(parameter['name'], quote_char)
+            value = escape_by_quote(
                 value_by_parameter(parameter, seed=seed, locale=locale),
                 quote_char,
             )
@@ -57,8 +57,8 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
             else OrderedDict({})
         headers_line_length += 2  # {}
         for key, value in headers.items():
-            escaped_key = escape_quote(key, quote_char)
-            escaped_value = escape_quote(value, quote_char)
+            escaped_key = escape_by_quote(key, quote_char)
+            escaped_value = escape_by_quote(value, quote_char)
             headers_keys[escaped_key] = escaped_value
             # 2 is ': '
             headers_line_length += \
@@ -73,7 +73,7 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
         kwargs_line_length = 2
         for key, value in kwargs.items():
             kwarg_reproducted = repr_kwarg(
-                key, value, indent=indent, quote_char=quote_char)
+                key, value, indent='', quote_char=quote_char)
             kwargs_line_length += len(kwarg_reproducted)
             kwargs_reproducted.append(kwarg_reproducted)
         kwargs_line_length += len(kwargs) - 1  # commas except last

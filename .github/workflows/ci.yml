@@ -38,6 +38,9 @@ jobs:
           coveralls
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Doctest with pytest
+        run: |
+          pytest -svv --doctest-modules http_request_codegen
 
   build-sdist:
     if: startsWith(github.ref, 'refs/tags/')
