@@ -30,16 +30,22 @@
 
 ### Test
 
-=== "Basic"
+=== "Formal API"
 
     ```bash
     pytest -sv
     ```
 
-=== "With coverage"
+=== "Coverage"
 
     ```bash
     pytest -s --cov=http_request_codegen --cov-config=setup.cfg --cov-report=html
+    ```
+
+=== "Doctests"
+
+    ```bash
+    pytest -svv --doctest-modules http_request_codegen
     ```
 
 ### Lint
@@ -51,5 +57,11 @@ pre-commit run --all-files
 ## TODO
 
 - [x] Implement implementation autodiscovering in `http_request_codegen.factory`.
-- [ ] Test `http_request_codegen.python._utils::repr_str_kwarg`.
-- [ ] Test `http_request_codegen.python._utils::repr_kwarg`.
+- [ ] Document and doctest `http_request_codegen.generators.python._utils`
+ module.
+- [ ] Document and doctest `http_request_codegen.inspector` module.
+- [ ] Document and doctest `http_request_codegen.support` module.
+- [ ] Add parametrizer that list all combinations of arguments passed to
+ implementations.
+- [ ] Document `http_request_codegen.api::generate_http_request_md_code_block`
+ function.
