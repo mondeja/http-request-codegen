@@ -5,11 +5,11 @@ import re
 import pytest
 from faker.providers.lorem.en_US import Provider as EnUsLoremProvider
 
-from http_request_codegen.python._utils import (
+from http_request_codegen.generators.python._utils import (
     DEFAULT_INDENT,
     DEFAULT_QUOTE_CHAR
 )
-from http_request_codegen.python.requests import get as requests_get
+from http_request_codegen.generators.python.requests import get as requests_get
 
 
 @pytest.mark.parametrize(

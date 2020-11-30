@@ -1,5 +1,5 @@
 
-from http_request_codegen.python._utils import (
+from http_request_codegen.generators.python._utils import (
     DEFAULT_INDENT,
     DEFAULT_QUOTE_CHAR,
     escape_quote,

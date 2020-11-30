@@ -11,13 +11,11 @@ copyright: Copyright &copy; 2020 Álvaro Mondéjar
 docs_dir: docs
 theme:
   name: material
-  features:
-    - navigation.tabs
   icon:
     repo: fontawesome/brands/github
 
 nav:
-  - Basic: index.md
+  - User guide: index.md
   - Development: dev.md
 
 markdown_extensions:
@@ -26,6 +24,8 @@ markdown_extensions:
   - toc:
       permalink: True
   - meta
+  - pymdownx.tasklist:
+      custom_checkbox: true
 
 plugins:
   - search

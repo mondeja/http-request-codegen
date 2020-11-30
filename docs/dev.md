@@ -50,6 +50,6 @@ pre-commit run --all-files
 
 ## TODO
 
-- [ ] Implement implementation autodiscovering in `http_request_codegen.factory`.
+- [x] Implement implementation autodiscovering in `http_request_codegen.factory`.
 - [ ] Test `http_request_codegen.python._utils::repr_str_kwarg`.
 - [ ] Test `http_request_codegen.python._utils::repr_kwarg`.

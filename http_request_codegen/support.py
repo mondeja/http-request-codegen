@@ -4,8 +4,8 @@ import importlib
 from collections import OrderedDict
 
 from http_request_codegen.factory import (
-    GENERATORS_BY_LANG_IMPL,
-    get_func_by_lang_impl_method
+    get_func_by_lang_impl_method,
+    get_generators_by_lang_impl
 )
 from http_request_codegen.http import HTTP_METHODS
 from http_request_codegen.inspector import function_has_kwarg
@@ -38,7 +38,7 @@ def supported_features():
 
     response = {}
 
-    for lang, impls in GENERATORS_BY_LANG_IMPL.items():
+    for lang, impls in get_generators_by_lang_impl().items():
         response[lang] = {}
         for impl, module_path in impls.items():
             response[lang][impl] = {}
