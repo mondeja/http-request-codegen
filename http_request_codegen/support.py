@@ -5,7 +5,7 @@ from collections import OrderedDict
 
 from http_request_codegen.factory import (
     get_func_by_lang_impl_method,
-    get_generators_by_lang_impl
+    get_generators_modules_by_lang_impl
 )
 from http_request_codegen.http import HTTP_METHODS
 from http_request_codegen.inspector import function_has_kwarg
@@ -29,7 +29,7 @@ def _get_supports_parameters_funcs():
         "Parameters localization": _func_has_kwarg_support_factory('locale'),
         "Parameters seed": _func_has_kwarg_support_factory('seed'),
         "Quotation character": _func_has_kwarg_support_factory('quote_char'),
-        "Wrapping": _func_has_kwarg_support_factory('wrap'),
+        "Line wrapping": _func_has_kwarg_support_factory('wrap'),
     })
 
 
@@ -38,7 +38,7 @@ def supported_features():
 
     response = {}
 
-    for lang, impls in get_generators_by_lang_impl().items():
+    for lang, impls in get_generators_modules_by_lang_impl().items():
         response[lang] = {}
         for impl, module_path in impls.items():
             response[lang][impl] = {}

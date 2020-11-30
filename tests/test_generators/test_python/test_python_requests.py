@@ -3,13 +3,94 @@
 import re
 
 import pytest
-from faker.providers.lorem.en_US import Provider as EnUsLoremProvider
 
 from http_request_codegen.generators.python._utils import (
     DEFAULT_INDENT,
     DEFAULT_QUOTE_CHAR
 )
 from http_request_codegen.generators.python.requests import get as requests_get
+
+
+# from faker.providers.lorem.en_US import Provider as EnUsLoremProvider
+
+
+#   - url
+#   - url + parameter
+#   - url + parameters
+#   - url + header
+#   - url + headers
+#   - url + kwarg
+#   - url + kwargs
+#   - url + parameter  + header
+#   - url + parameters + header
+#   - url + parameter  + headers
+#   - url + parameters + headers
+#   - url + parameter  + header + kwarg
+#   - url + parameter  + header + kwargs
+#   - url + parameters + header + kwarg
+#   - url + parameters + header + kwargs
+#   - url + parameter  + headers + kwargs
+#   - url + parameters + headers + kwargs
+#   - url + parameter + kwarg
+#   - url + parameters + kwarg
+#   - url + parameter + kwargs
+#   - url + parameters + kwargs
+#   - url + header + kwarg
+#   - url + headers + kwarg
+#   - url + header + kwargs
+#   - url + headers + kwargs
+
+# init
+# no init
+# quote_char '
+# quote_char DEFAULT_QUOTE_CHAR
+# quote_char "
+# indent '  '
+# indent '    '
+# indent DEFAULT_INDENT
+# indent \t
+# oneline
+# wrap DEFAULT_WRAP
+# wrap 1
+# wrap DEFAULT_WRAP + 1
+# wrap DEFAULT_WRAP + 2
+# wrap DEFAULT_WRAP - 1
+# wrap DEFAULT_WRAP - 2
+# wrap 99999
+
+"""
+# Basic complete case
+(
+    'localhost',
+    [
+        {
+            'name': 'foo',
+            'type': 'str',
+        }
+    ],
+    {'Content-Type': 'application/json'},
+    DEFAULT_INDENT,
+    DEFAULT_QUOTE_CHAR,
+    None,
+    True,
+    False,
+    {'stream': True, 'timeout': 2.5},
+    re.escape('''import requests
+
+req = requests.get(
+'localhost',
+params={
+'foo': \'''') + '(?P<foo>[^\']+)' + re.escape('''\'
+},
+headers={
+'Content-Type': 'application/json'
+},
+stream=True,
+timeout=2.5
+)'''),
+    {'foo': EnUsLoremProvider.word_list}
+),
+"""
 
 
 @pytest.mark.parametrize(
@@ -40,42 +121,10 @@ from http_request_codegen.generators.python.requests import get as requests_get
             {},
             '''import requests
 
-req = requests.get(
-    'localhost')''',
+req = requests.get('localhost')''',
             {}
         ),
 
-        # Basic complete case
-        (
-            'localhost',
-            [
-                {
-                    'name': 'foo',
-                    'type': 'str',
-                }
-            ],
-            {'Content-Type': 'application/json'},
-            DEFAULT_INDENT,
-            DEFAULT_QUOTE_CHAR,
-            None,
-            True,
-            False,
-            {'stream': True, 'timeout': 2.5},
-            re.escape('''import requests
-
-req = requests.get(
-    'localhost',
-    params={
-        'foo': \'''') + '(?P<foo>[^\']+)' + re.escape('''\'
-    },
-    headers={
-        'Content-Type': 'application/json'
-    },
-    stream=True,
-    timeout=2.5
-)'''),
-            {'foo': EnUsLoremProvider.word_list}
-        ),
 
         # Headers
         #   one
@@ -89,14 +138,9 @@ req = requests.get(
             True,
             False,
             {},
-            '''import requests
-
-req = requests.get(
-    'localhost',
-    headers={
-        'Content-Type': 'application/json'
-    }
-)''',
+            ('import requests\n\n'
+             'req = requests.get(\'localhost\', headers={'
+             '\'Content-Type\': \'application/json\'})'),
             {}
         ),
         #   two

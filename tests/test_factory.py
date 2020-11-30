@@ -1,8 +1,14 @@
 """Test language-implementation-method factory."""
 
+import importlib
+from types import ModuleType
+
 import pytest
 
-from http_request_codegen.factory import get_func_by_lang_impl_method
+from http_request_codegen.factory import (
+    get_func_by_lang_impl_method,
+    get_generators_modules_by_lang_impl
+)
 from http_request_codegen.generators.python.requests import (
     get as requests_get,
     post as requests_post
@@ -46,7 +52,7 @@ from http_request_codegen.generators.python.urllib import (
     ('flklfsdngklsnhfd', 'requests', None, ValueError),
     ('flklfsdngklsnhfd', 'requests', 'GET', ValueError),
 ))
-def test_language_impl_method_factory(language, impl, method, result):
+def test_get_func_by_lang_impl_method(language, impl, method, result):
     if hasattr(result, '__traceback__'):
         with pytest.raises(result):
             get_func_by_lang_impl_method(
@@ -57,3 +63,24 @@ def test_language_impl_method_factory(language, impl, method, result):
     else:
         assert get_func_by_lang_impl_method(
             language=language, impl=impl, method=method) == result
+
+
+def test_get_generators_modules_by_lang_impl():
+    generators_modules_by_lang_impl = get_generators_modules_by_lang_impl()
+    assert generators_modules_by_lang_impl
+    assert isinstance(generators_modules_by_lang_impl, dict)
+
+    for lang, impls in generators_modules_by_lang_impl.items():
+        assert lang
+        assert isinstance(lang, str)
+        assert isinstance(impls, dict)
+
+        for impl, modpath in impls.items():
+            assert impl
+            assert isinstance(impl, str)
+            assert isinstance(modpath, str)
+            assert 'http_request_codegen.generators.' in modpath
+
+            mod = importlib.import_module(modpath)
+            assert mod
+            assert isinstance(mod, ModuleType)

@@ -15,10 +15,12 @@ GENERATORS_DIR = os.path.abspath(
 
 
 @lru_cache(maxsize=1)
-def get_generators_by_lang_impl():
+def get_generators_modules_by_lang_impl():
     response = {}
 
     for fname in os.listdir(GENERATORS_DIR):
+        if fname.startswith('_'):
+            continue
         fpath = os.path.join(GENERATORS_DIR, fname)
         if not os.path.isdir(fpath):
             continue
@@ -36,7 +38,7 @@ def get_generators_by_lang_impl():
 
 @lru_cache(maxsize=32)
 def get_func_by_lang_impl_method(language=None, impl=None, method=None):
-    generators_by_lang_impl = get_generators_by_lang_impl()
+    generators_by_lang_impl = get_generators_modules_by_lang_impl()
 
     if language is None:
         if impl is None:

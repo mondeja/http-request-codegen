@@ -4,6 +4,7 @@ DEFAULT_INDENT = '    '
 
 VALID_QUOTE_CHARS = '"\''
 DEFAULT_QUOTE_CHAR = "'"
+DEFAULT_WRAP = 80
 
 # TODO: Document all functions.
 
@@ -93,7 +94,8 @@ def repr_str_kwarg(kwarg_name, string, quote_char=DEFAULT_QUOTE_CHAR,
 
 def repr_dict_kwarg(kwarg_name, dictionary, quote_char=DEFAULT_QUOTE_CHAR,
                     indent=DEFAULT_INDENT, indent_depth=1, newline='\n',
-                    _validate_identifier=True, _validate_quote_char=True):
+                    _validate_identifier=True, _validate_quote_char=True,
+                    _escape_keys=True, _escape_values=True):
     """Returns the code of a dictionary passed as Python keyword argument
     to a function.
 
@@ -143,11 +145,60 @@ def repr_dict_kwarg(kwarg_name, dictionary, quote_char=DEFAULT_QUOTE_CHAR,
                          ' %(quote_char)s%(value)s%(quote_char)s%(comma)s'
                          '%(newline)s') % {
                 'indents': indent * (indent_depth + 1),
-                'key': escape_quote_func(key),
-                'value': escape_quote_func(value),
+                'key': key if not _escape_keys else escape_quote_func(key),
+                'value': value if not _escape_values else
+                escape_quote_func(value),
                 'quote_char': quote_char,
                 'newline': newline,
                 'comma': ',' if i < len(dictionary) - 1 else '',
             }
     response += '%(indent)s}' % {'indent': indent * indent_depth}
+    return response
+
+
+def raw_str_definition(string, indent=DEFAULT_INDENT,
+                       quote_char=DEFAULT_QUOTE_CHAR, wrap=DEFAULT_WRAP,
+                       _escape=False):
+    """Creates a definition of a Python string, multilining it if neccesary.
+    Does not handle spaces at all.
+
+    Examples:
+
+        >>> print(raw_str_definition(('Lorem Ipsum es simplemente el texto de'
+        ...                           ' relleno de las imprentas y archivos de'
+        ...                           ' texto.', wrap=70))
+        ('Lorem Ipsum es simplemente el texto de relleno de las imprenta'
+         's y archivos de texto.')
+
+        >>> print(raw_str_definition('123', wrap=1, quote_char='"'))
+        ("1"
+         "2"
+         "3")
+    """
+    _wrap_at = wrap - len(indent) + len(quote_char) * 2
+    string_escaped = string if not _escape else \
+        escape_quote(string, quote_char)
+
+    if len(string) < _wrap_at:
+        return '%(quote_char)s%(value)s%(quote_char)s' % {
+            'quote_char': quote_char,
+            'value': string_escaped,
+        }
+
+    response = '(%(quote_char)s' % {
+        'quote_char': quote_char
+    }
+    _chars_in_current_line = len(response) + len(indent)
+    for i, ch in enumerate(string):
+        response += ch
+        _chars_in_current_line += 1
+        if _chars_in_current_line >= _wrap_at:
+            if i >= len(string) - 1:
+                break
+            response += '%(quote_char)s\n%(indent)s %(quote_char)s' % {
+                'quote_char': quote_char,
+                'indent': indent,
+            }
+            _chars_in_current_line = 2 + len(indent)  # ' ('
+    response += '%(quote_char)s)' % {'quote_char': quote_char}
     return response
