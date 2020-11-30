@@ -22,7 +22,9 @@ jobs:
         run: python3 -m pip install .[doc]
 
       - name: Build documentation
-        run: mkdocs build
+        run: |
+          mkdocs build
+          rm site/fake_module.py
 
       - name: Deploy to Github Pages
         uses: peaceiris/actions-gh-pages@v3
