@@ -9,13 +9,13 @@ from http_request_codegen.factory import (
     get_func_by_lang_impl_method,
     get_generators_modules_by_lang_impl
 )
+from http_request_codegen.generators.python._urllib import (
+    get as urllib_get,
+    post as urllib_post
+)
 from http_request_codegen.generators.python.requests import (
     get as requests_get,
     post as requests_post
-)
-from http_request_codegen.generators.python.urllib import (
-    get as urllib_get,
-    post as urllib_post
 )
 
 
