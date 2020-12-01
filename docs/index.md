@@ -236,7 +236,7 @@ Supports the following features:
 
 {% endfor %}
 
-## **Reference**
+## **Public API**
 
 ### **`generate_http_request_code`**
 

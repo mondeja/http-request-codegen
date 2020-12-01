@@ -1,4 +1,4 @@
-"""Parameter value formatter factory."""
+'''Parameter value formatter factory.'''
 
 import importlib
 import random
@@ -22,7 +22,7 @@ def _instanciate_faker(seed=None, locale=None):
 
 
 def value_by_parameter(parameter_data, seed=None, locale=None):
-    """Given a dictionary of parameter options, returns the corresponding value
+    '''Given a dictionary of parameter options, returns the corresponding value
     built following the rules listed in ``parameters`` argument of
     :py:func:`http_request_codegen.api.generate_http_request_code` function
     documentation.
@@ -35,7 +35,7 @@ def value_by_parameter(parameter_data, seed=None, locale=None):
     - ``type``
 
     TODO: Document arguments.
-    """
+    '''
     if 'value' in parameter_data:
         return str(parameter_data['value'])
     elif 'values' in parameter_data:

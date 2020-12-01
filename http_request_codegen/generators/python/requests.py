@@ -1,4 +1,4 @@
-"""Python requests code snippets generator."""
+'''Python requests code snippets generator.'''
 
 from collections import OrderedDict
 
@@ -7,9 +7,9 @@ from http_request_codegen.generators.python._utils import (
     DEFAULT_QUOTE_CHAR,
     DEFAULT_WRAP,
     escape_by_quote,
-    raw_str_definition,
-    repr_dict_kwarg,
-    repr_kwarg
+    kwarg_definition,
+    kwarg_definition_dict_valued,
+    raw_str_definition
 )
 from http_request_codegen.valuer import value_by_parameter
 
@@ -17,7 +17,7 @@ from http_request_codegen.valuer import value_by_parameter
 def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
         quote_char=DEFAULT_QUOTE_CHAR, init=True, oneline=False,
         wrap=DEFAULT_WRAP, seed=None, locale=None, **kwargs):
-    """GET method code generator for python requests library."""
+    '''GET method code generator for python requests library.'''
     indent = indent or DEFAULT_INDENT
     quote_char = quote_char or DEFAULT_QUOTE_CHAR
 
@@ -72,7 +72,7 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
         kwargs_reproducted = []
         kwargs_line_length = 2
         for key, value in kwargs.items():
-            kwarg_reproducted = repr_kwarg(
+            kwarg_reproducted = kwarg_definition(
                 key, value, indent='', quote_char=quote_char)
             kwargs_line_length += len(kwarg_reproducted)
             kwargs_reproducted.append(kwarg_reproducted)
@@ -132,13 +132,12 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
 
     if headers:
         response += '%(header)s%(comma)s%(newline)s' % {
-            'header': repr_dict_kwarg('headers',
-                                      headers_keys,
-                                      indent=indent if not oneline else '',
-                                      quote_char=quote_char,
-                                      newline='\n' if not oneline else '',
-                                      _escape_keys=False,
-                                      _escape_values=False),
+            'header': kwarg_definition_dict_valued(
+                'headers', headers_keys,
+                indent=indent if not oneline else '',
+                quote_char=quote_char,
+                newline='\n' if not oneline else '',
+                _escape_keys=False, _escape_values=False),
             'newline': '\n' if not oneline else '',
             'comma': ',' if kwargs else '',
         }

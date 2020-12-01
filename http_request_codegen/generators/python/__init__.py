@@ -1,1 +1,1 @@
-"""Python implementations request generators."""
+'''Python implementations request generators.'''

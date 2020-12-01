@@ -1,1 +1,1 @@
-"""HTTP request code generators."""
+'''HTTP request code generators.'''

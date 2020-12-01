@@ -1,4 +1,4 @@
-"""Test valuer factories."""
+'''Test valuer factories.'''
 
 import builtins
 import uuid
@@ -25,7 +25,7 @@ from tests.conftest import (
     None
 ))
 def test_value_by_parameter__value(value):
-    """Passing the attribute 'value', will be casted to string."""
+    '''Passing the attribute 'value', will be casted to string.'''
     assert value_by_parameter({'value': value}) == str(value)
 
 

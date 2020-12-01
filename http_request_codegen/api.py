@@ -1,4 +1,4 @@
-"""http-request-codegen public API."""
+'''http-request-codegen public API.'''
 
 from http_request_codegen.factory import get_func_by_lang_impl_method
 

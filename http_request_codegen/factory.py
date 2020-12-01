@@ -1,4 +1,4 @@
-"""Language-implementation-method factory."""
+'''Language-implementation-method factory.'''
 
 import importlib
 import os

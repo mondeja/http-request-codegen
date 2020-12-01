@@ -57,11 +57,15 @@ pre-commit run --all-files
 ## TODO
 
 - [x] Implement implementation autodiscovering in `http_request_codegen.factory`.
-- [ ] Document and doctest `http_request_codegen.generators.python._utils`
+- [x] Document and doctest `http_request_codegen.generators.python._utils`
  module.
-- [ ] Document and doctest `http_request_codegen.inspector` module.
-- [ ] Document and doctest `http_request_codegen.support` module.
+- [x] Document and doctest `http_request_codegen.inspector` module.
+- [x] Document `http_request_codegen.support` module.
 - [ ] Add parametrizer that list all combinations of arguments passed to
  implementations.
 - [ ] Document `http_request_codegen.api::generate_http_request_md_code_block`
  function.
+- [ ] Add parameter name randomization support.
+- [ ] Add url randomization support.
+- [ ] Add support for random choosing from list of provider functions as
+ parameter values.

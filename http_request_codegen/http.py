@@ -1,4 +1,4 @@
-"""HTTP utitlities of http-request-codegen."""
+'''HTTP utitlities of http-request-codegen.'''
 
 HTTP_METHODS = [
     'GET',

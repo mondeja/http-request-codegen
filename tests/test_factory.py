@@ -1,4 +1,4 @@
-"""Test language-implementation-method factory."""
+'''Test language-implementation-method factory.'''
 
 import importlib
 from types import ModuleType

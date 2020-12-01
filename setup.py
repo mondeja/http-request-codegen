@@ -61,7 +61,7 @@ with io.open(INIT_FILEPATH, encoding="utf-8") as f:
 
 
 class UploadCommand(Command):
-    """Support setup.py upload."""
+    '''Support setup.py upload.'''
 
     description = "Build and publish the package."
     user_options = [
@@ -70,7 +70,7 @@ class UploadCommand(Command):
 
     @staticmethod
     def status(s):
-        """Prints things in bold."""
+        '''Prints things in bold.'''
         sys.stdout.write("\033[1m{0}\033[0m\n".format(s))
 
     def initialize_options(self):

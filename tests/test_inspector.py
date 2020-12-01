@@ -1,4 +1,4 @@
-"""Testinf for inspection functions of http-request-codegen."""
+'''Testinf for inspection functions of http-request-codegen.'''
 
 import pytest
 

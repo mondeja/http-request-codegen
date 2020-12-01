@@ -1,4 +1,4 @@
-"""Test Python requests library generators."""
+'''Test Python requests library generators.'''
 
 import re
 
