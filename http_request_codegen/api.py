@@ -7,7 +7,7 @@ def generate_http_request_code(language=None, impl=None, method='GET',
                                url='localhost', parameters=[], headers={},
                                indent=None, quote_char='\'', init=True,
                                oneline=False, seed=None, locale=None,
-                               **kwargs):
+                               wrap=80, **kwargs):
     '''Generates a code snippet of an HTTP request for a library of a given
     programming language or a CLI of a program, based on a valid HTTP method
     and a specification of parameters.
@@ -125,10 +125,12 @@ def generate_http_request_code(language=None, impl=None, method='GET',
     '''
     func = get_func_by_lang_impl_method(
         language=language, impl=impl, method=method)
-    func_kwargs = kwargs
+    if wrap is None:
+        wrap = float('inf')
+
     return func(url, parameters=parameters, headers=headers, indent=indent,
-                oneline=oneline, seed=seed, locale=locale,
-                quote_char=quote_char, **func_kwargs)
+                oneline=oneline, seed=seed, locale=locale, init=init,
+                wrap=wrap, quote_char=quote_char, **kwargs)
 
 
 def generate_http_request_md_code_block(language=None, **kwargs):

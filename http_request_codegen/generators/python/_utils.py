@@ -218,9 +218,9 @@ def kwarg_definition(kwarg_name, value, indent=DEFAULT_INDENT, **kwargs):
 
     Examples:
         >>> print(kwarg_definition('foo', 'bar'))
-            foo='bar'
+        foo='bar'
         >>> print(kwarg_definition('foo', 1))
-            foo=1
+        foo=1
         >>> print(kwarg_definition('foo', dict(bar='baz')))
             foo={
                 'bar': 'baz'
@@ -251,16 +251,16 @@ def kwarg_definition(kwarg_name, value, indent=DEFAULT_INDENT, **kwargs):
         return kwarg_definition_str_valued(kwarg_name, value, indent=indent,
                                            _validate_identifier=False,
                                            **kwargs)
-    return '%(indent)s%(kwarg_name)s=%(value)s' % {
+    return '%(kwarg_name)s=%(value)s' % {
         'kwarg_name': kwarg_name,
-        'value': value.__repr__(),
-        'indent': indent
+        'value': repr(value),
     }
 
 
 def kwarg_definition_str_valued(kwarg_name, string,
                                 quote_char=DEFAULT_QUOTE_CHAR,
                                 indent=DEFAULT_INDENT,
+                                wrap=DEFAULT_WRAP,
                                 _validate_identifier=True):
     '''Returns the code of a string passed as Python keyword argument to
     a function.
@@ -286,7 +286,7 @@ def kwarg_definition_str_valued(kwarg_name, string,
 
     Examples:
         >>> print(kwarg_definition_str_valued('foo', 'bar'))
-            foo='bar'
+        foo='bar'
         >>> print(kwarg_definition_str_valued('foo', 'bar', quote_char='"',
         ...                                   indent=''))
         foo="bar"
@@ -310,19 +310,22 @@ def kwarg_definition_str_valued(kwarg_name, string,
     if _validate_identifier:
         validate_python_identifier(kwarg_name)
 
-    return '%(indent)s%(kwarg_name)s=%(quote_char)s%(value)s%(quote_char)s' % {
+    return '%(kwarg_name)s=%(value)s' % {
         'kwarg_name': kwarg_name,
-        'value': escape_by_quote(string, quote_char),
-        'quote_char': quote_char,
-        'indent': indent,
+        'value': raw_str_definition(
+            string,
+            indent=' ' * (len(kwarg_name) + len(indent) + 1),
+            quote_char=quote_char,
+            wrap=wrap),
     }
 
 
 def kwarg_definition_dict_valued(kwarg_name, dictionary,
                                  quote_char=DEFAULT_QUOTE_CHAR,
                                  indent=DEFAULT_INDENT, indent_depth=1,
-                                 newline='\n', _validate_identifier=True,
-                                 _escape_keys=True, _escape_values=True):
+                                 newline='\n', wrap=DEFAULT_WRAP,
+                                 _validate_identifier=True, _escape_keys=True,
+                                 _escape_values=True):
     '''Returns the code of a dictionary passed as Python keyword argument
     to a function.
 
@@ -389,18 +392,20 @@ def kwarg_definition_dict_valued(kwarg_name, dictionary,
     if dictionary:
         response += newline
         for i, (key, value) in enumerate(dictionary.items()):
+            _key = key if not _escape_keys else escape_quote_func(key)
             if isinstance(value, str):
-                _value = '%(quote_char)s%(value)s%(quote_char)s' % {
-                    'quote_char': quote_char,
-                    'value': value if not _escape_values else
-                    escape_quote_func(value)
-                }
+                _indent = indent * indent_depth * 2 + ' ' * (len(_key) + 4)
+                _value = raw_str_definition(value,
+                                            indent=_indent,
+                                            quote_char=quote_char,
+                                            wrap=wrap,
+                                            _escape=_escape_values)
             else:
                 _value = str(value)
             response += ('%(indents)s%(quote_char)s%(key)s%(quote_char)s:'
                          ' %(value)s%(comma)s%(newline)s') % {
                 'indents': indent * (indent_depth + 1),
-                'key': key if not _escape_keys else escape_quote_func(key),
+                'key': _key,
                 'value': _value,
                 'quote_char': quote_char,
                 'newline': newline,
@@ -412,7 +417,7 @@ def kwarg_definition_dict_valued(kwarg_name, dictionary,
 
 def raw_str_definition(string, indent=DEFAULT_INDENT,
                        quote_char=DEFAULT_QUOTE_CHAR, wrap=DEFAULT_WRAP,
-                       _escape=False):
+                       _escape=True):
     '''Creates a definition of a Python string, multilining it if neccesary.
     Does not handle spaces at all wrapping it, so it's useful to efficiently
     wrap non-spaced strings like URLs.
@@ -446,6 +451,12 @@ def raw_str_definition(string, indent=DEFAULT_INDENT,
         ("1"
          "2"
          "3")
+        >>> print(raw_str_definition('123', wrap=4, quote_char='"', indent=''))
+        ("1"
+         "2"
+         "3")
+        >>> print(raw_str_definition('123', wrap=6, quote_char='"', indent=''))
+        "123"
 
     Returns:
         str: String reproducted in multiples lines wrapped by ``(`` and ``)``

@@ -19,28 +19,28 @@ REQUIRED = [
     'faker>=4.0.0',  # Python3 only support
 ]
 LINT_EXTRAS = [
-    "flake8==3.8.4",
-    "flake8-print==4.0.0",
-    "flake8-implicit-str-concat==0.2.0",
-    "isort==5.6.4",
-    "yamllint==1.25.0",
+    'flake8==3.8.4',
+    'flake8-print==4.0.0',
+    'flake8-implicit-str-concat==0.2.0',
+    'isort==5.6.4',
+    'yamllint==1.25.0',
 ]
 TEST_EXTRAS = [
-    "pytest==6.1.2",
-    "pytest-cov==2.10.1",
-    "tox==3.20.1",
+    'pytest==6.1.2',
+    'pytest-cov==2.10.1',
+    'inflection==0.5.1',
 ]
 DOC_EXTRAS = [
-    "mkdocs==1.1.2",
-    "mkdocs-material==6.1.6",
-    "mkdocs_macros_plugin==0.5.0",
-    "mkdocs-minify-plugin==0.3.0",
-    "mkdocstrings==0.13.6",
+    'mkdocs==1.1.2',
+    'mkdocs-material==6.1.6',
+    'mkdocs_macros_plugin==0.5.0',
+    'mkdocs-minify-plugin==0.3.0',
+    'mkdocstrings==0.13.6',
 ]
 DEV_EXTRAS = [
-    "twine==3.2.0",
-    "bump2version==1.0.1",
-    "pre-commit==2.9.2",
+    'twine==3.2.0',
+    'bump2version==1.0.1',
+    'pre-commit==2.9.2',
 ] + DOC_EXTRAS + TEST_EXTRAS + LINT_EXTRAS
 
 HERE = os.path.abspath(os.path.dirname(__file__))

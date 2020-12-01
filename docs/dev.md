@@ -71,10 +71,9 @@ pre-commit run --all-files
 - [ ] Document ``uuid`` type in parameters types.
 - [ ] Document ``id`` type in parameters types.
 - [ ] Document ``file`` type in parameters types.
-- [ ] Add parametrizer that list all combinations of arguments passed to
+- [x] Add parametrizer that list all combinations of arguments passed to
  implementations.
 - [ ] Document `http_request_codegen.api::generate_http_request_md_code_block`
  function.
-- [ ] Document `http_request_codegen.valuer::lazy_value_by_parameter`
-  function.
-- [ ] Implement random parameter type with ``_type = lazy_string()`` 
+- [ ] Document `http_request_codegen.valuer::lazy_value_by_parameter` function.
+- [ ] Document `http_request_codegen.valuer::lazy_name_by_parameter` function.

@@ -79,13 +79,11 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
 
     kwargs_line_length = 0
     if kwargs:
-        kwargs_reproducted = []
         kwargs_line_length = 2
         for key, value in kwargs.items():
-            kwarg_reproducted = kwarg_definition(
-                key, value, indent='', quote_char=quote_char)
-            kwargs_line_length += len(kwarg_reproducted)
-            kwargs_reproducted.append(kwarg_reproducted)
+            kwargs_line_length += len(key) + len(str(value))
+            if isinstance(value, str):
+                kwargs_line_length += 2
         kwargs_line_length += len(kwargs) - 1  # commas except last
 
     # oneliner by wrapping
@@ -117,7 +115,7 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
     # parameters render
     if parameters:
         response += '%(indent)sparams={%(newline)s' % {
-            'indent': indent,
+            'indent': indent if not oneline else '',
             'newline': '\n' if not oneline else '',
         }
         for i, (pname, pvalue) in enumerate(parameters_keys.items()):
@@ -133,8 +131,10 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
             }
             response += '\n' if not oneline else ''
 
-        response += '%(indent)s},%(newline)s' % {
-            'indent': indent,
+        response += '%(indent)s}%(comma)s%(newline)s' % {
+            'indent': indent if not oneline else (
+                '' if (not headers and not kwargs) else ' '),
+            'comma': ',' if not oneline and (headers or kwargs) else '',
             'newline': '\n' if not oneline else '',
         }
 
@@ -151,12 +151,18 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
         }
 
     if kwargs:
-        for i, kwarg_reproducted in enumerate(kwargs_reproducted):
+        for i, (key, value) in enumerate(kwargs.items()):
             response += '%(indent)s%(repr_kwarg)s%(comma)s%(newline)s' % {
-                'indent': indent if not oneline else ' ',
-                'repr_kwarg': kwarg_reproducted,
+                'indent': indent if not oneline else '',
+                'repr_kwarg': kwarg_definition(
+                    key,
+                    value,
+                    indent='' if oneline else indent,
+                    quote_char=quote_char,
+                    wrap=wrap),
                 'comma': ',' if i < len(kwargs) - 1 else '',
-                'newline': '\n' if not oneline else '',
+                'newline': '\n' if not oneline else (
+                    ' ' if i < len(kwargs) - 1 else ''),
             }
 
     response += ')%(separator)s' % {'separator': ';' if _oneline else ''}

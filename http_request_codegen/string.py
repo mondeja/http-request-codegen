@@ -145,3 +145,25 @@ def lazy_string(string, seed=None, string_func_path=False):
     elif hasattr(string, '__name__'):
         return string.__name__
     return str(string)
+
+
+def replace_multiple(string, replacements={}):
+    """Replaces multiple strings inside a string.
+    [inflection](https://inflection.readthedocs.io) library, replacing some
+    strings in a personalized way.
+
+    Args:
+        string (str): String to replace.
+        replacements (dict): Custom replacements for the string.
+
+    Examples:
+        >>> print(replace_multiple('Replace this ".',
+        ...                         replacements={'"': 'double quote'}))
+        Replace this double quote.
+
+    Returns:
+        str: Input string with multiple replaces performed.
+    """
+    for replacer, replacement in replacements.items():
+        string = string.replace(replacer, replacement)
+    return string
