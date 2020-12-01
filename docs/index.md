@@ -3,16 +3,25 @@
 [![Documentation][docs-image]][docs-link]
 [![Coverage status][coverage-image]][coverage-link]
 
+!!! warning
+    This library is currently under development, only supporting a few
+    methods and implementations (see [Support](#support)). Please wait before
+    use it and [help me][pull-requests-link] with implementations if you are
+    interested.
+
 **http-request-codegen** generates HTTP request code snippets for different
 implementations. It's perfect if you want to include examples documenting APIs.
 Supports the following features:
 
-- Parameters values randomization using multiples strategies:
+- Request parameters values randomization using multiples strategies:
     - Random values from lists and functions.
     - Random values from data types.
     - Random values from [Faker providers][faker-providers-doc].
     - Randomization seeds.
     - Localization.
+- Request headers customization.
+- Request optional arguments.
+- Custom line wrapping.
 - Custom indentation.
 - Custom quotation character.
 - Rendering in one line.
@@ -61,6 +70,8 @@ Supports the following features:
             === "Input"
             
                 ```python
+                import fake_module
+                
                 from http_request_codegen import generate_http_request_code
                 
                 generate_http_request_code(
@@ -78,8 +89,10 @@ Supports the following features:
                           'name': 'fixed-value',
                           'value': 32
                       },
+
+                      # Parameter value randomization
                       {
-                          'name': 'random-values-by-list',
+                          'name': 'random-values-by-iterable',
                           'values': ['foo', 'bar', 'baz']
                       },
                       {
@@ -120,26 +133,40 @@ Supports the following features:
                           'round': 3
                       },
                       {
-                          'name': 'boolean',
+                          'name': 'random-boolean',
                           'type': bool
                       },
                       {
-                          'name': 'unique-identifier',
+                          'name': 'random-type',
+                          'type': 'random'  # random type from availables
+                      },
+                      {
+                          'name': 'random-unique-identifier',
                           'type': 'uuid'
                       },
                       {
-                          'name': 'id',  # positive integer
+                          'name': 'random-id',  # positive integer
                           'type': 'id'
                       },
                       {
-                          'name': 'filepath',
+                          'name': 'random-filepath',
                           'type': 'file'  # 'faker.providers.file::file_path'
-                      }
+                      },
+                      
+                      # Parameter name randomization
+                      {
+                          'name': ['random-name-from-iterable',
+                                   'random-name-by-iterable'],
+                          'type': 'str',
+                      },
+                      {
+                          'name': fake_module.random_name_by_function,
+                          'type': 'random',
+                      },
                   ]
                 )
                 ```
-                
-            
+
             === "Output"
           
                 {{http_request_codegen.generate_http_request_md_code_block(
@@ -158,7 +185,7 @@ Supports the following features:
                           'value': 32
                       },
                       {
-                          'name': 'random-values-by-list',
+                          'name': 'random-values-by-iterable',
                           'values': ['foo', 'bar', 'baz']
                       },
                       {
@@ -199,24 +226,36 @@ Supports the following features:
                           'round': 3
                       },
                       {
-                          'name': 'boolean',
+                          'name': 'random-boolean',
                           'type': bool
                       },
                       {
-                          'name': 'unique-identifier',
+                          'name': 'random-type',
+                          'type': 'random'
+                      },
+                      {
+                          'name': 'random-unique-identifier',
                           'type': 'uuid',
                       },
                       {
-                          'name': 'id',
+                          'name': 'random-id',
                           'type': 'id'
                       },
                       {
-                          'name': 'filepath',
+                          'name': 'random-filepath',
                           'type': 'file'
-                      }
+                      },
+                      {
+                          'name': ['random-name-from-iterable',
+                                   'random-name-by-iterable'],
+                          'type': 'str',
+                      },
+                      {
+                          'name': fake_module.random_name_by_function,
+                          'type': 'random',
+                      },
                   ]
                 )|indent(16)}}
-            
             
         {% endfor %}
     {% endfor %}
@@ -254,6 +293,8 @@ from http_request_codegen import generate_http_request_code
 [docs-link]: https://mondeja.github.io/http-request-codegen
 [coverage-image]: https://img.shields.io/coveralls/github/mondeja/http-request-codegen?logo=coveralls
 [coverage-link]: https://coveralls.io/github/mondeja/http-request-codegen
+
+[pull-requests-link]: https://github.com/mondeja/http-request-codegen/pulls
 
 [faker-doc]: https://faker.readthedocs.io
 [faker-providers-doc]: https://faker.readthedocs.io/en/master/providers.html

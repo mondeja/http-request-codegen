@@ -56,16 +56,25 @@ pre-commit run --all-files
 
 ## TODO
 
-- [x] Implement implementation autodiscovering in `http_request_codegen.factory`.
+- [x] Implement implementation autodiscovering in
+ `http_request_codegen.factory`.
 - [x] Document and doctest `http_request_codegen.generators.python._utils`
  module.
 - [x] Document and doctest `http_request_codegen.inspector` module.
 - [x] Document `http_request_codegen.support` module.
+- [x] Add parameter name randomization support.
+- [x] Add url randomization support.
+- [x] Implement random parameter type (lazy string and `'random'` type).
+- [ ] Document lazy strings in parameter type.
+- [ ] Document ``bool`` type in parameters types.
+- [ ] Document ``random`` type in parameters types.
+- [ ] Document ``uuid`` type in parameters types.
+- [ ] Document ``id`` type in parameters types.
+- [ ] Document ``file`` type in parameters types.
 - [ ] Add parametrizer that list all combinations of arguments passed to
  implementations.
 - [ ] Document `http_request_codegen.api::generate_http_request_md_code_block`
  function.
-- [ ] Add parameter name randomization support.
-- [ ] Add url randomization support.
-- [ ] Add support for random choosing from list of provider functions as
- parameter values.
+- [ ] Document `http_request_codegen.valuer::lazy_value_by_parameter`
+  function.
+- [ ] Implement random parameter type with ``_type = lazy_string()`` 

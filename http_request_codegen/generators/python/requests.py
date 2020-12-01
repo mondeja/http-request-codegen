@@ -11,7 +11,7 @@ from http_request_codegen.generators.python._utils import (
     kwarg_definition_dict_valued,
     raw_str_definition
 )
-from http_request_codegen.valuer import value_by_parameter
+from http_request_codegen.valuer import lazy_string, lazy_value_by_parameter
 
 
 def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
@@ -20,6 +20,7 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
     '''GET method code generator for python requests library.'''
     indent = indent or DEFAULT_INDENT
     quote_char = quote_char or DEFAULT_QUOTE_CHAR
+    url = lazy_string(url)
 
     _oneline = oneline
     response = ''
@@ -40,9 +41,11 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
         parameters_keys = OrderedDict({})
         parameters_line_length = 9  # 'params={}'
         for parameter in parameters:
-            name = escape_by_quote(parameter['name'], quote_char)
+            name = escape_by_quote(
+                lazy_string(parameter['name'], seed=seed),
+                quote_char)
             value = escape_by_quote(
-                value_by_parameter(parameter, seed=seed, locale=locale),
+                lazy_value_by_parameter(parameter, seed=seed, locale=locale),
                 quote_char,
             )
             parameters_keys[name] = value

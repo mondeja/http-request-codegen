@@ -2,13 +2,14 @@
 
 import builtins
 import uuid
+from collections.abc import Iterable
 from types import LambdaType
 
 import pytest
 from faker.providers.lorem import Provider as LoremProvider
 from faker.providers.lorem.en_US import Provider as EnUsLoremProvider
 
-from http_request_codegen.valuer import value_by_parameter
+from http_request_codegen.valuer import lazy_value_by_parameter
 from tests.conftest import (
     value as _value_func,
     values_list as _values_list_func
@@ -24,26 +25,26 @@ from tests.conftest import (
     True,
     None
 ))
-def test_value_by_parameter__value(value):
+def test_lazy_value_by_parameter__value(value):
     '''Passing the attribute 'value', will be casted to string.'''
-    assert value_by_parameter({'value': value}) == str(value)
+    assert lazy_value_by_parameter({'value': value}) == str(value)
 
 
 @pytest.mark.parametrize(('values', 'seed', 'result'), (
     # list
-    (['foo', 'bar', 'baz'], 1, 'foo'),
-    (['foo', 'bar', 'baz'], 500, 'bar'),
-    ([1, None, True], 1, True),
-    ([1, None, True], 500, None),
+    (['foo', 'bar', 'baz'], 1, ['foo', 'bar', 'baz']),
+    (['foo', 'bar', 'baz'], 500, ['foo', 'bar', 'baz']),
+    ([1, None, True], 1, ['1', 'None', 'True']),
+    ([1, None, True], 500, ['1', 'None', 'True']),
 
     # function
     #   function returning list
-    (_values_list_func, 1, 'baz'),
-    (_values_list_func, 5, '-1.5'),
+    (_values_list_func, 1, [str(val) for val in _values_list_func()]),
+    (_values_list_func, 5, [str(val) for val in _values_list_func()]),
     #   function returning value
-    (_value_func, None, 'foo'),
-    (_value_func, 1, 'foo'),
-    (_value_func, 500, 'foo'),
+    (_value_func, None, str(_value_func())),
+    (_value_func, 1, str(_value_func())),
+    (_value_func, 500, str(_value_func())),
 
     # str
     #   str to Python module-func path format returning list
@@ -59,16 +60,18 @@ def test_value_by_parameter__value(value):
     ('tests.conftest::non-existent', None, ValueError),
     ('tests.conftest::non-existent', 5, ValueError),
     #   str to non-existent module from module-func path format
-    ('test.non-existent::non-existent', None, ModuleNotFoundError),
-    ('test.non-existent::non-existent', 5, ModuleNotFoundError),
+    ('test.non-existent::non-existent', None, ValueError),
+    ('test.non-existent::non-existent', 5, ValueError),
 ))
-def test_value_by_parameter__values(values, seed, result):
+def test_lazy_value_by_parameter__values(values, seed, result):
     parameter = {'values': values, 'name': 'foo'}
     if hasattr(result, '__traceback__'):
         with pytest.raises(result):
-            value_by_parameter(parameter, seed=seed)
+            lazy_value_by_parameter(parameter, seed=seed)
+    elif isinstance(result, Iterable):
+        assert lazy_value_by_parameter(parameter, seed=seed) in result
     else:
-        assert value_by_parameter(parameter, seed=seed) == result
+        assert lazy_value_by_parameter(parameter, seed=seed) == result
 
 
 @pytest.mark.parametrize(('faker', 'seed', 'result'), (
@@ -80,12 +83,12 @@ def test_value_by_parameter__values(values, seed, result):
     (LoremProvider.word, None, EnUsLoremProvider.word_list),
     (LoremProvider.word, 5, EnUsLoremProvider.word_list),
 ))
-def test_value_by_parameter__faker(faker, seed, result):
+def test_lazy_value_by_parameter__faker(faker, seed, result):
     parameter = {'faker': faker, 'name': 'foo'}
     if isinstance(result, (list, tuple)):
-        assert value_by_parameter(parameter, seed=seed) in result
+        assert lazy_value_by_parameter(parameter, seed=seed) in result
     else:
-        assert value_by_parameter(parameter, seed=seed) == result
+        assert lazy_value_by_parameter(parameter, seed=seed) == result
 
 
 VALID_INT_FROM_TYPE = lambda r: int(r) in range(-2**16, 2**16)
@@ -182,11 +185,11 @@ def VALID_UUID4_FROM_TYPE(r):
     ('Identifier', None, VALID_ID_FROM_TYPE),
     ('IDENTIFIER', None, VALID_ID_FROM_TYPE),
 ))
-def test_value_by_parameter__type(type, seed, result):
+def test_lazy_value_by_parameter__type(type, seed, result):
     parameter = {'type': type, 'name': 'foo'}
     if isinstance(result, (list, tuple, range)):
-        assert value_by_parameter(parameter, seed=seed) in result
+        assert lazy_value_by_parameter(parameter, seed=seed) in result
     elif isinstance(result, LambdaType):
-        assert result(value_by_parameter(parameter, seed=seed))
+        assert result(lazy_value_by_parameter(parameter, seed=seed))
     else:
-        assert value_by_parameter(parameter, seed=seed) == result
+        assert lazy_value_by_parameter(parameter, seed=seed) == result
