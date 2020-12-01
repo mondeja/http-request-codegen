@@ -1,6 +1,9 @@
 
 import inspect
-from types import FunctionType, MethodType
+from types import FunctionType, LambdaType, MethodType
+
+
+CallableTypes = (FunctionType, MethodType, LambdaType)
 
 
 def function_has_kwarg(func, kwarg_name):

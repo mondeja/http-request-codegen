@@ -20,14 +20,42 @@ def generate_http_request_code(language=None, impl=None, method='GET',
             library, a program, or a language API. See [Support](#support)
             to check the supported implementations by language.
         method (str): HTTP method of the generated request.
-        url (str): URL endpoint of the generated request.
-        headers (dict): Request headers.
+        url (str, iterable, callable): URL endpoint of the generated request.
+                + Defined as a string, the url will be the string itself.
+                + Defined as an iterable, the url will be selected randomly
+            from the iterable. Supports recursivity: until a string is not
+            selected the recursion will not be stopped.
+                + Defined as a callable, the url will be the returned value of
+            the callable. Supports recursivity: until a string is returned the
+            recursion will not be stopped.
+        headers (dict): Mapping of request header names and values.
         parameters (list): List of parameters for the request. Each parameter
             must be a dictionary. This dictionary defines, for each parameter,
             what is the parameter name and how are the parameters values
             generated:
 
-            - **name** (*str*): Parameter name. This attribute is required.
+            - **name** (*str*, *list*, *function*): Parameter name. At least
+                one of this or ``names`` attributes are required.
+                    + Defined as a string, the name will be the string itself.
+                    + Defined as an iterable, the name will be selected
+                randomly from the iterable. Supports recursivity: until a
+                string is not selected the recursion will not be stopped.
+                    + Defined as a callable, the name will be the returned
+                value of the callable. Supports recursivity: until a string is
+                returned the recursion will not be stopped.
+            - **names** (*str*, *list*, *function*): Parameter name. At least
+                one of this or ``name`` attributes are required.
+                    + Defined as an iterable, the name will be selected
+                randomly from the iterable. Supports recursivity: until a
+                string is not selected the recursion will not be stopped.
+                    + Defined as a string, must be a Python formatted module
+                path following the format ``'path.to.module::function'`` and
+                the return name will be used as the name for the parameter,
+                which is useful if choosing a random value from a list doesn't
+                fit your needs.
+                    + Defined as a callable, the name will be the returned
+                value of the callable. Supports recursivity: until a string is
+                returned the recursion will not be stopped.
             - **type** (*str*): Parameter data type. If not defined and
                 ``value``, ``values`` and ``faker`` are not defined, will be
                 considered as a string and the value of the parameter will be a
@@ -47,30 +75,39 @@ def generate_http_request_code(language=None, impl=None, method='GET',
                 - ``'float'``: Basic integer type. Can be defined with the
                     Python builtin type ``float``, or the strings ``'float'``
                     and ``number``.
-            - **value** (*str*): Parameter value. Id not defined and ``type``,
-                ``values`` and ``faker`` are not defined, it will be a random
-                word built using faker library.
-            - **values** (*list*/*str*/*function*): Possible parameter values.
-                    + Defined as a list, the value of the parameter will be
-                selected from the list using [random.random.choice
-                ](https://docs.python.org/library/random.html#random.choice).
+            - **value** (*str*, *iterable*, *callable*): Parameter value. If
+                not defined and ``type``, ``values`` and ``faker`` are not
+                defined, the value of the parameter will be a random word built
+                using faker library.
+                    + Defined as a string, the value will be the string itself.
+                    + Defined as an iterable, the value will be selected
+                randomly from the iterable. Supports recursivity: until a
+                string is not selected the recursion will not be stopped.
+                    + Defined as a callable, the value will be the returned
+                value of the callable. Supports recursivity: until a string is
+                returned the recursion will not be stopped.
+            - **values** (*list*, *iterable*, *callable*): Possible parameter
+                values.
+                    + Defined as an iterable, the value will be selected
+                randomly from the iterable. Supports recursivity: until a
+                string is not selected the recursion will not be stopped.
                     + Defined as a string, must be a Python formatted module
                 path following the format ``'path.to.module::function'`` and
                 the return value will be used as the value for the parameter,
                 which is useful if choosing a random value from a list doesn't
                 fit your needs.
-                    + Defined as a function, their return value will be used
-                as the value for the parameter, which is useful if choosing a
-                random value from a list doesn't fit your needs.
-                If not defined and ``type``, ``value`` and ``faker`` are not
-                defined, it will be a random word built using faker library.
-            - **faker** (*str*/*function*): Python formatted module path to a
+                    + Defined as a callable, the value will be the returned
+                value of the callable. Supports recursivity: until a string is
+                returned the recursion will not be stopped.
+            - **faker** (*str*, *function*): Python formatted module path to a
                 function of a Faker provider used to build the value
                 randomized. Can be a standard, external provider or any
                 function, but if is not a provider, ``seed`` and ``locale``
                 will not have effect.
                     + Defined as a string must follow the format
                 ``'path.to.provider.module::function'``.
+        wrap (int): Maximum anchor of the code. If it exceeds it, the output
+            code will be conveniently formatted on multiple lines.
         indent (str): Indentation string used in the generated code. If not
             defined, the indentation string commonly used in the implementation
             will be used.

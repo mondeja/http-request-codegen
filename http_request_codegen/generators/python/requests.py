@@ -11,7 +11,11 @@ from http_request_codegen.generators.python._utils import (
     kwarg_definition_dict_valued,
     raw_str_definition
 )
-from http_request_codegen.valuer import lazy_string, lazy_value_by_parameter
+from http_request_codegen.string import lazy_string
+from http_request_codegen.valuer import (
+    lazy_name_by_parameter,
+    lazy_value_by_parameter
+)
 
 
 def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
@@ -42,11 +46,14 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
         parameters_line_length = 9  # 'params={}'
         for parameter in parameters:
             name = escape_by_quote(
-                lazy_string(parameter['name'], seed=seed),
-                quote_char)
-            value = escape_by_quote(
+                lazy_name_by_parameter(parameter, seed=seed),
+                quote_char
+            )
+            value = raw_str_definition(
                 lazy_value_by_parameter(parameter, seed=seed, locale=locale),
-                quote_char,
+                quote_char=quote_char,
+                indent=indent + (' ' * (8 + len(name))),
+                wrap=wrap
             )
             parameters_keys[name] = value
             parameters_line_length += len(name) + 4 + len(value)
@@ -121,9 +128,7 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
                 'parameter_name': pname,
                 'indent': indent * 2 if not oneline else '',
                 'quote_char': quote_char,
-                'value': pvalue if oneline else raw_str_definition(
-                    pvalue, indent=indent * 2, quote_char=quote_char,
-                    wrap=wrap, _escape=False),
+                'value': pvalue,
                 'comma': ',' if i < len(parameters) - 1 else '',
             }
             response += '\n' if not oneline else ''

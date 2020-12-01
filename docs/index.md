@@ -87,7 +87,15 @@ Supports the following features:
                   parameters=[
                       {
                           'name': 'fixed-value',
-                          'value': 32
+                          'value': 3
+                      },
+                      {
+                          'name': 'dinamic-value-by-iterable',
+                          'value': [1, 2, 3]  # same as 'values': [1, 2, 3]
+                      },
+                      {
+                          'name': 'dinamic-value-by-function',
+                          'value': fake_module.integers_from_1_to_10
                       },
 
                       # Parameter value randomization
@@ -182,7 +190,15 @@ Supports the following features:
                   parameters=[
                       {
                           'name': 'fixed-value',
-                          'value': 32
+                          'value': 3
+                      },
+                      {
+                          'name': 'dinamic-value-by-iterable',
+                          'value': [1, 2, 3]
+                      },
+                      {
+                          'name': 'dinamic-value-by-function',
+                          'value': fake_module.integers_from_1_to_10
                       },
                       {
                           'name': 'random-values-by-iterable',

@@ -8,7 +8,7 @@ from http_request_codegen.factory import (
     get_generators_modules_by_lang_impl
 )
 from http_request_codegen.http import HTTP_METHODS
-from http_request_codegen.inspector import function_has_kwarg
+from http_request_codegen.meta import function_has_kwarg
 
 
 FEATURES_KWARGS = OrderedDict({

@@ -451,11 +451,10 @@ def raw_str_definition(string, indent=DEFAULT_INDENT,
         str: String reproducted in multiples lines wrapped by ``(`` and ``)``
             characters in multiples lines or simply defined in a single line.
     '''
-    _wrap_at = wrap - len(indent) + len(quote_char) * 2
     string_escaped = string if not _escape else \
         escape_by_quote(string, quote_char)
 
-    if len(string) < _wrap_at:
+    if len(string) + len(indent) + len(quote_char) * 2 < wrap:
         return '%(quote_char)s%(value)s%(quote_char)s' % {
             'quote_char': quote_char,
             'value': string_escaped,
@@ -468,7 +467,7 @@ def raw_str_definition(string, indent=DEFAULT_INDENT,
     for i, ch in enumerate(string):
         response += ch
         _chars_in_current_line += 1
-        if _chars_in_current_line >= _wrap_at - 4:
+        if _chars_in_current_line >= wrap - 2:
             if i >= len(string) - 1:
                 break
             response += '%(quote_char)s\n%(indent)s %(quote_char)s' % {

@@ -65,7 +65,7 @@ pre-commit run --all-files
 - [x] Add parameter name randomization support.
 - [x] Add url randomization support.
 - [x] Implement random parameter type (lazy string and `'random'` type).
-- [ ] Document lazy strings in parameter type.
+- [x] Document lazy strings in parameter type.
 - [ ] Document ``bool`` type in parameters types.
 - [ ] Document ``random`` type in parameters types.
 - [ ] Document ``uuid`` type in parameters types.
