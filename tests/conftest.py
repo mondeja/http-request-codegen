@@ -344,6 +344,22 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
+            'name': 'URL + parameter + header (oneline)',
+            'arguments': {
+                'url': TEST_BASE_URL,
+                'parameters': [
+                    {
+                        'name': 'param-1',
+                        'value': 'value-1'
+                    }
+                ],
+                'headers': {
+                    'Content-Type': 'application/json'
+                },
+                'oneline': True
+            }
+        },
+        {
             'name': 'URL + parameters + header',
             'arguments': {
                 'url': TEST_BASE_URL,
@@ -414,6 +430,22 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
+            'name': 'URL + parameter + kwarg (oneline)',
+            'arguments': {
+                'url': TEST_BASE_URL,
+                'parameters': [
+                    {
+                        'name': 'a',
+                        'value': 'b',
+                    }
+                ],
+                'kwargs': {
+                    'timeout': 10
+                },
+                'oneline': True
+            }
+        },
+        {
             'name': 'URL + parameters + kwarg',
             'arguments': {
                 'url': TEST_BASE_URL,
@@ -478,6 +510,19 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
                 'kwargs': {
                     'timeout': 5
                 }
+            }
+        },
+        {
+            'name': 'URL + header + kwarg (oneline)',
+            'arguments': {
+                'url': TEST_BASE_URL,
+                'headers': {
+                    'Content-Type': 'application/json'
+                },
+                'kwargs': {
+                    'timeout': 5
+                },
+                'oneline': True
             }
         },
         {

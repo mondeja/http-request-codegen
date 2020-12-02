@@ -137,10 +137,10 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
             response += '\n' if not oneline else ''
 
         response += '%(indent)s}%(comma)s%(newline)s' % {
-            'indent': indent if not oneline else (
-                '' if (not headers and not kwargs) else ' '),
-            'comma': ',' if not oneline and (headers or kwargs) else '',
-            'newline': '\n' if not oneline else '',
+            'indent': indent if not oneline else '',
+            'comma': ',' if (headers or kwargs) else '',
+            'newline': '\n' if not oneline else ('' if (
+                not headers and not kwargs) else ' '),
         }
 
     if headers:
@@ -151,7 +151,8 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
                 quote_char=quote_char,
                 newline='\n' if not oneline else '',
                 _escape_keys=False, _escape_values=False),
-            'newline': '\n' if not oneline else '',
+            'newline': '\n' if not oneline else (
+                '' if not kwargs else ' '),
             'comma': ',' if kwargs else '',
         }
 
