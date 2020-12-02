@@ -555,9 +555,21 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'No init',
+            'name': 'No setup',
             'arguments': {
-                'init': False,
+                'setup': False,
+            }
+        },
+        {
+            'name': 'Custom setup',
+            'arguments': {
+                'setup': 'custom_setup=1\n\n'
+            }
+        },
+        {
+            'name': 'Custom teardown',
+            'arguments': {
+                'teardown': '\n\ncustom_teardown=1'
             }
         },
         {
@@ -600,10 +612,10 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'One line + no init',
+            'name': 'One line + no setup',
             'arguments': {
                 'oneline': True,
-                'init': False
+                'setup': False
             }
         },
         {

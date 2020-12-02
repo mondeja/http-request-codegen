@@ -8,9 +8,9 @@ from http_request_codegen.factory import (
 
 def generate_http_request_code(language=None, impl=None, method='GET',
                                url='localhost', parameters=[], headers={},
-                               indent=None, quote_char='\'', init=True,
-                               oneline=False, seed=None, locale=None,
-                               wrap=80, **kwargs):
+                               indent=None, quote_char='\'', setup=True,
+                               teardown=None, oneline=False, seed=None,
+                               locale=None, wrap=80, **kwargs):
     '''Generates a code snippet of an HTTP request for a library of a given
     programming language or a CLI of a program, based on a valid HTTP method
     and a specification of parameters.
@@ -138,9 +138,12 @@ def generate_http_request_code(language=None, impl=None, method='GET',
             will be used.
         quote_char (str): Quotation character for strings used in the generated
             code.
-        init (bool): Includes the code needed by an implementation tp perform
-            the request. Could be imports of additional modules or
-            intialization of objects, depends on implementation.
+        setup (bool, str): If ``True``, includes the code needed by an
+            implementation to perform the request. Could be imports of
+            additional modules or intialization of objects, depends on
+            implementation. You can customize this snippet passing a string
+            with the code snippet that you want to include.
+        teardown (str): Code snippet to include after the HTTP request code.
         oneline (bool): Render the code in a single line.
         seed (int): Seed used generating random fake values of parameters.
             Useful if you want to generate the same set of values between
@@ -149,12 +152,10 @@ def generate_http_request_code(language=None, impl=None, method='GET',
             library for localization of the fake random values for parameters.
 
     Raises:
-        ValueError: One of the values is not a valid value in their
-            context.
-        TypeError: One of the values does not complaint with the types
-            supported for it.
-        ImportError: One of the Python module-function paths specified can not
-            be imported successfully.
+        ValueError: Value is not a valid value in their context.
+        TypeError: Values does not complaint with the types supported for it.
+        ImportError: Python module-function path specified can not be imported
+            successfully.
 
     Returns:
         str: HTTP request code snippet.
@@ -163,8 +164,9 @@ def generate_http_request_code(language=None, impl=None, method='GET',
         language=language, impl=impl, method=method
     )(
         url, parameters=parameters, headers=headers, indent=indent,
-        oneline=oneline, seed=seed, locale=locale, init=init,
-        wrap=wrap or float('inf'), quote_char=quote_char, **kwargs
+        oneline=oneline, seed=seed, locale=locale, setup=setup,
+        teardown=teardown, wrap=wrap or float('inf'), quote_char=quote_char,
+        **kwargs
     )
 
 

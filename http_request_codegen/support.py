@@ -19,7 +19,8 @@ FEATURES_KWARGS = OrderedDict({
     'Custom indentation': 'indent',
     'Quotation character': 'quote_char',
     'One line rendering': 'oneline',
-    'Initialization on/off': 'init',
+    'Custom initialization': 'setup',
+    'Custom teardown': 'teardown',
     'Line wrapping': 'wrap',
 })
 

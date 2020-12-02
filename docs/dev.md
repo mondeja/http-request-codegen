@@ -82,7 +82,9 @@ pre-commit run --all-files
  function.
 - [x] Document `http_request_codegen.valuer::lazy_value_by_parameter` function.
 - [x] Document `http_request_codegen.valuer::lazy_name_by_parameter` function.
-- [ ] Improve Python string wrapping algorithm continuing in new lines if there
- is little space in the current one.
+- [x] Change `init` argument by `setup`.
+- [x] Allow `setup` argument to take a string for customize the initialization.
+- [x] Implement `teardown` argument.
+- [ ] Implement Python requests POST.
 - [ ] Create Python string wrapping algorithm that could wrap whitespaces in a
- smart way.  
+ smart way.

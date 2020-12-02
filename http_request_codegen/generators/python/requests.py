@@ -19,8 +19,9 @@ from http_request_codegen.valuer import (
 
 
 def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
-        quote_char=DEFAULT_QUOTE_CHAR, init=True, oneline=False,
-        wrap=DEFAULT_WRAP, seed=None, locale=None, **kwargs):
+        quote_char=DEFAULT_QUOTE_CHAR, setup=True, teardown=None,
+        oneline=False, wrap=DEFAULT_WRAP, seed=None, locale=None,
+        **kwargs):
     '''GET method code generator for python requests library.'''
     indent = indent or DEFAULT_INDENT
     quote_char = quote_char or DEFAULT_QUOTE_CHAR
@@ -30,11 +31,15 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
     response = ''
 
     # import
-    if init:
-        response += 'import requests%(separator)s%(newline)s%(newline)s' % {
-            'separator': ';' if oneline else '',
-            'newline': '\n' if not oneline else '',
-        }
+    if setup:
+        if isinstance(setup, str):
+            response += setup
+        else:
+            response += ('import requests%(separator)s'
+                         '%(newline)s%(newline)s') % {
+                'separator': ';' if oneline else '',
+                'newline': '\n' if not oneline else '',
+            }
 
     # url length
     url_length = len(url) + 21  # 'req = requests.get(' (19) + '' (2)
@@ -166,6 +171,9 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
             }
 
     response += ')%(separator)s' % {'separator': ';' if _oneline else ''}
+
+    if teardown:
+        response += str(teardown)
     return response
 
 

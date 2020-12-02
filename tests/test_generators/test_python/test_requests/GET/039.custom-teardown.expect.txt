@@ -1,0 +1,5 @@
+import requests
+
+req = requests.get('localhost')
+
+custom_teardown=1
