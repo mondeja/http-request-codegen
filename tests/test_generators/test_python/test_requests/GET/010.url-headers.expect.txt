@@ -1,7 +1,7 @@
 import requests
 
 req = requests.get(
-    'localhost',
+    'http://localhost:8876',
     headers={
         'Content-Type': 'application/json',
         'Accept-Language': 'es'

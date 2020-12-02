@@ -1,9 +1,15 @@
 import requests
 
 req = requests.get(
-    ('lo'
-     'ca'
-     'lh'
-     'os'
-     't')
+    ('ht'
+     'tp'
+     ':/'
+     '/l'
+     'oc'
+     'al'
+     'ho'
+     'st'
+     ':8'
+     '87'
+     '6')
 )

@@ -1,6 +1,19 @@
 import requests
 
 req = requests.get(
-    ('localhost localhost localhost localhost localhost localhost localhost lo'
-     'calhost localhost localhost ')
+    'http://localhost:8876',
+    headers={
+        'Accept-Language': ('es en fr * es en fr * es en fr * es en fr * es en'
+                            ' fr * es en fr * es en fr * es en fr * es en fr *'
+                            ' es en fr * es en fr * es en fr * es en fr * es e'
+                            'n fr * es en fr * es en fr * es en fr * es en fr '
+                            '* es en fr * es en fr * es en fr * es en fr * es '
+                            'en fr * es en fr * es en fr * es en fr * es en fr'
+                            ' * es en fr * es en fr * es en fr * es en fr * es'
+                            ' en fr * es en fr * es en fr * es en fr * es en f'
+                            'r * es en fr * es en fr * es en fr * es en fr * e'
+                            's en fr * es en fr * es en fr * es en fr * es en '
+                            'fr * es en fr * es en fr * es en fr * es en fr * '
+                            'es en fr * ')
+    }
 )

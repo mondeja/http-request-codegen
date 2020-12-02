@@ -1,3 +1,9 @@
 import requests
 
-req = requests.get('localhost', params={'param-1': 'value-1' }timeout=10)
+req = requests.get(
+    'http://localhost:8876',
+    params={
+        'param-1': 'value-1'
+    },
+    timeout=10
+)

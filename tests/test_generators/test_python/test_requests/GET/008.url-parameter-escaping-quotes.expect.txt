@@ -1,7 +1,7 @@
 import requests
 
 req = requests.get(
-    'localhost',
+    'http://localhost:8876',
     params={
         'param-1-with-\'\'-quotes': 'value-1-with-\'\'-quotes'
     }

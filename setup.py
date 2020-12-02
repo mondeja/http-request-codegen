@@ -29,6 +29,7 @@ TEST_EXTRAS = [
     'pytest==6.1.2',
     'pytest-cov==2.10.1',
     'inflection==0.5.1',
+    'flask==1.1.2',
 ]
 DOC_EXTRAS = [
     'mkdocs==1.1.2',

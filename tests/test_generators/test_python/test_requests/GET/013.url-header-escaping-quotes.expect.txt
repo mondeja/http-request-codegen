@@ -3,8 +3,6 @@ import requests
 req = requests.get(
     'http://localhost:8876',
     headers={
-        'Accept-Language': '*'
-    },
-    timeout=5,
-    stream=False
+        'Accept-Language': 'Header value with \'\' quotes'
+    }
 )

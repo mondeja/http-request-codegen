@@ -1,5 +1,5 @@
 import requests
 
 req = requests.get(
-    'localhost'
+    'http://localhost:8876'
 )

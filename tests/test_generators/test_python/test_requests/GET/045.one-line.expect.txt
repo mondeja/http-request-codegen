@@ -1,1 +1,1 @@
-import requests;req = requests.get('localhost');
+import requests;req = requests.get('http://localhost:8876');

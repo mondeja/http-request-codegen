@@ -29,3 +29,20 @@ def test_python_requests_get(args_group):
         **combination_arguments_to_kwargs(args_group['arguments']))
 
     assert result == expected_result
+
+
+@pytest.mark.parametrize(
+    'args_group',
+    get_argument_combinations(dirpath=GET_CASES_DIRPATH),
+    ids=lambda args_group: os.path.basename(args_group['filename'])
+)
+def test_python_requests_get__response(args_group, assert_request_args):
+    result = generate_http_request_code(
+        'python', 'requests', 'GET',
+        **combination_arguments_to_kwargs(args_group['arguments']))
+
+    if 'import requests' not in result:
+        result = 'import requests\n\n%s' % result
+    namespace = {}
+    exec(result, namespace)
+    assert_request_args(args_group['arguments'], namespace['req'].json())

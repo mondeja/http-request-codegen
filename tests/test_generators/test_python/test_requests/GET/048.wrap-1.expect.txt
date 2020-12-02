@@ -1,7 +1,14 @@
 import requests
 
 req = requests.get(
-    ('l'
+    ('h'
+     't'
+     't'
+     'p'
+     ':'
+     '/'
+     '/'
+     'l'
      'o'
      'c'
      'a'
@@ -9,5 +16,10 @@ req = requests.get(
      'h'
      'o'
      's'
-     't')
+     't'
+     ':'
+     '8'
+     '8'
+     '7'
+     '6')
 )

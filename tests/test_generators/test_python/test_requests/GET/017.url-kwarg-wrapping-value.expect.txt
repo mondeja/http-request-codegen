@@ -1,7 +1,17 @@
 import requests
 
 req = requests.get(
-    'localhost',
-    timeout=('hello hello hello hello hello hello hello hello hello hello hell'
-             'o hello hello hello hello hello hello hello hello hello ')
+    'http://localhost:8876',
+        cookies={
+        'bar': ('foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz f'
+                'oo bar baz foo bar baz foo bar baz foo bar baz foo bar baz fo'
+                'o bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo'
+                ' bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo '
+                'bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo b'
+                'ar baz foo bar baz foo bar baz foo bar baz foo bar baz foo ba'
+                'r baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar'
+                ' baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar '
+                'baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar b'
+                'az foo bar baz foo bar baz foo bar baz foo bar baz ')
+    }
 )

@@ -1,1 +1,1 @@
-req = requests.get('localhost')
+req = requests.get('http://localhost:8876')

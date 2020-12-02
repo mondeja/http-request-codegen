@@ -7,10 +7,10 @@ from http_request_codegen.factory import (
 
 
 def generate_http_request_code(language=None, impl=None, method='GET',
-                               url='localhost', parameters=[], headers={},
-                               indent=None, quote_char='\'', setup=True,
-                               teardown=None, oneline=False, seed=None,
-                               locale=None, wrap=80, **kwargs):
+                               url='http://localhost', parameters=[],
+                               headers={}, indent=None, quote_char='\'',
+                               setup=True, teardown=None, oneline=False,
+                               seed=None, locale=None, wrap=80, **kwargs):
     '''Generates a code snippet of an HTTP request for a library of a given
     programming language or a CLI of a program, based on a valid HTTP method
     and a specification of parameters.
@@ -185,20 +185,12 @@ def generate_http_request_md_fenced_code_block(language=None,
             function.
 
     Examples:
-        >>> print(generate_http_request_md_fenced_code_block())
-        ```python
-        import requests
-        <BLANKLINE>
-        req = requests.get('localhost')
-        ```
+        >>> generate_http_request_md_fenced_code_block(setup=False)
+        "```python\\nreq = requests.get('http://localhost')\\n```"
 
-        >>> print(
-        ...     generate_http_request_md_fenced_code_block(fence_string='~~~'))
-        ~~~python
-        import requests
-        <BLANKLINE>
-        req = requests.get('localhost')
-        ~~~
+        >>> generate_http_request_md_fenced_code_block(fence_string='~~~',
+        ...                                            setup=False)
+        "~~~python\\nreq = requests.get('http://localhost')\\n~~~"
 
     Returns:
         str: Fenced code block with HTTP request code snippet inside.

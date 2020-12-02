@@ -1,3 +1,8 @@
 import requests
 
-req = requests.get('localhost', timeout='value with \'\' quotes')
+req = requests.get(
+    'http://localhost:8876',
+        cookies={
+        'foo': 'value with \'\' quotes'
+    }
+)

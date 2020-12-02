@@ -1,5 +1,5 @@
 import requests
 
-req = requests.get('localhost')
+req = requests.get('http://localhost:8876')
 
 custom_teardown=1

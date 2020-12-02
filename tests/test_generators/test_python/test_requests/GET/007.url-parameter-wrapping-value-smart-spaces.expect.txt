@@ -1,7 +1,7 @@
 import requests
 
 req = requests.get(
-    'localhost',
+    'http://localhost:8876',
     params={
         'param-1': ('Wrap me handling spaces smartly Wrap me handling spaces s'
                     'martly Wrap me handling spaces smartly Wrap me handling s'
