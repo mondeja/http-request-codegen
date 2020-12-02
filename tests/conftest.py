@@ -730,32 +730,22 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'Indent two spaces',
+            'name': 'Indent 2 spaces',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'indent': '  ',
                 'headers': {
-                    'Accept-Language': 'es en fr * ' * 50,
+                    'Accept-Language': 'es en fr * ' * 20,
                 },
             }
         },
         {
-            'name': 'Indent four spaces',
+            'name': 'Indent 4 spaces',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'indent': '    ',
                 'headers': {
-                    'Accept-Language': 'es en fr * ' * 50,
-                },
-            }
-        },
-        {
-            'name': 'Indent tab',
-            'arguments': {
-                'url': TEST_BASE_URL,
-                'indent': '\t',
-                'headers': {
-                    'Accept-Language': 'es en fr * ' * 50,
+                    'Accept-Language': 'es en fr * ' * 20,
                 },
             }
         },

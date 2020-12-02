@@ -471,10 +471,11 @@ def raw_str_definition(string, indent=DEFAULT_INDENT,
             'value': string_escaped,
         }
 
+    indent_length = len(indent)
     response = '(%(quote_char)s' % {
         'quote_char': quote_char
     }
-    _chars_in_current_line = len(response) + len(indent)
+    _chars_in_current_line = len(response) + indent_length
     for i, ch in enumerate(string):
         response += ch
         _chars_in_current_line += 1
@@ -485,6 +486,6 @@ def raw_str_definition(string, indent=DEFAULT_INDENT,
                 'quote_char': quote_char,
                 'indent': indent,
             }
-            _chars_in_current_line = 2 + len(indent)  # ' ('
+            _chars_in_current_line = 2 + indent_length  # ' ('
     response += '%(quote_char)s)' % {'quote_char': quote_char}
     return response
