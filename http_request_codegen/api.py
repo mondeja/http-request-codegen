@@ -62,22 +62,44 @@ def generate_http_request_code(language=None, impl=None, method='GET',
             - **type** (*str*): Parameter data type. If not defined and
                 ``value``, ``values`` and ``faker`` are not defined, will be
                 considered as a string and the value of the parameter will be a
-                random word built using [faker][faker-doc] library. The
-                following parameter data types are supported, as well as their
-                corresponding names in capital letters:
+                random word built using [faker][faker-doc] library. For some
+                types, other parameter dictionary attributes are supported,
+                documented, if so, in each type. The following parameter data
+                types are supported as attributes of parameters dictionaries,
+                as well as their corresponding names in capital letters:
 
                 - ``'str'``: Basic string type. Can be defined with the Python
                     builtin type ``str`` or the strings ``'str'`` and
                     ``'string'``.
-                - ``'bool'``: Basic boolean type. Can be defined with the
-                    Python builtin type ``bool``, or the strings ``'bool'``
-                    and ``'boolean'``.
                 - ``'int'``: Basic integer type. Can be defined with the Python
                     builtin type ``int``, or the strings ``'int'`` and
-                    ``'integer'``.
-                - ``'float'``: Basic integer type. Can be defined with the
-                    Python builtin type ``float``, or the strings ``'float'``
-                    and ``number``.
+                    ``'integer'``. As default will be an integer in the range
+                    -65536 to -65536. The minimum and maximum values can be
+                    defined with ``min`` and ``max`` parameter optional
+                    attributes.
+                - ``'float'``: Floating point number type. Can be defined
+                    with the Python builtin type ``float``, or the strings
+                    ``'float'`` and ``number``. As default will be in the range
+                    -65536 to 65536. The minimum and maximum values
+                    can be defined with ``min`` and ``max`` parameter optional
+                    attributes and can be rounded with ``round`` Python builtin
+                    function using ``round`` parameter optional attribute.
+                - ``'bool'``: Basic boolean type. Can be defined with the
+                    Python builtin type ``bool``, or the strings ``'bool'``
+                    and ``'boolean'``. Returns as parameter value one of the
+                    strings ``'true'`` or ``'false'``. If you pass the optional
+                    parameter attribute ``null`` as ``True``, the string
+                    ``'null'`` can also be returned.
+                - ``'uuid'``: Unique identifier type. Can be defined with the
+                    Python type ``uuid.UUID``, or the strings ``'uuid'``
+                    and ``'uuid4'``. It's a unique identifier v4 encoded as
+                    hexadecimal string.
+                - ``'id'``: Basic integer id. It's a positive integer in the
+                    range 1 to 65536. The maximum value can be defined by
+                    optional ``max`` attribute.
+                - ``'random'``: Random type between the available types. You
+                    can define a set of possible types passing an iterable
+                    to ``types`` optional parameter attribute.
             - **value** (*str*, *iterable*, *callable*): Parameter value. If
                 not defined and ``type``, ``values`` and ``faker`` are not
                 defined, the value of the parameter will be a random word built
@@ -125,6 +147,17 @@ def generate_http_request_code(language=None, impl=None, method='GET',
             multiples code snippets.
         locale (str): Locale used by [faker](https://faker.readthedocs.io)
             library for localization of the fake random values for parameters.
+
+    Raises:
+        ValueError: One of the values is not a valid value in their
+            context.
+        TypeError: One of the values does not complaint with the types
+            supported for it.
+        ImportError: One of the Python module-function paths specified can not
+            be imported successfully.
+
+    Returns:
+        str: HTTP request code snippet.
     '''
     return get_func_by_lang_impl_method(
         language=language, impl=impl, method=method
@@ -135,8 +168,41 @@ def generate_http_request_code(language=None, impl=None, method='GET',
     )
 
 
-def generate_http_request_md_code_block(language=None, **kwargs):
-    return '```%(language)s\n%(render)s\n```' % {
+def generate_http_request_md_fenced_code_block(language=None,
+                                               fence_string='```',
+                                               **kwargs):
+    """Wraps [``generate_http_request_code``](#generate_http_request_code)
+    function result in a Markdown fenced code block.
+
+    Args:
+        fence_string (str): Code block fence string used wrapping the code.
+            It does not perform any check about if the fenced string is a
+            "valid" markdown code block fence string.
+        **kwargs: All optional arguments are passed to
+            [``generate_http_request_code``](#generate_http_request_code)
+            function.
+
+    Examples:
+        >>> print(generate_http_request_md_fenced_code_block())
+        ```python
+        import requests
+        <BLANKLINE>
+        req = requests.get('localhost')
+        ```
+
+        >>> print(
+        ...     generate_http_request_md_fenced_code_block(fence_string='~~~'))
+        ~~~python
+        import requests
+        <BLANKLINE>
+        req = requests.get('localhost')
+        ~~~
+
+    Returns:
+        str: Fenced code block with HTTP request code snippet inside.
+    """
+    return '%(fence_string)s%(language)s\n%(render)s\n%(fence_string)s' % {
         'language': language if language else DEFAULT_LANGUAGE,
         'render': generate_http_request_code(language=language, **kwargs),
+        'fence_string': fence_string
     }

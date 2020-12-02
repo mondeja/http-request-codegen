@@ -1,6 +1,6 @@
 from http_request_codegen.api import (
     generate_http_request_code,
-    generate_http_request_md_code_block
+    generate_http_request_md_fenced_code_block
 )
 from http_request_codegen.support import supported_features, supported_methods
 
@@ -11,7 +11,7 @@ __title__ = 'http-request-codegen'
 __description__ = 'Multilanguage HTTP requests code generator.'
 __all__ = (
     'generate_http_request_code',
-    'generate_http_request_md_code_block',
+    'generate_http_request_md_fenced_code_block',
     'supported_features',
     'supported_methods',
 )

@@ -145,6 +145,11 @@ Supports the following features:
                           'type': bool
                       },
                       {
+                          'name': 'random-boolean-nullable',
+                          'type': 'boolean',
+                          'null': True
+                      },
+                      {
                           'name': 'random-type',
                           'type': 'random'  # random type from availables
                       },
@@ -177,7 +182,7 @@ Supports the following features:
 
             === "Output"
           
-                {{http_request_codegen.generate_http_request_md_code_block(
+                {{http_request_codegen.generate_http_request_md_fenced_code_block(
                   language=lang,
                   impl=impl,
                   method=method,
@@ -246,6 +251,11 @@ Supports the following features:
                           'type': bool
                       },
                       {
+                          'name': 'random-boolean-nullable',
+                          'type': 'boolean',
+                          'null': True
+                      },
+                      {
                           'name': 'random-type',
                           'type': 'random'
                       },
@@ -300,6 +310,14 @@ from http_request_codegen import generate_http_request_code
 ```
 
 ::: http_request_codegen.generate_http_request_code
+
+### **`generate_http_request_md_fenced_code_block`**
+
+```python
+from http_request_codegen import generate_http_request_md_fenced_code_block
+```
+
+::: http_request_codegen.generate_http_request_md_fenced_code_block
 
 [pypi-version-image]: https://img.shields.io/pypi/v/http-request-codegen?label=version
 [pypi-link]: https://pypi.org/project/http-request-codegen

@@ -3,6 +3,7 @@
 import importlib
 import random
 import uuid
+from collections.abc import Iterable
 from functools import lru_cache
 
 from faker import Faker
@@ -78,7 +79,7 @@ def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
                                seed=seed,
                                string_func_path=True)
         except (ModuleNotFoundError, ImportError):
-            raise ValueError(
+            raise ImportError(
                 ('\'values\' \'%s\' attribute of parameter \'%s\' is'
                  ' pointing to an inexistent Python callable object') % (
                      parameter_data['values'], parameter_data['name']))
@@ -126,19 +127,21 @@ def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
             else parameter_data['max']
         _min = -65536 if 'min' not in parameter_data \
             else parameter_data['min']
-        _round = 2 if 'round' not in parameter_data \
-            else parameter_data['round']
-        return str(round(random.uniform(_min, _max), _round))
+        response = random.uniform(_min, _max)
+        if 'round' in parameter_data:
+            response = round(response, parameter_data['round'])
+        return str(response)
     elif _type in ('bool', 'boolean', bool):
+        _possibles = ['true', 'false']
+        if parameter_data.get('null'):
+            _possibles.append('null')
         if seed is not None:
             random.seed(seed)
-        # TODO: Add support for nullable values
-        return random.choice(['true', 'false'])
+        return random.choice(_possibles)
     elif _type in ('uuid', 'uuid4', uuid.UUID):
         return _instanciate_faker(
             seed=seed, locale=locale).uuid4(cast_to=None).hex
     elif _type in ('id', 'identifier'):
-        # TODO: Document id type
         if seed is not None:
             random.seed(seed)
         _max = 65536 if 'max' not in parameter_data \
@@ -150,12 +153,19 @@ def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
         faker.add_provider(faker_file_provider)
         return faker.file_path()
     elif _type == 'random':
-        # TODO: Document 'random' type
         if seed is not None:
             random.seed(seed)
-
-        parameter_data['type'] = random.choice([
-            'str', 'int', 'float', 'bool', 'uuid', 'id', 'file'])
+        if 'types' in parameter_data:
+            if not isinstance(parameter_data['types'], Iterable):
+                raise TypeError(
+                    ('\'types\' attribute specifying random type must be'
+                     ' an iterable, got type %s') % (
+                        str(type((parameter_data['types'])))))
+            _possible = list(parameter_data['types'])
+        else:
+            _possible = [
+                'str', 'int', 'float', 'bool', 'uuid', 'id', 'file']
+        parameter_data['type'] = random.choice(_possible)
         return lazy_value_by_parameter(parameter_data['type'], seed=seed)
     raise TypeError(
         ('Data type \'%s\' of parameter \'%s\' not supported') % (

@@ -57,11 +57,11 @@ def test_lazy_value_by_parameter__value(value):
     ('tests.conftest::value', 500, 'foo'),
 
     #   str to non-existent function from module-func path format
-    ('tests.conftest::non-existent', None, ValueError),
-    ('tests.conftest::non-existent', 5, ValueError),
+    ('tests.conftest::non-existent', None, ImportError),
+    ('tests.conftest::non-existent', 5, ImportError),
     #   str to non-existent module from module-func path format
-    ('test.non-existent::non-existent', None, ValueError),
-    ('test.non-existent::non-existent', 5, ValueError),
+    ('test.non-existent::non-existent', None, ImportError),
+    ('test.non-existent::non-existent', 5, ImportError),
 ))
 def test_lazy_value_by_parameter__values(values, seed, result):
     parameter = {'values': values, 'name': 'foo'}
@@ -145,10 +145,10 @@ def VALID_UUID4_FROM_TYPE(r):
     (builtins.float, None, VALID_FLOAT_FROM_TYPE),
 
     # float seeded
-    ('Float', 4, '-34596.7'),
-    (float, 4, '-34596.7'),
-    ('NUMBER', 5, '16108.97'),
-    (builtins.float, 5, '16108.97'),
+    ('Float', 4, '-34596.70478193498'),
+    (float, 4, '-34596.70478193498'),
+    ('NUMBER', 5, '16108.970952583011'),
+    (builtins.float, 5, '16108.970952583011'),
 
     # bool
     ('bool', None, ['true', 'false']),

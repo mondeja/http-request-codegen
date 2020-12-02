@@ -30,7 +30,7 @@
 
 ### Test
 
-=== "Formal API"
+=== "All"
 
     ```bash
     pytest -sv
@@ -66,17 +66,24 @@ pre-commit run --all-files
 - [x] Add url randomization support.
 - [x] Implement random parameter type (lazy string and `'random'` type).
 - [x] Document lazy strings in parameter type.
-- [ ] Document ``bool`` type in parameters types.
-- [ ] Document ``random`` type in parameters types.
-- [ ] Document ``uuid`` type in parameters types.
-- [ ] Document ``id`` type in parameters types.
+- [x] Document ``bool`` type in parameters types.
+- [x] Implement nullable value for ``bool`` type.
+- [x] Document ``random`` type in parameters types.
+- [x] Implement ``random`` type filtering between set of types.
+- [x] Document ``uuid`` type in parameters types.
+- [x] Document ``id`` type in parameters types.
 - [ ] Document ``file`` type in parameters types.
-- [ ] Add parametrizer that list all combinations of arguments passed to
+- [x] Document ``float`` type ``max``, ``min`` and ``round`` parameters.
+- [x] Document ``int`` type ``max`` and ``min`` parameters.
+- [x] Add parametrizer that list all combinations of arguments passed to
  implementations.
-- [ ] Document `http_request_codegen.api::generate_http_request_md_code_block`
+- [x] Implement custom code block fence string in
+ `http_request_codegen.api::generate_http_request_md_fenced_code_block` function.
+- [x] Document `http_request_codegen.api::generate_http_request_md_fenced_code_block`
  function.
 - [ ] Document `http_request_codegen.valuer::lazy_value_by_parameter` function.
 - [ ] Document `http_request_codegen.valuer::lazy_name_by_parameter` function.
+- [ ] Implement custom types using functions.
 - [ ] Improve Python string wrapping algorithm continuing in new lines if there
  is little space in the current one.
 - [ ] Create Python string wrapping algorithm that could wraps whitespaces in a
