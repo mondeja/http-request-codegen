@@ -1,0 +1,12 @@
+import requests
+
+req = requests.get(
+    'localhost',
+    params={
+        'param-1': 'value-1'
+    },
+    headers={
+        'Content-Type': 'application/json'
+    },
+    timeout=5
+)

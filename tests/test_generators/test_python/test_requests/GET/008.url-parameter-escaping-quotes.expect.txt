@@ -1,0 +1,8 @@
+import requests
+
+req = requests.get(
+    'localhost',
+    params={
+        'param-1-with-\'\'-quotes': 'value-1-with-\'\'-quotes'
+    }
+)

@@ -1,0 +1,13 @@
+import requests
+
+req = requests.get(
+    ('l'
+     'o'
+     'c'
+     'a'
+     'l'
+     'h'
+     'o'
+     's'
+     't')
+)

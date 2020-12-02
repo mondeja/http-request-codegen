@@ -1,0 +1,17 @@
+import requests
+
+req = requests.get(
+    'localhost',
+    params={
+        'param-1': ('foo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfo'
+                    'o-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-'
+                    'bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-ba'
+                    'r-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-'
+                    'bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-ba'
+                    'zfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazf'
+                    'oo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo'
+                    '-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-b'
+                    'ar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar'
+                    '-bazfoo-bar-bazfoo-bar-bazfoo-bar-baz')
+    }
+)

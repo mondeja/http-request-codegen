@@ -71,9 +71,13 @@ pre-commit run --all-files
 - [ ] Document ``uuid`` type in parameters types.
 - [ ] Document ``id`` type in parameters types.
 - [ ] Document ``file`` type in parameters types.
-- [x] Add parametrizer that list all combinations of arguments passed to
+- [ ] Add parametrizer that list all combinations of arguments passed to
  implementations.
 - [ ] Document `http_request_codegen.api::generate_http_request_md_code_block`
  function.
 - [ ] Document `http_request_codegen.valuer::lazy_value_by_parameter` function.
 - [ ] Document `http_request_codegen.valuer::lazy_name_by_parameter` function.
+- [ ] Improve Python string wrapping algorithm continuing in new lines if there
+ is little space in the current one.
+- [ ] Create Python string wrapping algorithm that could wraps whitespaces in a
+ smart way.  

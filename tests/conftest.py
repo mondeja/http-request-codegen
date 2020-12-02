@@ -2,6 +2,10 @@
 import os
 import sys
 
+import inflection
+
+from http_request_codegen.string import replace_multiple
+
 
 TEST_DIR = os.path.abspath(os.path.dirname(__file__))
 if TEST_DIR not in sys.path:
@@ -16,24 +20,30 @@ def value():
     return 'foo'
 
 
-def _foo_bar_baz_6():
-    return ['foo-6', 'bar-6', 'baz-6']
+def argument_combination_to_filename(combination_name, index):
+    return '%s.%s.expect.txt' % (
+        str(index).zfill(3),
+        inflection.parameterize(
+            replace_multiple(combination_name, replacements={
+                '"': '-double-quote-',
+                '\'': '-single-quote-',
+            })
+        )
+    )
 
 
-def get_argument_combinations():
-    def create_foo_bar_baz_list(num):
-        def foo_bar_baz_list():
-            return ['foo-%d' % num, 'bar-%d' % num, 'baz-%d' % num]
-        return foo_bar_baz_list
+def combination_arguments_to_kwargs(arguments):
+    kwargs = {}
+    for key, value in arguments.items():
+        if key == 'kwargs':
+            kwargs.update(value)
+        else:
+            kwargs[key] = value
+    return kwargs
 
-    #   - url + parameter  + header + kwarg
-    #   - url + parameter  + header + kwargs
-    #   - url + parameters + header + kwarg
-    #   - url + parameters + header + kwargs
-    #   - url + parameter  + headers + kwargs
-    #   - url + parameters + headers + kwargs
 
-    return [
+def get_argument_combinations(include_filenames=True, dirpath=None):
+    response = [
         {
             'name': 'URL',
             'arguments': {
@@ -73,44 +83,20 @@ def get_argument_combinations():
                 'parameters': [
                     {
                         'name': 'param-1',
-                        'value': 'foo-1'
+                        'value': 'foo'
                     },
                     {
                         'name': 'param-2',
-                        'value': ['foo-2', 'bar-2', 'baz-2']
+                        'value': 1
                     },
                     {
                         'name': 'param-3',
-                        'value': create_foo_bar_baz_list(3)
+                        'value': .777
                     },
                     {
                         'name': 'param-4',
-                        'values': ['foo-4', 'bar-4', 'baz-4']
+                        'value': True
                     },
-                    {
-                        'name': 'param-5',
-                        'values': create_foo_bar_baz_list(5)
-                    },
-                    {
-                        'name': 'param-6',
-                        'values': 'conftest::_foo_bar_baz_6'
-                    },
-                    {
-                        'name': 'param-7',
-                        'type': 'str'
-                    },
-                    {
-                        'name': 'param-8',
-                        'type': 'int'
-                    },
-                    {
-                        'name': 'param-9',
-                        'type': 'float'
-                    },
-                    {
-                        'name': 'param-10',
-                        'faker': 'faker.providers.lorem::word'
-                    }
                 ]
             }
         },
@@ -138,6 +124,18 @@ def get_argument_combinations():
                     {
                         'name': 'param-2',
                         'value': 'value-2'
+                    }
+                ]
+            }
+        },
+        {
+            'name': 'URL + parameter wrapping value smart spaces',
+            'arguments': {
+                'url': 'localhost',
+                'parameters': [
+                    {
+                        'name': 'param-1',
+                        'value': 'Wrap me handling spaces smartly ' * 15,
                     }
                 ]
             }
@@ -433,9 +431,129 @@ def get_argument_combinations():
                 }
             }
         },
-
-
-
+        {
+            'name': 'URL + parameter + header + kwarg',
+            'arguments': {
+                'parameters': [
+                    {
+                        'name': 'param-1',
+                        'value': 'value-1'
+                    }
+                ],
+                'headers': {
+                    'Content-Type': 'application/json'
+                },
+                'kwargs': {
+                    'timeout': 5
+                }
+            }
+        },
+        {
+            'name': 'URL + parameter + header + kwargs',
+            'arguments': {
+                'parameters': [
+                    {
+                        'name': 'param-1',
+                        'value': 'value-1'
+                    }
+                ],
+                'headers': {
+                    'Content-Type': 'application/json'
+                },
+                'kwargs': {
+                    'timeout': 5,
+                    'stream': True
+                }
+            }
+        },
+        {
+            'name': 'URL + parameters + header + kwarg',
+            'arguments': {
+                'parameters': [
+                    {
+                        'name': 'param-1',
+                        'value': 'value-1'
+                    },
+                    {
+                        'name': 'param-2',
+                        'value': 7.77
+                    }
+                ],
+                'headers': {
+                    'Content-Type': 'application/json'
+                },
+                'kwargs': {
+                    'timeout': 5
+                }
+            }
+        },
+        {
+            'name': 'URL + parameters + header + kwargs',
+            'arguments': {
+                'parameters': [
+                    {
+                        'name': 'param-1',
+                        'value': 'value-1'
+                    },
+                    {
+                        'name': 'param-2',
+                        'value': 7.77
+                    }
+                ],
+                'headers': {
+                    'Content-Type': 'application/json'
+                },
+                'kwargs': {
+                    'timeout': 5,
+                    'stream': False
+                }
+            }
+        },
+        {
+            'name': 'URL + parameters + headers + kwarg',
+            'arguments': {
+                'parameters': [
+                    {
+                        'name': 'param-1',
+                        'value': 'value-1'
+                    },
+                    {
+                        'name': 'param-2',
+                        'value': 7.77
+                    }
+                ],
+                'headers': {
+                    'Content-Type': 'application/json',
+                    'Accept-Language': 'fr'
+                },
+                'kwargs': {
+                    'timeout': 5
+                }
+            }
+        },
+        {
+            'name': 'URL + parameters + headers + kwargs',
+            'arguments': {
+                'parameters': [
+                    {
+                        'name': 'param-1',
+                        'value': 'value-1'
+                    },
+                    {
+                        'name': 'param-2',
+                        'value': 7.77
+                    }
+                ],
+                'headers': {
+                    'Content-Type': 'application/json',
+                    'Accept-Language': 'fr'
+                },
+                'kwargs': {
+                    'timeout': 5,
+                    'stream': True
+                }
+            }
+        },
         {
             'name': 'No init',
             'arguments': {
@@ -501,15 +619,54 @@ def get_argument_combinations():
             }
         },
         {
+            'name': 'Wrap 10',
+            'arguments': {
+                'wrap': 10
+            }
+        },
+        {
+            'name': 'Wrap 20',
+            'arguments': {
+                'wrap': 20
+            }
+        },
+        {
+            'name': 'Wrap 30',
+            'arguments': {
+                'wrap': 30
+            }
+        },
+        {
+            'name': 'Wrap 35',
+            'arguments': {
+                'wrap': 35
+            }
+        },
+        {
+            'name': 'Wrap 40',
+            'arguments': {
+                'wrap': 40
+            }
+        },
+        {
             'name': 'Wrap infinite',
             'arguments': {
                 'wrap': float('inf')
             }
         },
         {
-            'name': 'Wrap null',
+            'name': 'Wrap null is infinite',
             'arguments': {
                 'wrap': None
             }
         }
     ]
+
+    if include_filenames:
+        for index, args_group in enumerate(response):
+            fname = argument_combination_to_filename(
+                args_group['name'], index)
+            if dirpath and os.path.exists(dirpath):
+                fname = os.path.join(dirpath, fname)
+            args_group['filename'] = fname
+    return response

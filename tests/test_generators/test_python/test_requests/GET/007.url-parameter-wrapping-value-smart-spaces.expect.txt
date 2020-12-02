@@ -1,0 +1,16 @@
+import requests
+
+req = requests.get(
+    'localhost',
+    params={
+        'param-1': ('Wrap me handling spaces smartly Wrap me handling spaces s'
+                    'martly Wrap me handling spaces smartly Wrap me handling s'
+                    'paces smartly Wrap me handling spaces smartly Wrap me han'
+                    'dling spaces smartly Wrap me handling spaces smartly Wrap'
+                    ' me handling spaces smartly Wrap me handling spaces smart'
+                    'ly Wrap me handling spaces smartly Wrap me handling space'
+                    's smartly Wrap me handling spaces smartly Wrap me handlin'
+                    'g spaces smartly Wrap me handling spaces smartly Wrap me '
+                    'handling spaces smartly ')
+    }
+)

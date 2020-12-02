@@ -1,0 +1,3 @@
+import requests
+
+req = requests.get('localhost', headers={'Accept-Language': '*'},timeout=5, stream=False)

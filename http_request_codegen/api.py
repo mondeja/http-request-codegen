@@ -1,6 +1,9 @@
 '''http-request-codegen public API.'''
 
-from http_request_codegen.factory import get_func_by_lang_impl_method
+from http_request_codegen.factory import (
+    DEFAULT_LANGUAGE,
+    get_func_by_lang_impl_method
+)
 
 
 def generate_http_request_code(language=None, impl=None, method='GET',
@@ -123,18 +126,17 @@ def generate_http_request_code(language=None, impl=None, method='GET',
         locale (str): Locale used by [faker](https://faker.readthedocs.io)
             library for localization of the fake random values for parameters.
     '''
-    func = get_func_by_lang_impl_method(
-        language=language, impl=impl, method=method)
-    if wrap is None:
-        wrap = float('inf')
-
-    return func(url, parameters=parameters, headers=headers, indent=indent,
-                oneline=oneline, seed=seed, locale=locale, init=init,
-                wrap=wrap, quote_char=quote_char, **kwargs)
+    return get_func_by_lang_impl_method(
+        language=language, impl=impl, method=method
+    )(
+        url, parameters=parameters, headers=headers, indent=indent,
+        oneline=oneline, seed=seed, locale=locale, init=init,
+        wrap=wrap or float('inf'), quote_char=quote_char, **kwargs
+    )
 
 
 def generate_http_request_md_code_block(language=None, **kwargs):
     return '```%(language)s\n%(render)s\n```' % {
-        'language': language if language else 'python',
+        'language': language if language else DEFAULT_LANGUAGE,
         'render': generate_http_request_code(language=language, **kwargs),
     }

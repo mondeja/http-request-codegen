@@ -1,0 +1,9 @@
+import requests
+
+req = requests.get(
+    'localhost',
+    headers={
+        'Content-Type': 'application/json',
+        'Accept-Language': 'es'
+    }
+)

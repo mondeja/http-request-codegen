@@ -6,15 +6,15 @@ import argparse
 import os
 import sys
 
-import inflection
-
 from http_request_codegen import __version__, generate_http_request_code
 from http_request_codegen.factory import (
     DEFAULT_IMPLEMENTATION,
     DEFAULT_LANGUAGE
 )
-from http_request_codegen.string import replace_multiple
-from tests.conftest import get_argument_combinations
+from tests.conftest import (
+    combination_arguments_to_kwargs,
+    get_argument_combinations
+)
 
 
 DESCRIPTION = ('Implementation test cases creator. This script creates a'
@@ -64,29 +64,14 @@ def main(args=[]):
         sys.stderr.write('The directory \'%s\' exists.\n' % opts.directory)
     os.makedirs(opts.directory, exist_ok=True)
 
-    for i, args_group in enumerate(get_argument_combinations()):
-        kwargs = {
-            'language': opts.language,
-            'impl': opts.implementation,
-            'method': opts.method,
-        }
-        for key, value in args_group['arguments'].items():
-            if key == 'kwargs':
-                kwargs.update(value)
-            else:
-                kwargs[key] = value
-        result = generate_http_request_code(**kwargs)
+    for args_group in get_argument_combinations():
+        result = generate_http_request_code(
+            language=opts.language,
+            impl=opts.implementation,
+            method=opts.method,
+            **combination_arguments_to_kwargs(args_group['arguments']))
 
-        fname = '%s.%s.expect.txt' % (
-            str(i).zfill(3),
-            inflection.parameterize(
-                replace_multiple(args_group['name'], replacements={
-                    '"': '-double-quote-',
-                    '\'': '-single-quote-',
-                })
-            )
-        )
-        fpath = os.path.join(opts.directory, fname)
+        fpath = os.path.join(opts.directory, args_group['filename'])
         with open(fpath, 'w') as f:
             f.write(result)
 

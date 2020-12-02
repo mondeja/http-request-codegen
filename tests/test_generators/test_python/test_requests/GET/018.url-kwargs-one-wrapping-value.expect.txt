@@ -1,0 +1,8 @@
+import requests
+
+req = requests.get(
+    'localhost',
+    timeout=('hello hello hello hello hello hello hello hello hello hello hell'
+             'o hello hello hello hello hello hello hello hello hello '),
+    stream=True
+)

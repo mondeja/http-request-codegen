@@ -1,0 +1,8 @@
+import requests
+
+req = requests.get(
+    'localhost',
+    headers={
+        'Header name with \'\' quotes': 'Header value with \'\' quotes'
+    }
+)

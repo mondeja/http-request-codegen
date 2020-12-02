@@ -1,0 +1,9 @@
+import requests
+
+req = requests.get(
+    ('lo'
+     'ca'
+     'lh'
+     'os'
+     't')
+)

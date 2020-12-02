@@ -1,0 +1,3 @@
+import requests
+
+req = requests.get('localhost', timeout=5)

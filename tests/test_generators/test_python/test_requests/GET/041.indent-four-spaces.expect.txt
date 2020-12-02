@@ -1,0 +1,6 @@
+import requests
+
+req = requests.get(
+    ('localhost localhost localhost localhost localhost localhost localhost lo'
+     'calhost localhost localhost ')
+)

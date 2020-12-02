@@ -1,0 +1,9 @@
+import requests
+
+req = requests.get(
+    ('https:/'
+     '/fakewe'
+     'bsite.e'
+     'xtensio'
+     'n')
+)
