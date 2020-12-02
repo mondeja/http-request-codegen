@@ -161,10 +161,6 @@ Supports the following features:
                           'name': 'random-id',  # positive integer
                           'type': 'id'
                       },
-                      {
-                          'name': 'random-filepath',
-                          'type': 'file'  # 'faker.providers.file::file_path'
-                      },
                       
                       # Parameter name randomization
                       {
@@ -266,10 +262,6 @@ Supports the following features:
                       {
                           'name': 'random-id',
                           'type': 'id'
-                      },
-                      {
-                          'name': 'random-filepath',
-                          'type': 'file'
                       },
                       {
                           'name': ['random-name-from-iterable',

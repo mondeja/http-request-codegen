@@ -72,7 +72,6 @@ pre-commit run --all-files
 - [x] Implement ``random`` type filtering between set of types.
 - [x] Document ``uuid`` type in parameters types.
 - [x] Document ``id`` type in parameters types.
-- [ ] Document ``file`` type in parameters types.
 - [x] Document ``float`` type ``max``, ``min`` and ``round`` parameters.
 - [x] Document ``int`` type ``max`` and ``min`` parameters.
 - [x] Add parametrizer that list all combinations of arguments passed to
@@ -81,10 +80,9 @@ pre-commit run --all-files
  `http_request_codegen.api::generate_http_request_md_fenced_code_block` function.
 - [x] Document `http_request_codegen.api::generate_http_request_md_fenced_code_block`
  function.
-- [ ] Document `http_request_codegen.valuer::lazy_value_by_parameter` function.
-- [ ] Document `http_request_codegen.valuer::lazy_name_by_parameter` function.
-- [ ] Implement custom types using functions.
+- [x] Document `http_request_codegen.valuer::lazy_value_by_parameter` function.
+- [x] Document `http_request_codegen.valuer::lazy_name_by_parameter` function.
 - [ ] Improve Python string wrapping algorithm continuing in new lines if there
  is little space in the current one.
-- [ ] Create Python string wrapping algorithm that could wraps whitespaces in a
+- [ ] Create Python string wrapping algorithm that could wrap whitespaces in a
  smart way.  

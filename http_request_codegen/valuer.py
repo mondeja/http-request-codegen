@@ -7,10 +7,7 @@ from collections.abc import Iterable
 from functools import lru_cache
 
 from faker import Faker
-from faker.providers import (
-    file as faker_file_provider,
-    lorem as faker_lorem_provider
-)
+from faker.providers import lorem as faker_lorem_provider
 
 from http_request_codegen.meta import CallableTypes
 from http_request_codegen.string import lazy_string
@@ -35,7 +32,15 @@ def lazy_name_by_parameter(parameter_data, seed=None):
     - ``name``
     - ``names``
 
-    TODO: Document arguments, returns and exceptions.
+    Args:
+        parameter_data (dict): Parameter specification data. It's defined at
+            **name** and **names** sections of ``parameters`` argument of
+            ``http_request_codegen.api.generate_http_request_code`` function
+            documentation.
+        seed (int): Seed using randomizing names.
+
+    Returns:
+        str: Parameter name.
     '''
     if 'name' in parameter_data:
         return lazy_string(parameter_data['name'], seed=seed)
@@ -69,7 +74,17 @@ def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
     - ``faker``
     - ``type``
 
-    TODO: Document arguments, returns and exceptions.
+    Args:
+        parameter_data (dict): Parameter specification data. It's defined at
+            **type**, **value**, **values** and **faker** sections of
+            ``parameters`` argument of
+            ``http_request_codegen.api.generate_http_request_code`` function
+            documentation.
+        seed (int): Seed using randomizing values.
+        locale (str): Locale used for ``faker`` providers.
+
+    Returns:
+        str: Parameter value.
     '''
     if 'value' in parameter_data:
         return lazy_string(parameter_data['value'], seed=seed)
@@ -147,11 +162,6 @@ def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
         _max = 65536 if 'max' not in parameter_data \
             else parameter_data['max']
         return str(random.randint(1, _max))
-    elif _type == 'file':
-        # TODO: Document file type
-        faker = _instanciate_faker(seed=seed, locale=locale)
-        faker.add_provider(faker_file_provider)
-        return faker.file_path()
     elif _type == 'random':
         if seed is not None:
             random.seed(seed)
