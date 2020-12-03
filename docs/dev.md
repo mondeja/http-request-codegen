@@ -87,7 +87,9 @@ pre-commit run --all-files
 - [x] Implement `teardown` argument.
 - [x] Implement real testing of generated HTTP requests against Flask server.
 - [x] Implement Python requests POST.
+- [x] Add complete demo for POST methods.
 - [ ] Add more oneline tests for POST requests.
 - [ ] Implement real server testing for POST requests.
+- [ ] Add support for random URLs passing ``None`` to ``url`` argument.
 - [ ] Create Python string wrapping algorithm that could wrap whitespaces in a
  smart way.

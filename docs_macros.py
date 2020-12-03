@@ -44,9 +44,11 @@ def define_env(env):
                 if feature == '_supported':
                     continue
                 response += f'        | {feature}             | '
-                for _method in methods.keys():
-                    if method != _method:
-                        continue
-                    response += ' %s ' % '✅' if supported else ' '
+                for i, _method in enumerate(methods.keys()):
+                    if i > 0:
+                        response += '| '
+                    response += (
+                        '%s ' % '✅' if methods[_method][feature] else ' ')
+
                 response += '|\n'
         return response

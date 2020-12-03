@@ -98,7 +98,8 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
     response += ('req = requests.get(%(newline)s%(indent)s%(url)s%(newline2)s'
                  '%(comma)s%(space)s%(newline3)s') % {
         'url': ('%(quote_char)s%(url)s%(quote_char)s' % {
-            'url': url, 'quote_char': quote_char
+            'url': url,
+            'quote_char': quote_char
         }) if oneline else raw_str_definition(url,
                                               indent=indent,
                                               quote_char=quote_char,
@@ -304,7 +305,7 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
 
             files_keys[escaped_key] = []
 
-            if isinstance(value, str):
+            if isinstance(value, str) or value is None:
                 # random filepath
                 if value is None:
                     value = lazy_value_by_parameter(
@@ -341,6 +342,7 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
 
                 # random filepath
                 if value[0] is None:
+                    value = list(value)
                     value[0] = lazy_value_by_parameter(
                         {
                             'name': '',
