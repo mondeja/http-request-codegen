@@ -64,9 +64,7 @@ def function_has_kwarg(func, kwarg_name):
     _inside_func_def = False
     try:
         func_source = inspect.getsource(func)
-    except TypeError as err:
-        if isinstance(func, (FunctionType, MethodType)):
-            raise err
+    except TypeError:
         raise TypeError(
             ('function or method was expected, got %s') % type(func).__name__)
 

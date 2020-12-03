@@ -228,10 +228,7 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
             if not _content_type_found:
                 _key_lower = str(key).lower()
                 if _key_lower == 'content-type':
-                    if 'multipart/form-data' in value:
-                        content_type = 'multipart/form-data'
-                        _content_type_found = True
-                    elif 'text/plain' in value:
+                    if 'text/plain' in value:
                         content_type = 'text/plain'
                         _content_type_found = True
                     elif 'application/json' in value:
@@ -459,51 +456,44 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
         }
 
         for i, (fkey, fvalue) in enumerate(files_keys.items()):
-            if isinstance(fvalue, list):
-                _value = ('(%(newline1)s%(indent)s%(fpath)s,%(newline2)s'
-                          '%(indent)s%(open_file_string)s') % {
-                    'newline1': '\n' if not oneline else '',
-                    'newline2': '\n' if not oneline else ' ',
-                    'indent': indent * 3 if not oneline else '',
-                    'fpath': raw_str_definition(
-                        fvalue[0],
+            _value = ('(%(newline1)s%(indent)s%(fpath)s,%(newline2)s'
+                      '%(indent)s%(open_file_string)s') % {
+                'newline1': '\n' if not oneline else '',
+                'newline2': '\n' if not oneline else ' ',
+                'indent': indent * 3 if not oneline else '',
+                'fpath': raw_str_definition(
+                    fvalue[0],
+                    quote_char=quote_char,
+                    indent=indent * 3,
+                    wrap=wrap),
+                'open_file_string': fvalue[1]
+            }
+            if len(fvalue) > 2:
+                _value += ',%(newline)s%(indent)s%(content_type)s' % {
+                    'content_type': raw_str_definition(
+                        fvalue[2],
                         quote_char=quote_char,
                         indent=indent * 3,
                         wrap=wrap),
-                    'open_file_string': fvalue[1]
+                    'newline': '\n' if not oneline else '',
+                    'indent': indent * 3 if not oneline else ' '
                 }
-                if len(fvalue) > 2:
-                    _value += ',%(newline)s%(indent)s%(content_type)s' % {
-                        'content_type': raw_str_definition(
-                            fvalue[2],
-                            quote_char=quote_char,
-                            indent=indent * 3,
-                            wrap=wrap),
-                        'newline': '\n' if not oneline else '',
-                        'indent': indent * 3 if not oneline else ' '
-                    }
-                if len(fvalue) > 3:
-                    _value += ',%(newline)s%(indent)s%(headers)s' % {
-                        'headers': dict_definition(
-                            fvalue[3],
-                            indent=indent if not oneline else '',
-                            indent_depth=3,
-                            quote_char=quote_char,
-                            newline='\n' if not oneline else '',
-                            _escape_keys=False, _escape_values=False),
-                        'newline': '\n' if not oneline else '',
-                        'indent': indent * 3 if not oneline else ' '
-                    }
-                _value += '%(newline)s%(indent)s)' % {
-                    'newline': '' if oneline else '\n',
-                    'indent': '' if oneline else indent * 2
+            if len(fvalue) > 3:
+                _value += ',%(newline)s%(indent)s%(headers)s' % {
+                    'headers': dict_definition(
+                        fvalue[3],
+                        indent=indent if not oneline else '',
+                        indent_depth=3,
+                        quote_char=quote_char,
+                        newline='\n' if not oneline else '',
+                        _escape_keys=False, _escape_values=False),
+                    'newline': '\n' if not oneline else '',
+                    'indent': indent * 3 if not oneline else ' '
                 }
-            else:   # isinstance(fvalue, str)
-                _value = raw_str_definition(
-                    fvalue,
-                    quote_char=quote_char,
-                    indent=indent * 2 + (' ' * (4 + len(fkey))),
-                    wrap=wrap if i < len(files_keys) - 1 else wrap - 1)
+            _value += '%(newline)s%(indent)s)' % {
+                'newline': '' if oneline else '\n',
+                'indent': '' if oneline else indent * 2
+            }
             response += ('%(indent)s%(quote_char)s%(key)s'
                          '%(quote_char)s: %(value)s%(comma)s') % {
                 'key': fkey,

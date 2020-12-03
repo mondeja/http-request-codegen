@@ -17,6 +17,25 @@ def generate_http_request_code(language=None, impl=None, method='GET',
     programming language or a CLI of a program, based on a valid HTTP method
     and a specification of parameters.
 
+    There are some peculiarities concerning certain methods:
+
+    ??? info "POST"
+
+        POST methods implementations includes some of the most used
+        "Content-Types" headers related behaviours:
+
+        - The default behavior, even if you don't specify it explicitly in the
+            `Content-Type` header is the generation of an
+            ``application/x-www-form-urlencoded`` encoded request.
+        - If you want to generate a ``multipart/form-data`` encoded request,
+            you need to specify the files to sent using the ``files`` argument.
+        - If you specifies the `Content-Type` header `application/json`, the
+            parameters sent will be adjusted according to the JSON encoded POST
+            request.
+        - If you specifies the `Content-Type` header `text/plain`, you can only
+            send one parameter and it will be adjusted accordingly following
+            the implementation.
+
     Args:
         language (str): Programming language or plataform of the resulting code
             snippet. See [Support](#support) to check the supported platforms
@@ -26,11 +45,11 @@ def generate_http_request_code(language=None, impl=None, method='GET',
             to check the supported implementations by language.
         method (str): HTTP method of the generated request.
         url (str, iterable, callable): URL endpoint of the generated request.
-                + Defined as a string, the url will be the string itself.
-                + Defined as an iterable, the url will be selected randomly
+            - Defined as a string, the url will be the string itself.
+            - Defined as an iterable, the url will be selected randomly
             from the iterable. Supports recursivity: until a string is not
             selected the recursion will not be stopped.
-                + Defined as a callable, the url will be the returned value of
+            - Defined as a callable, the url will be the returned value of
             the callable. Supports recursivity: until a string is returned the
             recursion will not be stopped.
         headers (dict): Mapping of request header names and values.
@@ -41,26 +60,28 @@ def generate_http_request_code(language=None, impl=None, method='GET',
 
             - **name** (*str*, *list*, *function*): Parameter name. At least
                 one of this or ``names`` attributes are required.
-                    + Defined as a string, the name will be the string itself.
-                    + Defined as an iterable, the name will be selected
+                - Defined as a string, the name will be the string itself.
+                - Defined as an iterable, the name will be selected
                 randomly from the iterable. Supports recursivity: until a
                 string is not selected the recursion will not be stopped.
-                    + Defined as a callable, the name will be the returned
+                - Defined as a callable, the name will be the returned
                 value of the callable. Supports recursivity: until a string is
                 returned the recursion will not be stopped.
+
             - **names** (*str*, *list*, *function*): Parameter name. At least
                 one of this or ``name`` attributes are required.
-                    + Defined as an iterable, the name will be selected
+                - Defined as an iterable, the name will be selected
                 randomly from the iterable. Supports recursivity: until a
                 string is not selected the recursion will not be stopped.
-                    + Defined as a string, must be a Python formatted module
+                - Defined as a string, must be a Python formatted module
                 path following the format ``'path.to.module::function'`` and
                 the return name will be used as the name for the parameter,
                 which is useful if choosing a random value from a list doesn't
                 fit your needs.
-                    + Defined as a callable, the name will be the returned
+                - Defined as a callable, the name will be the returned
                 value of the callable. Supports recursivity: until a string is
                 returned the recursion will not be stopped.
+
             - **type** (*str*): Parameter data type. If not defined and
                 ``value``, ``values`` and ``faker`` are not defined, will be
                 considered as a string and the value of the parameter will be a
@@ -102,28 +123,31 @@ def generate_http_request_code(language=None, impl=None, method='GET',
                 - ``'random'``: Random type between the available types. You
                     can define a set of possible types passing an iterable
                     to ``types`` optional parameter attribute.
+
             - **value** (*str*, *iterable*, *callable*): Parameter value. If
                 not defined and ``type``, ``values`` and ``faker`` are not
                 defined, the value of the parameter will be a random word built
                 using faker library.
-                    + Defined as a string, the value will be the string itself.
-                    + Defined as an iterable, the value will be selected
+                - Defined as a string, the value will be the string itself.
+                - Defined as an iterable, the value will be selected
                 randomly from the iterable. Supports recursivity: until a
                 string is not selected the recursion will not be stopped.
-                    + Defined as a callable, the value will be the returned
+                - Defined as a callable, the value will be the returned
                 value of the callable. Supports recursivity: until a string is
                 returned the recursion will not be stopped.
+
             - **values** (*list*, *iterable*, *callable*): Possible parameter
                 values.
-                    + Defined as an iterable, the value will be selected
+
+                - Defined as an iterable, the value will be selected
                 randomly from the iterable. Supports recursivity: until a
                 string is not selected the recursion will not be stopped.
-                    + Defined as a string, must be a Python formatted module
+                -  Defined as a string, must be a Python formatted module
                 path following the format ``'path.to.module::function'`` and
                 the return value will be used as the value for the parameter,
                 which is useful if choosing a random value from a list doesn't
                 fit your needs.
-                    + Defined as a callable, the value will be the returned
+                - Defined as a callable, the value will be the returned
                 value of the callable. Supports recursivity: until a string is
                 returned the recursion will not be stopped.
             - **faker** (*str*, *function*): Python formatted module path to a
@@ -131,22 +155,25 @@ def generate_http_request_code(language=None, impl=None, method='GET',
                 randomized. Can be a standard, external provider or any
                 function, but if is not a provider, ``seed`` and ``locale``
                 will not have effect.
-                    + Defined as a string must follow the format
+                - Defined as a string must follow the format
                 ``'path.to.provider.module::function'``.
+
         files (dict): Mapping of files to send to URL. Only has effect for POST
             methods. If you define this argument the `Content-Type` header
             of the request will be assumed to be `'multipart/form-data'`, but
             only will be explicitly specified in the code generated if the
             implementation needs it. Each value accepts a string, ``None`` or a
             tuple:
-                + Defined as a string, must be the filepath of the file to be
+
+            + Defined as a string, must be the filepath of the file to be
             sent.
-                + Defined as ``None``, the filepath will be randomized using
+            + Defined as ``None``, the filepath will be randomized using
             ``faker.providers.file::file_path`` function.
-                + Defined as a tuple, the first value must be the filepath of
+            + Defined as a tuple, the first value must be the filepath of
             the file to be sent (if ``None`` will be a randomized filepath),
             the second value the content-type of the file and the third a
             dictionary of custom headers for the file.
+
         wrap (int): Maximum anchor of the code. If it exceeds it, the output
             code will be conveniently formatted on multiple lines.
         indent (str): Indentation string used in the generated code. If not

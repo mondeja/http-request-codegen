@@ -82,10 +82,16 @@ def test_lazy_value_by_parameter__values(values, seed, result):
     # Faker provider by function
     (LoremProvider.word, None, EnUsLoremProvider.word_list),
     (LoremProvider.word, 5, EnUsLoremProvider.word_list),
+
+    # Invalid type to faker
+    (True, None, TypeError),
 ))
 def test_lazy_value_by_parameter__faker(faker, seed, result):
     parameter = {'faker': faker, 'name': 'foo'}
-    if isinstance(result, (list, tuple)):
+    if hasattr(result, '__traceback__'):
+        with pytest.raises(result):
+            lazy_value_by_parameter(parameter, seed=seed)
+    elif isinstance(result, (list, tuple)):
         assert lazy_value_by_parameter(parameter, seed=seed) in result
     else:
         assert lazy_value_by_parameter(parameter, seed=seed) == result
@@ -105,89 +111,108 @@ def VALID_UUID4_FROM_TYPE(r):
     return val.hex == r
 
 
-@pytest.mark.parametrize(('type', 'seed', 'result'), (
+@pytest.mark.parametrize(('_type', 'seed', 'result', 'kwargs'), (
+    # default (str)
+    (None, None, EnUsLoremProvider.word_list, {}),
+
     # str
-    ('str', None, EnUsLoremProvider.word_list),
-    ('Str', None, EnUsLoremProvider.word_list),
-    ('STR', None, EnUsLoremProvider.word_list),
-    ('string', None, EnUsLoremProvider.word_list),
-    ('String', None, EnUsLoremProvider.word_list),
-    ('STRING', None, EnUsLoremProvider.word_list),
-    (str, None, EnUsLoremProvider.word_list),
-    (builtins.str, None, EnUsLoremProvider.word_list),
+    ('str', None, EnUsLoremProvider.word_list, {}),
+    ('Str', None, EnUsLoremProvider.word_list, {}),
+    ('STR', None, EnUsLoremProvider.word_list, {}),
+    ('string', None, EnUsLoremProvider.word_list, {}),
+    ('String', None, EnUsLoremProvider.word_list, {}),
+    ('STRING', None, EnUsLoremProvider.word_list, {}),
+    (str, None, EnUsLoremProvider.word_list, {}),
+    (builtins.str, None, EnUsLoremProvider.word_list, {}),
 
     # TODO: test str seeded
 
     # int
-    ('int', None, VALID_INT_FROM_TYPE),
-    ('Int', None, VALID_INT_FROM_TYPE),
-    ('INT', None, VALID_INT_FROM_TYPE),
-    ('integer', None, VALID_INT_FROM_TYPE),
-    ('Integer', None, VALID_INT_FROM_TYPE),
-    ('INTEGER', None, VALID_INT_FROM_TYPE),
-    (int, None, VALID_INT_FROM_TYPE),
-    (builtins.int, None, VALID_INT_FROM_TYPE),
+    ('int', None, VALID_INT_FROM_TYPE, {}),
+    ('Int', None, VALID_INT_FROM_TYPE, {}),
+    ('INT', None, VALID_INT_FROM_TYPE, {}),
+    ('integer', None, VALID_INT_FROM_TYPE, {}),
+    ('Integer', None, VALID_INT_FROM_TYPE, {}),
+    ('INTEGER', None, VALID_INT_FROM_TYPE, {}),
+    (int, None, VALID_INT_FROM_TYPE, {}),
+    (builtins.int, None, VALID_INT_FROM_TYPE, {}),
 
     # int seeded
-    ('Int', 4, '-3658'),
-    (int, 4, '-3658'),
-    ('INTEGER', 5, '1427'),
-    (builtins.int, 5, '1427'),
+    ('Int', 4, '-3658', {}),
+    (int, 4, '-3658', {}),
+    ('INTEGER', 5, '1427', {}),
+    (builtins.int, 5, '1427', {}),
 
     # float
-    ('float', None, VALID_FLOAT_FROM_TYPE),
-    ('Float', None, VALID_FLOAT_FROM_TYPE),
-    ('FLOAT', None, VALID_FLOAT_FROM_TYPE),
-    ('number', None, VALID_FLOAT_FROM_TYPE),
-    ('Number', None, VALID_FLOAT_FROM_TYPE),
-    ('NUMBER', None, VALID_FLOAT_FROM_TYPE),
-    (float, None, VALID_FLOAT_FROM_TYPE),
-    (builtins.float, None, VALID_FLOAT_FROM_TYPE),
+    ('float', None, VALID_FLOAT_FROM_TYPE, {}),
+    ('Float', None, VALID_FLOAT_FROM_TYPE, {}),
+    ('FLOAT', None, VALID_FLOAT_FROM_TYPE, {}),
+    ('number', None, VALID_FLOAT_FROM_TYPE, {}),
+    ('Number', None, VALID_FLOAT_FROM_TYPE, {}),
+    ('NUMBER', None, VALID_FLOAT_FROM_TYPE, {}),
+    (float, None, VALID_FLOAT_FROM_TYPE, {}),
+    (builtins.float, None, VALID_FLOAT_FROM_TYPE, {}),
+    #   round
+    ('float', None, VALID_FLOAT_FROM_TYPE, {'round': 5}),
 
     # float seeded
-    ('Float', 4, '-34596.70478193498'),
-    (float, 4, '-34596.70478193498'),
-    ('NUMBER', 5, '16108.970952583011'),
-    (builtins.float, 5, '16108.970952583011'),
+    ('Float', 4, '-34596.70478193498', {}),
+    (float, 4, '-34596.70478193498', {}),
+    ('NUMBER', 5, '16108.970952583011', {}),
+    (builtins.float, 5, '16108.970952583011', {}),
 
     # bool
-    ('bool', None, ['true', 'false']),
-    ('Bool', None, ['true', 'false']),
-    ('BOOL', None, ['true', 'false']),
-    ('boolean', None, ['true', 'false']),
-    ('Boolean', None, ['true', 'false']),
-    ('BOOLEAN', None, ['true', 'false']),
-    (bool, None, ['true', 'false']),
-    (builtins.bool, None, ['true', 'false']),
+    ('bool', None, ['true', 'false'], {}),
+    ('Bool', None, ['true', 'false'], {}),
+    ('BOOL', None, ['true', 'false'], {}),
+    ('boolean', None, ['true', 'false'], {}),
+    ('Boolean', None, ['true', 'false'], {}),
+    ('BOOLEAN', None, ['true', 'false'], {}),
+    (bool, None, ['true', 'false'], {}),
+    (builtins.bool, None, ['true', 'false'], {}),
+    #   nullable
+    ('bool', None, ['true', 'false', 'null'], {'null': True}),
+    ('bool', -33, 'null', {'null': True}),
 
     # bool seeded
-    ('Bool', 4, 'true'),
-    (bool, 4, 'true'),
-    ('BOOLEAN', 5, 'false'),
-    (builtins.bool, 5, 'false'),
+    ('Bool', 4, 'true', {}),
+    (bool, 4, 'true', {}),
+    ('BOOLEAN', 5, 'false', {}),
+    (builtins.bool, 5, 'false', {}),
 
     # uuid
-    ('uuid', None, VALID_UUID4_FROM_TYPE),
-    ('Uuid', None, VALID_UUID4_FROM_TYPE),
-    ('UUID', None, VALID_UUID4_FROM_TYPE),
-    ('uuid4', None, VALID_UUID4_FROM_TYPE),
-    ('Uuid4', None, VALID_UUID4_FROM_TYPE),
-    ('UUID4', None, VALID_UUID4_FROM_TYPE),
-    (uuid.UUID, None, VALID_UUID4_FROM_TYPE),
+    ('uuid', None, VALID_UUID4_FROM_TYPE, {}),
+    ('Uuid', None, VALID_UUID4_FROM_TYPE, {}),
+    ('UUID', None, VALID_UUID4_FROM_TYPE, {}),
+    ('uuid4', None, VALID_UUID4_FROM_TYPE, {}),
+    ('Uuid4', None, VALID_UUID4_FROM_TYPE, {}),
+    ('UUID4', None, VALID_UUID4_FROM_TYPE, {}),
+    (uuid.UUID, None, VALID_UUID4_FROM_TYPE, {}),
 
     # TODO: test uuid seeded
 
     # id
-    ('id', None, VALID_ID_FROM_TYPE),
-    ('Id', None, VALID_ID_FROM_TYPE),
-    ('ID', None, VALID_ID_FROM_TYPE),
-    ('identifier', None, VALID_ID_FROM_TYPE),
-    ('Identifier', None, VALID_ID_FROM_TYPE),
-    ('IDENTIFIER', None, VALID_ID_FROM_TYPE),
+    ('id', None, VALID_ID_FROM_TYPE, {}),
+    ('Id', None, VALID_ID_FROM_TYPE, {}),
+    ('ID', None, VALID_ID_FROM_TYPE, {}),
+    ('identifier', None, VALID_ID_FROM_TYPE, {}),
+    ('Identifier', None, VALID_ID_FROM_TYPE, {}),
+    ('IDENTIFIER', None, VALID_ID_FROM_TYPE, {}),
+    ('IDENTIFIER', 55, VALID_ID_FROM_TYPE, {}),
+
+    # unsupported type
+    (False, None, TypeError, {}),
 ))
-def test_lazy_value_by_parameter__type(type, seed, result):
-    parameter = {'type': type, 'name': 'foo'}
-    if isinstance(result, (list, tuple, range)):
+def test_lazy_value_by_parameter__type(_type, seed, result, kwargs):
+    parameter = {'name': 'foo'}
+    if _type is not None:
+        parameter['type'] = _type
+    parameter.update(kwargs)
+
+    if hasattr(result, '__traceback__'):
+        with pytest.raises(result):
+            lazy_value_by_parameter(parameter, seed=seed)
+    elif isinstance(result, (list, tuple, range)):
         assert lazy_value_by_parameter(parameter, seed=seed) in result
     elif isinstance(result, LambdaType):
         assert result(lazy_value_by_parameter(parameter, seed=seed))
