@@ -11,13 +11,15 @@ from tests.conftest import (
 )
 
 
-GET_CASES_DIRPATH = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), 'GET'))
+CASES_DIRS = {
+    method: os.path.abspath(os.path.join(os.path.dirname(__file__), method))
+    for method in ['GET', 'POST']
+}
 
 
 @pytest.mark.parametrize(
     'args_group',
-    get_argument_combinations(dirpath=GET_CASES_DIRPATH),
+    get_argument_combinations(method='GET', dirpath=CASES_DIRS['GET']),
     ids=lambda args_group: os.path.basename(args_group['filename'])
 )
 def test_python_requests_get(args_group):
@@ -33,7 +35,7 @@ def test_python_requests_get(args_group):
 
 @pytest.mark.parametrize(
     'args_group',
-    get_argument_combinations(dirpath=GET_CASES_DIRPATH),
+    get_argument_combinations(method='GET', dirpath=CASES_DIRS['GET']),
     ids=lambda args_group: os.path.basename(args_group['filename'])
 )
 def test_python_requests_get__response(args_group, assert_request_args):
@@ -46,3 +48,19 @@ def test_python_requests_get__response(args_group, assert_request_args):
     namespace = {}
     exec(result, namespace)
     assert_request_args(args_group['arguments'], namespace['req'].json())
+
+
+@pytest.mark.parametrize(
+    'args_group',
+    get_argument_combinations(method='POST', dirpath=CASES_DIRS['POST']),
+    ids=lambda args_group: os.path.basename(args_group['filename'])
+)
+def test_python_requests_post(args_group):
+    with open(args_group['filename'], 'r') as f:
+        expected_result = f.read()
+
+    result = generate_http_request_code(
+        'python', 'requests', 'POST',
+        **combination_arguments_to_kwargs(args_group['arguments']))
+
+    assert result == expected_result

@@ -4,6 +4,7 @@
 
 import argparse
 import os
+import shutil
 import sys
 
 from http_request_codegen import __version__, generate_http_request_code
@@ -64,16 +65,21 @@ def main(args=[]):
         sys.stderr.write('The directory \'%s\' exists.\n' % opts.directory)
     os.makedirs(opts.directory, exist_ok=True)
 
-    for args_group in get_argument_combinations():
-        result = generate_http_request_code(
-            language=opts.language,
-            impl=opts.implementation,
-            method=opts.method,
-            **combination_arguments_to_kwargs(args_group['arguments']))
+    try:
+        for args_group in get_argument_combinations(method=opts.method):
+            result = generate_http_request_code(
+                language=opts.language,
+                impl=opts.implementation,
+                method=opts.method,
+                **combination_arguments_to_kwargs(args_group['arguments'])
+            )
 
-        fpath = os.path.join(opts.directory, args_group['filename'])
-        with open(fpath, 'w') as f:
-            f.write(result)
+            fpath = os.path.join(opts.directory, args_group['filename'])
+            with open(fpath, 'w') as f:
+                f.write(result)
+    except Exception as err:
+        shutil.rmtree(opts.directory)
+        raise err
 
     return 0
 

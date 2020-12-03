@@ -1,0 +1,8 @@
+import requests
+
+req = requests.post(
+    'http://localhost:8876',
+    data={
+        'param-1-with-\'\'-quotes': 'value-1-with-\'\'-quotes'
+    }
+)

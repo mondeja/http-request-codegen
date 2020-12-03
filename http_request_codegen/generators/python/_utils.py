@@ -383,36 +383,21 @@ def kwarg_definition_dict_valued(kwarg_name, dictionary,
     '''
     if _validate_identifier:
         validate_python_identifier(kwarg_name)
-    escape_quote_func = escape_quote_func_by_quote_char(quote_char)
 
-    response = '%(indent)s%(kwarg_name)s={' % {
+    return '%(indent)s%(kwarg_name)s=%(dictionary)s' % {
         'indent': indent * indent_depth,
         'kwarg_name': kwarg_name,
+        'dictionary': dict_definition(
+            dictionary,
+            indent=indent,
+            indent_depth=indent_depth,
+            quote_char=quote_char,
+            wrap=wrap,
+            newline=newline,
+            _escape_keys=_escape_keys,
+            _escape_values=_escape_values
+        )
     }
-    if dictionary:
-        response += newline
-        for i, (key, value) in enumerate(dictionary.items()):
-            _key = key if not _escape_keys else escape_quote_func(key)
-            if isinstance(value, str):
-                _indent = indent * indent_depth * 2 + ' ' * (len(_key) + 4)
-                _value = raw_str_definition(value,
-                                            indent=_indent,
-                                            quote_char=quote_char,
-                                            wrap=wrap,
-                                            _escape=_escape_values)
-            else:
-                _value = str(value)
-            response += ('%(indents)s%(quote_char)s%(key)s%(quote_char)s:'
-                         ' %(value)s%(comma)s%(newline)s') % {
-                'indents': indent * (indent_depth + 1),
-                'key': _key,
-                'value': _value,
-                'quote_char': quote_char,
-                'newline': newline,
-                'comma': ',' if i < len(dictionary) - 1 else '',
-            }
-    response += '%(indent)s}' % {'indent': indent * indent_depth}
-    return response
 
 
 def raw_str_definition(string, indent=DEFAULT_INDENT,
@@ -450,8 +435,9 @@ def raw_str_definition(string, indent=DEFAULT_INDENT,
         >>> print(raw_str_definition('123', wrap=1, quote_char='"', indent=''))
         ("1"
          "2"
-         "3")
-        >>> print(raw_str_definition('123', wrap=4, quote_char='"', indent=''))
+         "3"
+        )
+        >>> print(raw_str_definition('123', wrap=5, quote_char='"', indent=''))
         ("1"
          "2"
          "3")
@@ -487,5 +473,66 @@ def raw_str_definition(string, indent=DEFAULT_INDENT,
                 'indent': indent,
             }
             _chars_in_current_line = 2 + indent_length  # ' ('
-    response += '%(quote_char)s)' % {'quote_char': quote_char}
+    response += '%(quote_char)s%(newline)s%(indent)s)' % {
+        'newline': '\n' if _chars_in_current_line >= wrap - 1 else '',
+        'indent': indent if _chars_in_current_line >= wrap - 1 else '',
+        'quote_char': quote_char,
+    }
+    return response
+
+
+def dict_definition(dictionary, indent=DEFAULT_INDENT, indent_depth=0,
+                    quote_char=DEFAULT_QUOTE_CHAR, wrap=DEFAULT_WRAP,
+                    newline='\n', _escape_keys=True, _escape_values=True):
+    '''Creates a definition of a Python dictionary.
+
+    Args:
+        dictionary (str): Dictionary that will be defined as Python code.
+        indent (str): Indentation used for the keys and values.
+        indent_depth (int): Number of levels of indentation.
+        quote_char (str): Python string quotation character used.
+        wrap (int): Maximum anchor of the code. If it exceeds it, it will be
+            wrapped in multiple lines.
+        newline (str): Newline character.
+        _escape_keys (bool): If ``True`` the keys of the dictionary will be
+            escaped against the string of ``quote_char`` argument.
+        _escape_values (bool): If ``True`` the values of the dictionary will be
+            escaped against the string of ``quote_char`` argument.
+
+    Examples:
+        >>> print(dict_definition({'foo': 'bar'}))
+        {
+            'foo': 'bar'
+        }
+
+    Returns:
+        str: Definition of the dictionary.
+    '''
+    if _escape_keys:
+        escape_quote_func = escape_quote_func_by_quote_char(quote_char)
+
+    response = '{%(newline)s' % {'newline': newline}
+    for i, (key, value) in enumerate(dictionary.items()):
+        _key = key if not _escape_keys else escape_quote_func(key)
+        if isinstance(value, str):
+            _indent = indent * indent_depth * 2 + ' ' * (len(_key) + 4)
+            _value = raw_str_definition(value,
+                                        indent=_indent,
+                                        quote_char=quote_char,
+                                        wrap=wrap,
+                                        _escape=_escape_values)
+        else:
+            _value = str(value)
+        response += ('%(indents)s%(quote_char)s%(key)s%(quote_char)s:'
+                     ' %(value)s%(comma)s%(newline)s') % {
+            'indents': indent * (indent_depth + 1),
+            'key': _key,
+            'value': _value,
+            'quote_char': quote_char,
+            'newline': newline,
+            'comma': ',' if i < len(dictionary) - 1 else '',
+        }
+    response += '%(indent)s}' % {
+        'indent': (indent * indent_depth) if dictionary else ''
+    }
     return response

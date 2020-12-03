@@ -1,0 +1,17 @@
+import requests
+
+req = requests.post(
+    'http://localhost:8876',
+    files={
+        'param-1': (
+            '/file/path-1.ext',
+            open('/file/path-1.ext', 'rb'),
+            'text/plain'
+        ),
+        'param-2': (
+            '/file/path-1.ext',
+            open('/file/path-1.ext', 'rb'),
+            'text/csv'
+        )
+    }
+)

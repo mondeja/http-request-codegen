@@ -1,0 +1,15 @@
+import requests
+
+req = requests.post(
+    ('ht'
+     'tp'
+     ':/'
+     '/l'
+     'oc'
+     'al'
+     'ho'
+     'st'
+     ':8'
+     '87'
+     '6')
+)

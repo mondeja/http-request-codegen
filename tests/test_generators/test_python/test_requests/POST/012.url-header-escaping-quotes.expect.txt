@@ -1,0 +1,8 @@
+import requests
+
+req = requests.post(
+    'http://localhost:8876',
+    headers={
+        'Accept-Language': 'Header value with \'\' quotes'
+    }
+)

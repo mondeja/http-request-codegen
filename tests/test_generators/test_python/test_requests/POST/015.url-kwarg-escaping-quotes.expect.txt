@@ -1,0 +1,8 @@
+import requests
+
+req = requests.post(
+    'http://localhost:8876',
+    cookies={
+        'foo': 'value with \'\' quotes'
+    }
+)

@@ -1,0 +1,12 @@
+import requests
+
+req = requests.post(
+  'http://localhost:8876',
+  headers={
+    'Accept-Language': ('es en fr * es en fr * es en fr * es en fr * es en fr '
+                        '* es en fr * es en fr * es en fr * es en fr * es en f'
+                        'r * es en fr * es en fr * es en fr * es en fr * es en'
+                        ' fr * es en fr * es en fr * es en fr * es en fr * es '
+                        'en fr * ')
+  }
+)

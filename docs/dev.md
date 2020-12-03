@@ -86,6 +86,8 @@ pre-commit run --all-files
 - [x] Allow `setup` argument to take a string for customize the initialization.
 - [x] Implement `teardown` argument.
 - [x] Implement real testing of generated HTTP requests against Flask server.
-- [ ] Implement Python requests POST.
+- [x] Implement Python requests POST.
+- [ ] Add more oneline tests for POST requests.
+- [ ] Implement real server testing for POST requests.
 - [ ] Create Python string wrapping algorithm that could wrap whitespaces in a
  smart way.

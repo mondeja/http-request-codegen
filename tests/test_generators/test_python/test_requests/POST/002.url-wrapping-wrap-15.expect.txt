@@ -1,0 +1,7 @@
+import requests
+
+req = requests.post(
+    ('http://'
+     'localho'
+     'st:8876')
+)

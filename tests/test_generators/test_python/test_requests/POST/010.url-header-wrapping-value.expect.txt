@@ -1,0 +1,9 @@
+import requests
+
+req = requests.post(
+    'http://localhost:8876',
+    headers={
+        'Content-Type': ('application/jsonapplication/jsonapplication/jsonappl'
+                         'ication/jsonapplication/json')
+    }
+)

@@ -118,7 +118,8 @@ def combination_arguments_to_kwargs(arguments):
     return kwargs
 
 
-def get_argument_combinations(include_filenames=True, dirpath=None):
+def get_argument_combinations(method='GET', include_filenames=True,
+                              dirpath=None):
     response = [
         {
             'name': 'URL',
@@ -141,7 +142,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameter',
+            'name': 'Parameter',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -153,7 +154,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameters',
+            'name': 'Parameters',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -177,7 +178,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameter wrapping value',
+            'name': 'Parameter wrapping value',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -189,7 +190,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameters, one wrapping value',
+            'name': 'Parameters, one wrapping value',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -205,19 +206,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameter wrapping value smart spaces',
-            'arguments': {
-                'url': TEST_BASE_URL,
-                'parameters': [
-                    {
-                        'name': 'param-1',
-                        'value': 'Wrap me handling spaces smartly ' * 15,
-                    }
-                ]
-            }
-        },
-        {
-            'name': 'URL + parameter escaping quotes',
+            'name': 'Parameter escaping quotes',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -329,7 +318,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameter + header',
+            'name': 'Parameter + header',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -344,7 +333,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameter + header (oneline)',
+            'name': 'Parameter + header (oneline)',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -360,7 +349,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameters + header',
+            'name': 'Parameters + header',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -379,7 +368,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameter + headers',
+            'name': 'Parameter + headers',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -395,7 +384,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameters + headers',
+            'name': 'Parameters + headers',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -415,7 +404,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameter + kwarg',
+            'name': 'Parameter + kwarg',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -430,7 +419,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameter + kwarg (oneline)',
+            'name': 'Parameter + kwarg (oneline)',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -446,7 +435,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameters + kwarg',
+            'name': 'Parameters + kwarg',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -465,7 +454,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameter + kwargs',
+            'name': 'Parameter + kwargs',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -481,7 +470,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameters + kwargs',
+            'name': 'Parameters + kwargs',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -566,7 +555,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameter + header + kwarg',
+            'name': 'Parameter + header + kwarg',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -584,7 +573,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameter + header + kwargs',
+            'name': 'Parameter + header + kwargs',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -603,7 +592,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameters + header + kwarg',
+            'name': 'Parameters + header + kwarg',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -625,7 +614,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameters + header + kwargs',
+            'name': 'Parameters + header + kwargs',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -648,7 +637,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameters + headers + kwarg',
+            'name': 'Parameters + headers + kwarg',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -671,7 +660,7 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
-            'name': 'URL + parameters + headers + kwargs',
+            'name': 'Parameters + headers + kwargs',
             'arguments': {
                 'url': TEST_BASE_URL,
                 'parameters': [
@@ -793,6 +782,13 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         },
         {
+            'name': 'Wrap 25',
+            'arguments': {
+                'url': TEST_BASE_URL,
+                'wrap': 25
+            }
+        },
+        {
             'name': 'Wrap 30',
             'arguments': {
                 'url': TEST_BASE_URL,
@@ -828,6 +824,521 @@ def get_argument_combinations(include_filenames=True, dirpath=None):
             }
         }
     ]
+
+    if method.lower() == 'post':
+        response.extend([
+            {
+                'name': 'Data by parameter (text/plain)',
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'parameters': [
+                        {
+                            'value': 'foo bar baz ' * 3
+                        }
+                    ],
+                    'headers': {
+                        'Content-Type': 'text/plain'
+                    }
+                }
+            },
+            {
+                'name': 'Data by parameter (application/json)',
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'parameters': [
+                        {
+                            'name': 'param-1',
+                            'value': 'value-1'
+                        }
+                    ],
+                    'headers': {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            },
+            {
+                'name': 'Data by parameters (application/json)',
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'parameters': [
+                        {
+                            'name': 'param-int',
+                            'value': 1
+                        },
+                        {
+                            'name': 'param-float',
+                            'value': .777
+                        },
+                        {
+                            'name': 'param-bool',
+                            'value': True
+                        }
+                    ],
+                    'headers': {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            },
+            {
+                'name': ('Data by parameter'
+                         ' (application/x-www-form-urlencoded)'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'parameters': [
+                        {
+                            'name': 'param-1',
+                            'value': 'value-1'
+                        }
+                    ],
+                    'headers': {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }
+            },
+            {
+                'name': ('Data by parameters'
+                         ' (application/x-www-form-urlencoded)'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'parameters': [
+                        {
+                            'name': 'param-int',
+                            'value': 1
+                        },
+                        {
+                            'name': 'param-float',
+                            'value': .777
+                        },
+                        {
+                            'name': 'param-bool',
+                            'value': True
+                        }
+                    ],
+                    'headers': {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }
+            },
+            {
+                'name': 'File by filepath (multipart/form-data)',
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': '/file/path-1.ext'
+                    }
+                }
+            },
+            {
+                'name': 'Files by filepath (multipart/form-data)',
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': '/file/path-1.ext',
+                        'param-2': '/file/path-2.ext',
+                    }
+                }
+            },
+            {
+                'name': 'File by filepath (multipart/form-data) wrapping',
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': 'foo bar baz ' * 25
+                    }
+                }
+            },
+            {
+                'name': ('Files by filepath (multipart/form-data)'
+                         ' with Content-Type'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': ('/file/path-1.ext', 'text/plain'),
+                        'param-2': ('/file/path-1.ext', 'text/csv'),
+                    }
+                }
+            },
+            {
+                'name': ('File by filepath (multipart/form-data)'
+                         ' with Content-Type wrapping'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': (
+                            '/file/path-1.ext',
+                            'text/plain ' * 20
+                        ),
+                    }
+                }
+            },
+            {
+                'name': ('File by filepath (multipart/form-data),'
+                         ' Content-Type, header'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': (
+                            '/file/path-1.ext',
+                            'text/plain',
+                            {'Accept-Language': 'es'}
+                        ),
+                    }
+                }
+            },
+            {
+                'name': ('File by filepath (multipart/form-data),'
+                         ' Content-Type, headers'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': (
+                            '/file/path-1.ext',
+                            'text/plain',
+                            {
+                                'Accept-Language': 'es',
+                                'Accept-Charset': 'utf-8'
+                            }
+                        ),
+                    }
+                }
+            },
+            {
+                'name': 'Files by filepath (multipart/form-data) + parameter',
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': '/file/path-1.ext',
+                        'param-2': '/file/path-2.ext',
+                    },
+                    'parameters': [
+                        {
+                            'name': 'param-1',
+                            'value': 'value-1'
+                        }
+                    ]
+                }
+            },
+            {
+                'name': 'Files by filepath (multipart/form-data) + parameters',
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': '/file/path-1.ext',
+                        'param-2': '/file/path-2.ext',
+                    },
+                    'parameters': [
+                        {
+                            'name': 'param-1',
+                            'value': 'value-1'
+                        },
+                        {
+                            'name': 'param-2',
+                            'value': 'value-2'
+                        }
+                    ]
+                }
+            },
+            {
+                'name': ('Files by filepath (multipart/form-data) + parameter'
+                         ' + header'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': '/file/path-1.ext',
+                        'param-2': '/file/path-2.ext',
+                    },
+                    'parameters': [
+                        {
+                            'name': 'param-1',
+                            'value': 'value-1'
+                        }
+                    ],
+                    'headers': {
+                        'Accept-Language': 'fr'
+                    }
+                }
+            },
+            {
+                'name': ('Files by filepath (multipart/form-data) + parameter'
+                         ' + headers'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': '/file/path-1.ext',
+                        'param-2': '/file/path-2.ext',
+                    },
+                    'parameters': [
+                        {
+                            'name': 'param-1',
+                            'value': 'value-1'
+                        }
+                    ],
+                    'headers': {
+                        'Accept-Language': 'fr',
+                        'Accept-Charset': 'utf-8'
+                    }
+                }
+            },
+            {
+                'name': ('Files by filepath (multipart/form-data) + parameters'
+                         ' + header'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': '/file/path-1.ext',
+                        'param-2': '/file/path-2.ext',
+                    },
+                    'parameters': [
+                        {
+                            'name': 'param-1',
+                            'value': 'value-1'
+                        },
+                        {
+                            'name': 'param-2',
+                            'value': 'value-2'
+                        }
+                    ],
+                    'headers': {
+                        'Accept-Language': 'es'
+                    }
+                }
+            },
+            {
+                'name': ('Files by filepath (multipart/form-data) + parameters'
+                         ' + headers'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': '/file/path-1.ext',
+                        'param-2': '/file/path-2.ext',
+                    },
+                    'parameters': [
+                        {
+                            'name': 'param-1',
+                            'value': 'value-1'
+                        },
+                        {
+                            'name': 'param-2',
+                            'value': 'value-2'
+                        }
+                    ],
+                    'headers': {
+                        'Accept-Language': 'fr',
+                        'Accept-Charset': 'utf-8'
+                    }
+                }
+            },
+            {
+                'name': ('Files by filepath (multipart/form-data) + parameter'
+                         ' + header + kwarg'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': '/file/path-1.ext',
+                        'param-2': '/file/path-2.ext',
+                    },
+                    'parameters': [
+                        {
+                            'name': 'param-1',
+                            'value': 'value-1'
+                        }
+                    ],
+                    'headers': {
+                        'Accept-Language': 'fr'
+                    },
+                    'kwargs': {
+                        'timeout': 10
+                    }
+                }
+            },
+            {
+                'name': ('Files by filepath (multipart/form-data) + parameter'
+                         ' + headers + kwarg'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': '/file/path-1.ext',
+                        'param-2': '/file/path-2.ext',
+                    },
+                    'parameters': [
+                        {
+                            'name': 'param-1',
+                            'value': 'value-1'
+                        }
+                    ],
+                    'headers': {
+                        'Accept-Language': 'fr',
+                        'Accept-Charset': 'utf-8'
+                    },
+                    'kwargs': {
+                        'timeout': 10
+                    }
+                }
+            },
+            {
+                'name': ('Files by filepath (multipart/form-data) + parameters'
+                         ' + header + kwarg'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': '/file/path-1.ext',
+                        'param-2': '/file/path-2.ext',
+                    },
+                    'parameters': [
+                        {
+                            'name': 'param-1',
+                            'value': 'value-1'
+                        },
+                        {
+                            'name': 'param-2',
+                            'value': 'value-2'
+                        }
+                    ],
+                    'headers': {
+                        'Accept-Language': 'fr'
+                    },
+                    'kwargs': {
+                        'timeout': 10
+                    }
+                }
+            },
+            {
+                'name': ('Files by filepath (multipart/form-data) + parameters'
+                         ' + headers + kwarg'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': '/file/path-1.ext',
+                        'param-2': '/file/path-2.ext',
+                    },
+                    'parameters': [
+                        {
+                            'name': 'param-1',
+                            'value': 'value-1'
+                        },
+                        {
+                            'name': 'param-2',
+                            'value': 'value-2'
+                        }
+                    ],
+                    'headers': {
+                        'Accept-Language': 'fr',
+                        'Accept-Charset': 'utf-8'
+                    },
+                    'kwargs': {
+                        'timeout': 10
+                    }
+                }
+            },
+            {
+                'name': ('Files by filepath (multipart/form-data) + parameter'
+                         ' + header + kwargs'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': '/file/path-1.ext',
+                        'param-2': '/file/path-2.ext',
+                    },
+                    'parameters': [
+                        {
+                            'name': 'param-1',
+                            'value': 'value-1'
+                        }
+                    ],
+                    'headers': {
+                        'Accept-Language': 'fr',
+                    },
+                    'kwargs': {
+                        'timeout': 10,
+                        'cookies': {
+                            'hello': 'world'
+                        }
+                    }
+                }
+            },
+            {
+                'name': ('Files by filepath (multipart/form-data) + parameter'
+                         ' + headers + kwargs'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': '/file/path-1.ext',
+                        'param-2': '/file/path-2.ext',
+                    },
+                    'parameters': [
+                        {
+                            'name': 'param-1',
+                            'value': 'value-1'
+                        }
+                    ],
+                    'headers': {
+                        'Accept-Language': 'fr',
+                        'Accept-Charset': 'utf-8'
+                    },
+                    'kwargs': {
+                        'timeout': 10,
+                        'stream': False
+                    }
+                }
+            },
+            {
+                'name': ('Files by filepath (multipart/form-data) + parameters'
+                         ' + header + kwargs'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': '/file/path-1.ext',
+                        'param-2': '/file/path-2.ext',
+                    },
+                    'parameters': [
+                        {
+                            'name': 'param-1',
+                            'value': 'value-1'
+                        },
+                        {
+                            'name': 'param-2',
+                            'value': 'value-2'
+                        }
+                    ],
+                    'headers': {
+                        'Accept-Language': 'fr'
+                    },
+                    'kwargs': {
+                        'timeout': 10,
+                        'stream': False
+                    }
+                }
+            },
+            {
+                'name': ('Files by filepath (multipart/form-data) + parameters'
+                         ' + headers + kwargs'),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': '/file/path-1.ext',
+                        'param-2': '/file/path-2.ext',
+                    },
+                    'parameters': [
+                        {
+                            'name': 'param-1',
+                            'value': 'value-1'
+                        },
+                        {
+                            'name': 'param-2',
+                            'value': 'value-2'
+                        }
+                    ],
+                    'headers': {
+                        'Accept-Language': 'fr',
+                        'Accept-Charset': 'utf-8'
+                    },
+                    'kwargs': {
+                        'timeout': 10,
+                        'stream': False
+                    }
+                }
+            },
+        ])
 
     if include_filenames:
         for index, args_group in enumerate(response):

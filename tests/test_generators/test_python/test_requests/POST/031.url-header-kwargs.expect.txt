@@ -1,0 +1,10 @@
+import requests
+
+req = requests.post(
+    'http://localhost:8876',
+    headers={
+        'Accept-Language': '*'
+    },
+    timeout=5,
+    stream=False
+)

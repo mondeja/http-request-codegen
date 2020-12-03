@@ -1,0 +1,13 @@
+import requests
+
+req = requests.post(
+    'http://localhost:8876',
+    json={
+        'param-int': 1,
+        'param-float': 0.777,
+        'param-bool': True
+    },
+    headers={
+        'Content-Type': 'application/json'
+    }
+)

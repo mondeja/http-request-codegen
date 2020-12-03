@@ -1,0 +1,10 @@
+import requests
+
+req = requests.post(
+    'http://localhost:8876',
+    data={
+        'param-1': 'value-1'
+    },
+    timeout=10,
+    stream=True
+)

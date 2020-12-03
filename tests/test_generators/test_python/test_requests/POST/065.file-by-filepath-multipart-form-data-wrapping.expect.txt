@@ -1,0 +1,22 @@
+import requests
+
+req = requests.post(
+    'http://localhost:8876',
+    files={
+        'param-1': (
+            ('foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo '
+             'bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar '
+             'baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz '
+             'foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo '
+             'bar baz foo bar baz foo bar baz foo bar baz '),
+            open(
+                ('foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz '
+                 'foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz '
+                 'foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz '
+                 'foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz '
+                 'foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz '),
+                'rb'
+            )
+        )
+    }
+)

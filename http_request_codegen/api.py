@@ -4,13 +4,15 @@ from http_request_codegen.factory import (
     DEFAULT_LANGUAGE,
     get_func_by_lang_impl_method
 )
+from http_request_codegen.string import lazy_string
 
 
 def generate_http_request_code(language=None, impl=None, method='GET',
                                url='http://localhost', parameters=[],
-                               headers={}, indent=None, quote_char='\'',
-                               setup=True, teardown=None, oneline=False,
-                               seed=None, locale=None, wrap=80, **kwargs):
+                               headers={}, files={}, indent=None,
+                               quote_char='\'', setup=True, teardown=None,
+                               oneline=False, seed=None, locale=None, wrap=80,
+                               **kwargs):
     '''Generates a code snippet of an HTTP request for a library of a given
     programming language or a CLI of a program, based on a valid HTTP method
     and a specification of parameters.
@@ -131,6 +133,20 @@ def generate_http_request_code(language=None, impl=None, method='GET',
                 will not have effect.
                     + Defined as a string must follow the format
                 ``'path.to.provider.module::function'``.
+        files (dict): Mapping of files to send to URL. Only has effect for POST
+            methods. If you define this argument the `Content-Type` header
+            of the request will be assumed to be `'multipart/form-data'`, but
+            only will be explicitly specified in the code generated if the
+            implementation needs it. Each value accepts a string, ``None`` or a
+            tuple:
+                + Defined as a string, must be the filepath of the file to be
+            sent.
+                + Defined as ``None``, the filepath will be randomized using
+            ``faker.providers.file::file_path`` function.
+                + Defined as a tuple, the first value must be the filepath of
+            the file to be sent (if ``None`` will be a randomized filepath),
+            the second value the content-type of the file and the third a
+            dictionary of custom headers for the file.
         wrap (int): Maximum anchor of the code. If it exceeds it, the output
             code will be conveniently formatted on multiple lines.
         indent (str): Indentation string used in the generated code. If not
@@ -160,14 +176,21 @@ def generate_http_request_code(language=None, impl=None, method='GET',
     Returns:
         str: HTTP request code snippet.
     '''
+    _function_kwargs = {
+        'parameters': parameters, 'headers': headers,
+        'oneline': oneline, 'seed': seed, 'locale': locale, 'setup': setup,
+        'teardown': teardown, 'wrap': wrap or float('inf')
+    }
+    if indent is not None:
+        _function_kwargs['indent'] = indent
+    if quote_char is not None:
+        _function_kwargs['quote_char'] = quote_char
+    if method.lower() == 'post':
+        _function_kwargs['files'] = files
+    kwargs.update(_function_kwargs)
     return get_func_by_lang_impl_method(
         language=language, impl=impl, method=method
-    )(
-        url, parameters=parameters, headers=headers, indent=indent,
-        oneline=oneline, seed=seed, locale=locale, setup=setup,
-        teardown=teardown, wrap=wrap or float('inf'), quote_char=quote_char,
-        **kwargs
-    )
+    )(lazy_string(url), **kwargs)
 
 
 def generate_http_request_md_fenced_code_block(language=None,

@@ -1,0 +1,6 @@
+import requests
+
+req = requests.post(
+    ('http://local'
+     'host:8876')
+)

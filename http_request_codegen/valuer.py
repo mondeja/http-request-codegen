@@ -58,7 +58,7 @@ def lazy_name_by_parameter(parameter_data, seed=None):
         return lazy_string(parameter_data['names'],
                            seed=seed, string_func_path=True)
     raise ValueError(('Parameter must contain \'name\' or \'names\''
-                      'attribute, got %s') % str(parameter_data))
+                      ' attribute, got "%s"') % str(parameter_data))
 
 
 def lazy_value_by_parameter(parameter_data, seed=None, locale=None):

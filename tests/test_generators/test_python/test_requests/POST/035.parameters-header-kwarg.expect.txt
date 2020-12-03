@@ -1,0 +1,13 @@
+import requests
+
+req = requests.post(
+    'http://localhost:8876',
+    json={
+        'param-1': 'value-1',
+        'param-2': 7.77
+    },
+    headers={
+        'Content-Type': 'application/json'
+    },
+    timeout=5
+)

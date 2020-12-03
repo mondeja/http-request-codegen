@@ -1,0 +1,24 @@
+import requests
+
+req = requests.post(
+    'http://localhost:8876',
+    data={
+        'param-1': 'value-1'
+    },
+    files={
+        'param-1': (
+            '/file/path-1.ext',
+            open('/file/path-1.ext', 'rb')
+        ),
+        'param-2': (
+            '/file/path-2.ext',
+            open('/file/path-2.ext', 'rb')
+        )
+    },
+    headers={
+        'Accept-Language': 'fr',
+        'Accept-Charset': 'utf-8'
+    },
+    timeout=10,
+    stream=False
+)

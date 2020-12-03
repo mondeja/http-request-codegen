@@ -1,3 +1,0 @@
-import requests
-
-req = requests.get('http://localhost:8876', headers={'Content-Type': 'application/json'})
