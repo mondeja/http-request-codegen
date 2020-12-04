@@ -9,22 +9,11 @@
     use it and [help me][pull-requests-link] with implementations if you are
     interested.
 
-**http-request-codegen** generates HTTP request code snippets for different
-implementations. It's perfect if you want to include examples documenting APIs.
-Supports the following features:
-
-- Request parameters values randomization using multiples strategies:
-    - Random values from lists and functions.
-    - Random values from data types.
-    - Random values from [Faker providers][faker-providers-doc].
-    - Randomization seeds.
-    - Localization.
-- Request headers customization.
-- Request optional arguments.
-- Custom line wrapping.
-- Custom indentation.
-- Custom quotation character.
-- Rendering in one line.
+{%
+  include-markdown "../README.md"
+  start="<!--start-intro-->"
+  end="<!--end-intro-->"
+%}
 
 ## Installation
 

@@ -37,6 +37,7 @@ DOC_EXTRAS = [
     'mkdocs_macros_plugin==0.5.0',
     'mkdocs-minify-plugin==0.3.0',
     'mkdocstrings==0.13.6',
+    'mkdocs-include-markdown-plugin==1.0.0',
 ]
 DEV_EXTRAS = [
     'twine==3.2.0',

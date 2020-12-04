@@ -31,6 +31,7 @@ markdown_extensions:
 
 plugins:
   - search
+  - include-markdown
   - macros:
       module_name: docs_macros
   - minify:
