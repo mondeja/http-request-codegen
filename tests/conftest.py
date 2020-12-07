@@ -33,22 +33,7 @@ def assert_request_args():
         # print('\nREQUEST ARGS: ', request_args)
         # print('RESPONSE ARGS:', response_args)
 
-        if 'parameters' in request_args:
-            for param in request_args['parameters']:
-                assert param['name']
-                assert isinstance(param['name'], str)
-
-                _param_found = False
-                for _param in response_args['parameters']:
-                    if str(param['name']) == _param['name']:
-                        _param_found = True
-                        assert str(param['value']) == _param['value']
-
-                        assert _param['name']
-                        assert isinstance(_param['name'], str)
-                        break
-                assert _param_found
-
+        content_type = None
         if 'headers' in request_args:
             for hname, hvalue in request_args['headers'].items():
                 assert hname
@@ -58,6 +43,43 @@ def assert_request_args():
 
                 assert hname in response_args['headers']
                 assert hvalue == request_args['headers'][hname]
+
+                if hname.lower() == 'content-type':
+                    content_type = hvalue
+
+        if 'parameters' in request_args:
+            for param in request_args['parameters']:
+                if content_type == 'text/plain':
+                    assert not param['name']
+                else:
+                    assert param['name']
+                assert isinstance(param['name'], str)
+
+                _param_found = False
+                for _param in response_args['parameters']:
+                    if str(param['name']) == _param['name']:
+                        _param_found = True
+                        assert str(param['value']) == _param['value']
+
+                        if content_type == 'text/plain':
+                            assert not _param['name']
+                        else:
+                            assert _param['name']
+                        assert isinstance(_param['name'], str)
+                        break
+                assert _param_found
+
+        if 'kwargs' in request_args:
+            if 'cookies' in request_args['kwargs']:
+                for cname, cvalue in request_args['kwargs']['cookies'].items():
+                    assert cname
+                    assert isinstance(cname, str)
+                    assert cvalue
+                    assert isinstance(cvalue, str)
+
+                    assert cname in response_args['cookies']
+                    assert cvalue == request_args['kwargs']['cookies'][cname]
+
     return _assert_request_args
 
 
@@ -65,18 +87,64 @@ def on_start():
     # Setup Flask server in new process
     test_server = flask.Flask('http-request-codegen_tests')
 
-    @test_server.route('/')
+    @test_server.route('/', methods=['GET', 'POST'])
     def hello_world():
-        return {
-            'parameters': [
+        response = {
+            'headers': {
+                name: value
+                for name, value in flask.request.headers.items()
+            },
+            'cookies': {
+                name: value
+                for name, value in flask.request.cookies.items()
+            }
+        }
+        if flask.request.method == 'GET':
+            response['parameters'] = [
                 {
                     'name': name,
                     'value': value
-                } for name, value in flask.request.args.items()],
-            'headers': {
-                name: value for name, value in flask.request.headers.items()
-            }
-        }
+                } for name, value in flask.request.args.items()
+            ]
+        elif flask.request.method == 'POST':
+            try:
+                content_type = response['headers']['Content-Type']
+            except KeyError:
+                pass
+            else:
+                if content_type == 'application/x-www-form-urlencoded':
+                    response['parameters'] = [
+                        {
+                            'name': name,
+                            'value': value
+                        } for name, value in flask.request.form.items()
+                    ]
+                elif content_type == 'application/json':
+                    json_data = flask.request.get_json(silent=True)
+                    if json_data is not None:
+                        response['parameters'] = [
+                            {
+                                'name': name,
+                                'value': str(value)
+                            } for name, value in json_data.items()
+                        ]
+                elif content_type == 'text/plain':
+                    response['parameters'] = [
+                        {
+                            'name': '',
+                            'value': flask.request.data.decode('utf-8'),
+                        }
+                    ]
+                elif len(content_type) < 50:
+                    raise NotImplementedError(
+                        ('Content-Type \'%s\' not supported by POST method of'
+                         ' Flask testing server') % content_type)
+                # else:  fake content type, only for test header wrapping
+        else:
+            raise NotImplementedError(
+                ('Method %s must be implemented in Flask testing'
+                 ' server') % flask.request.method)
+        return response
 
     def flask_proc():
         test_server.run(host=TEST_SERVER_HOST,
@@ -833,6 +901,7 @@ def get_argument_combinations(method='GET', include_filenames=True,
                     'url': TEST_BASE_URL,
                     'parameters': [
                         {
+                            'name': '',
                             'value': 'foo bar baz ' * 3
                         }
                     ],
