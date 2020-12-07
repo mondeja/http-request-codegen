@@ -34,7 +34,7 @@ TEST_EXTRAS = [
 ]
 DOC_EXTRAS = [
     'mkdocs==1.1.2',
-    'mkdocs-material==6.1.6',
+    'mkdocs-material==6.1.7',
     'mkdocs_macros_plugin==0.5.0',
     'mkdocs-minify-plugin==0.3.0',
     'mkdocstrings==0.13.6',
