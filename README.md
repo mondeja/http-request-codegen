@@ -10,7 +10,7 @@ Supports the following features:
 - Request parameters values randomization using multiples strategies:
     - Random values from lists and functions.
     - Random values from data types.
-    - Random values from [Faker providers][faker-providers-doc].
+    - Random values from [Faker providers](https://faker.readthedocs.io/en/master/providers.html).
     - Randomization seeds.
     - Localization.
 - Request headers customization.
