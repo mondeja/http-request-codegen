@@ -4,8 +4,8 @@ req = requests.post(
     'http://localhost:8876',
     files={
         'param-1': (
-            '/file/path-1.ext',
-            open('/file/path-1.ext', 'rb')
+            '/tmp/file-1.ext',
+            open('/tmp/file-1.ext', 'rb')
         )
     }
 )

@@ -7,12 +7,12 @@ req = requests.post(
     },
     files={
         'param-1': (
-            '/file/path-1.ext',
-            open('/file/path-1.ext', 'rb')
+            '/tmp/file-1.ext',
+            open('/tmp/file-1.ext', 'rb')
         ),
         'param-2': (
-            '/file/path-2.ext',
-            open('/file/path-2.ext', 'rb')
+            '/tmp/file-2.ext',
+            open('/tmp/file-2.ext', 'rb')
         )
     }
 )

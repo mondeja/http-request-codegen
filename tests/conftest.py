@@ -2,6 +2,7 @@
 import multiprocessing
 import os
 import sys
+import tempfile
 
 import flask
 import inflection
@@ -18,6 +19,8 @@ TEST_SERVER_HOST = 'localhost'
 TEST_SERVER_PORT = '8876'
 TEST_BASE_URL = 'http://%s:%s' % (TEST_SERVER_HOST, TEST_SERVER_PORT)
 
+TEMPDIR = tempfile.gettempdir()
+
 
 def values_list():
     return ['foo', 'bar', 'baz', 1, -1.5, True, False, None]
@@ -27,7 +30,27 @@ def value():
     return 'foo'
 
 
-@pytest.fixture()
+@pytest.fixture
+def create_request_args_files():
+    def _create_request_args_files(args_group):
+        files = []
+        if 'arguments' in args_group:
+            if 'files' in args_group['arguments']:
+                fileargs = args_group['arguments']['files']
+                for filearg, value in fileargs.items():
+                    if isinstance(value, str):
+                        f = open(value, 'wb')
+                        f.write(b'foobarbaz')
+                        files.append(f)
+                    else:
+                        f = open(value[0], 'wb')
+                        f.write(b'foobarbaz')
+                        files.append(f)
+        return files
+    return _create_request_args_files
+
+
+@pytest.fixture
 def assert_request_args():
     def _assert_request_args(request_args, response_args):
         # print('\nREQUEST ARGS: ', request_args)
@@ -68,6 +91,29 @@ def assert_request_args():
                         assert isinstance(_param['name'], str)
                         break
                 assert _param_found
+
+        if 'files' in request_args:
+            for fp_name, fp_value in request_args['files'].items():
+                assert fp_name
+                assert isinstance(fp_name, str)
+
+                _file_param_found = False
+                for _fp_name, _fp_value in response_args['files'].items():
+                    assert _fp_name
+                    assert isinstance(_fp_name, str)
+
+                    if str(fp_name) == _fp_name:
+                        _file_param_found = True
+
+                        if isinstance(fp_value, str):
+                            request_value = fp_value
+                        else:
+                            request_value = [
+                                el if i != 1 else el.strip()
+                                for i, el in enumerate(fp_value)
+                            ]
+                        assert request_value == _fp_value
+                assert _file_param_found
 
         if 'kwargs' in request_args:
             if 'cookies' in request_args['kwargs']:
@@ -112,7 +158,7 @@ def on_start():
             except KeyError:
                 pass
             else:
-                if content_type == 'application/x-www-form-urlencoded':
+                if content_type in 'application/x-www-form-urlencoded':
                     response['parameters'] = [
                         {
                             'name': name,
@@ -135,6 +181,31 @@ def on_start():
                             'value': flask.request.data.decode('utf-8'),
                         }
                     ]
+                elif 'multipart/form-data' in content_type:
+                    response['parameters'] = [
+                        {
+                            'name': name,
+                            'value': value
+                        } for name, value in flask.request.form.items()
+                    ]
+
+                    for file_param_name, file in flask.request.files.items():
+                        if 'files' not in response:
+                            response['files'] = {}
+                        if file.content_type is None:
+                            response['files'][file_param_name] = file.filename
+                        else:
+                            fvalue = [file.filename, file.content_type]
+                            if file.headers is not None:
+                                file_headers = {}
+                                for name, value in file.headers.items():
+                                    if name in ['Content-Disposition',
+                                                'Content-Type']:
+                                        continue
+                                    file_headers[name] = value
+                                if file_headers:
+                                    fvalue.append(file_headers)
+                            response['files'][file_param_name] = fvalue
                 elif len(content_type) < 50:
                     raise NotImplementedError(
                         ('Content-Type \'%s\' not supported by POST method of'
@@ -993,7 +1064,7 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': '/file/path-1.ext'
+                        'param-1': os.path.join(TEMPDIR, 'file-1.ext')
                     }
                 }
             },
@@ -1002,8 +1073,8 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': '/file/path-1.ext',
-                        'param-2': '/file/path-2.ext',
+                        'param-1': os.path.join(TEMPDIR, 'file-1.ext'),
+                        'param-2': os.path.join(TEMPDIR, 'file-2.ext')
                     }
                 }
             },
@@ -1012,7 +1083,8 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': 'foo bar baz ' * 25
+                        'param-1': os.path.join(
+                            TEMPDIR, '%s.ext' % ('foo' * 40)),
                     }
                 }
             },
@@ -1022,8 +1094,14 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': ('/file/path-1.ext', 'text/plain'),
-                        'param-2': ('/file/path-1.ext', 'text/csv'),
+                        'param-1': (
+                            os.path.join(TEMPDIR, 'file-1.ext'),
+                            'text/plain'
+                        ),
+                        'param-2': (
+                            os.path.join(TEMPDIR, 'file-2.ext'),
+                            'text/csv'
+                        ),
                     }
                 }
             },
@@ -1034,7 +1112,7 @@ def get_argument_combinations(method='GET', include_filenames=True,
                     'url': TEST_BASE_URL,
                     'files': {
                         'param-1': (
-                            '/file/path-1.ext',
+                            os.path.join(TEMPDIR, 'file-1.ext'),
                             'text/plain ' * 20
                         ),
                     }
@@ -1047,7 +1125,7 @@ def get_argument_combinations(method='GET', include_filenames=True,
                     'url': TEST_BASE_URL,
                     'files': {
                         'param-1': (
-                            '/file/path-1.ext',
+                            os.path.join(TEMPDIR, 'file-1.ext'),
                             'text/plain',
                             {'Accept-Language': 'es'}
                         ),
@@ -1061,7 +1139,7 @@ def get_argument_combinations(method='GET', include_filenames=True,
                     'url': TEST_BASE_URL,
                     'files': {
                         'param-1': (
-                            '/file/path-1.ext',
+                            os.path.join(TEMPDIR, 'file-1.ext'),
                             'text/plain',
                             {
                                 'Accept-Language': 'es',
@@ -1076,8 +1154,8 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': '/file/path-1.ext',
-                        'param-2': '/file/path-2.ext',
+                        'param-1': os.path.join(TEMPDIR, 'file-1.ext'),
+                        'param-2': os.path.join(TEMPDIR, 'file-2.ext')
                     },
                     'parameters': [
                         {
@@ -1092,8 +1170,8 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': '/file/path-1.ext',
-                        'param-2': '/file/path-2.ext',
+                        'param-1': os.path.join(TEMPDIR, 'file-1.ext'),
+                        'param-2': os.path.join(TEMPDIR, 'file-2.ext')
                     },
                     'parameters': [
                         {
@@ -1113,8 +1191,8 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': '/file/path-1.ext',
-                        'param-2': '/file/path-2.ext',
+                        'param-1': os.path.join(TEMPDIR, 'file-1.ext'),
+                        'param-2': os.path.join(TEMPDIR, 'file-2.ext')
                     },
                     'parameters': [
                         {
@@ -1133,8 +1211,8 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': '/file/path-1.ext',
-                        'param-2': '/file/path-2.ext',
+                        'param-1': os.path.join(TEMPDIR, 'file-1.ext'),
+                        'param-2': os.path.join(TEMPDIR, 'file-2.ext')
                     },
                     'parameters': [
                         {
@@ -1154,8 +1232,8 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': '/file/path-1.ext',
-                        'param-2': '/file/path-2.ext',
+                        'param-1': os.path.join(TEMPDIR, 'file-1.ext'),
+                        'param-2': os.path.join(TEMPDIR, 'file-2.ext')
                     },
                     'parameters': [
                         {
@@ -1178,8 +1256,8 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': '/file/path-1.ext',
-                        'param-2': '/file/path-2.ext',
+                        'param-1': os.path.join(TEMPDIR, 'file-1.ext'),
+                        'param-2': os.path.join(TEMPDIR, 'file-2.ext')
                     },
                     'parameters': [
                         {
@@ -1203,8 +1281,8 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': '/file/path-1.ext',
-                        'param-2': '/file/path-2.ext',
+                        'param-1': os.path.join(TEMPDIR, 'file-1.ext'),
+                        'param-2': os.path.join(TEMPDIR, 'file-2.ext')
                     },
                     'parameters': [
                         {
@@ -1226,8 +1304,8 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': '/file/path-1.ext',
-                        'param-2': '/file/path-2.ext',
+                        'param-1': os.path.join(TEMPDIR, 'file-1.ext'),
+                        'param-2': os.path.join(TEMPDIR, 'file-2.ext')
                     },
                     'parameters': [
                         {
@@ -1250,8 +1328,8 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': '/file/path-1.ext',
-                        'param-2': '/file/path-2.ext',
+                        'param-1': os.path.join(TEMPDIR, 'file-1.ext'),
+                        'param-2': os.path.join(TEMPDIR, 'file-2.ext')
                     },
                     'parameters': [
                         {
@@ -1277,8 +1355,8 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': '/file/path-1.ext',
-                        'param-2': '/file/path-2.ext',
+                        'param-1': os.path.join(TEMPDIR, 'file-1.ext'),
+                        'param-2': os.path.join(TEMPDIR, 'file-2.ext')
                     },
                     'parameters': [
                         {
@@ -1305,8 +1383,8 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': '/file/path-1.ext',
-                        'param-2': '/file/path-2.ext',
+                        'param-1': os.path.join(TEMPDIR, 'file-1.ext'),
+                        'param-2': os.path.join(TEMPDIR, 'file-2.ext')
                     },
                     'parameters': [
                         {
@@ -1331,8 +1409,8 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': '/file/path-1.ext',
-                        'param-2': '/file/path-2.ext',
+                        'param-1': os.path.join(TEMPDIR, 'file-1.ext'),
+                        'param-2': os.path.join(TEMPDIR, 'file-2.ext')
                     },
                     'parameters': [
                         {
@@ -1356,8 +1434,8 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': '/file/path-1.ext',
-                        'param-2': '/file/path-2.ext',
+                        'param-1': os.path.join(TEMPDIR, 'file-1.ext'),
+                        'param-2': os.path.join(TEMPDIR, 'file-2.ext')
                     },
                     'parameters': [
                         {
@@ -1384,8 +1462,8 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 'arguments': {
                     'url': TEST_BASE_URL,
                     'files': {
-                        'param-1': '/file/path-1.ext',
-                        'param-2': '/file/path-2.ext',
+                        'param-1': os.path.join(TEMPDIR, 'file-1.ext'),
+                        'param-2': os.path.join(TEMPDIR, 'file-2.ext')
                     },
                     'parameters': [
                         {

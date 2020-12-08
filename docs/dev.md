@@ -92,7 +92,7 @@ pre-commit run --all-files
  to remove `fake_module.py` and `__pycache__` from built documentation.
 - [ ] Test ``http_request_codegen.valuer.::lazy_name_by_parameter`` function.
 - [ ] Add more oneline tests for POST requests.
-- [ ] Implement real server testing for POST requests.
+- [x] Implement real server testing for POST requests.
 - [ ] Add support for random URLs passing ``None`` to ``url`` argument.
 - [ ] Create Python string wrapping algorithm that could wrap whitespaces in a
  smart way.

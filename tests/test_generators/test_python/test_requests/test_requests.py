@@ -71,16 +71,22 @@ def test_python_requests_post(args_group):
     get_argument_combinations(method='POST', dirpath=CASES_DIRS['POST']),
     ids=lambda args_group: os.path.basename(args_group['filename'])
 )
-def test_python_requests_post__response(args_group, assert_request_args):
-    if os.path.basename(args_group['filename']).split(
-            '.')[1].startswith('file'):
-        pytest.skip()
+def test_python_requests_post__response(args_group, assert_request_args,
+                                        create_request_args_files):
     result = generate_http_request_code(
         'python', 'requests', 'POST',
         **combination_arguments_to_kwargs(args_group['arguments']))
 
     if 'import requests' not in result:
         result = 'import requests\n\n%s' % result
+
+    # Create files, if needed
+    files = create_request_args_files(args_group)
+
     namespace = {}
     exec(result, namespace)
     assert_request_args(args_group['arguments'], namespace['req'].json())
+
+    for f in files:
+        f.close()
+        os.remove(f.name)

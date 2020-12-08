@@ -4,17 +4,13 @@ req = requests.post(
     'http://localhost:8876',
     files={
         'param-1': (
-            ('foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo '
-             'bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar '
-             'baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz '
-             'foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo '
-             'bar baz foo bar baz foo bar baz foo bar baz '),
+            ('/tmp/foofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofo'
+             'ofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoo.ex'
+             't'),
             open(
-                ('foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz '
-                 'foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz '
-                 'foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz '
-                 'foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz '
-                 'foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz '),
+                ('/tmp/foofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoof'
+                 'oofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoof'
+                 'oofoo.ext'),
                 'rb'
             )
         )
