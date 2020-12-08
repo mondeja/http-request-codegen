@@ -46,3 +46,7 @@ plugins:
             show_root_toc_entry: false
       watch:
       - http_request_codegen
+  - exclude:
+      glob:
+        - '*.py'
+        - '*.pyc'

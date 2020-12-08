@@ -39,13 +39,9 @@ def create_request_args_files():
                 fileargs = args_group['arguments']['files']
                 for filearg, value in fileargs.items():
                     if isinstance(value, str):
-                        f = open(value, 'wb')
-                        f.write(b'foobarbaz')
-                        files.append(f)
+                        files.append(open(value, 'wb'))
                     else:
-                        f = open(value[0], 'wb')
-                        f.write(b'foobarbaz')
-                        files.append(f)
+                        files.append(open(value[0], 'wb'))
         return files
     return _create_request_args_files
 

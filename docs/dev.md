@@ -88,7 +88,7 @@ pre-commit run --all-files
 - [x] Implement real testing of generated HTTP requests against Flask server.
 - [x] Implement Python requests POST.
 - [x] Add complete demo for POST methods.
-- [ ] Use [mkdocs-exclude-plugin](https://github.com/apenwarr/mkdocs-exclude)
+- [x] Use [mkdocs-exclude-plugin](https://github.com/apenwarr/mkdocs-exclude)
  to remove `fake_module.py` and `__pycache__` from built documentation.
 - [ ] Test ``http_request_codegen.valuer.::lazy_name_by_parameter`` function.
 - [ ] Add more oneline tests for POST requests.
