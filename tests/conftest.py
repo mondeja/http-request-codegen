@@ -819,6 +819,13 @@ def get_argument_combinations(method='GET', include_filenames=True,
             }
         },
         {
+            'name': 'Setup',
+            'arguments': {
+                'url': TEST_BASE_URL,
+                'setup': True,
+            }
+        },
+        {
             'name': 'No setup',
             'arguments': {
                 'url': TEST_BASE_URL,

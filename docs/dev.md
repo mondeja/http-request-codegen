@@ -90,6 +90,10 @@ pre-commit run --all-files
 - [x] Add complete demo for POST methods.
 - [x] Use [mkdocs-exclude-plugin](https://github.com/apenwarr/mkdocs-exclude)
  to remove `fake_module.py` and `__pycache__` from built documentation.
+- [x] Implement fetch Javascript GET. 
+- [ ] Implement fetch Javascript POST. 
+- [ ] Implement curl Bash GET. 
+- [ ] Implement curl Bash POST. 
 - [ ] Test ``http_request_codegen.valuer.::lazy_name_by_parameter`` function.
 - [ ] Add more oneline tests for POST requests.
 - [x] Implement real server testing for POST requests.

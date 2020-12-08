@@ -1,0 +1,11 @@
+fetch(
+  'http://localhost:8876',
+  {
+    'timeout': 5,
+    'stream': True
+  }
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});

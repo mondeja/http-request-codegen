@@ -149,8 +149,6 @@ def lazy_string(string, seed=None, string_func_path=False):
 
 def replace_multiple(string, replacements={}):
     """Replaces multiple strings inside a string.
-    [inflection](https://inflection.readthedocs.io) library, replacing some
-    strings in a personalized way.
 
     Args:
         string (str): String to replace.
@@ -167,3 +165,90 @@ def replace_multiple(string, replacements={}):
     for replacer, replacement in replacements.items():
         string = string.replace(replacer, replacement)
     return string
+
+
+def escape_single_quote(value):
+    '''Escapes single quotes inside a string.
+
+    Args:
+        value (str): String for which single quotes will be escaped.
+
+    Raises:
+        TypeError: is the value is not a string.
+
+    Examples:
+        >>> print(escape_single_quote("Hello I neeed a ' escape."))
+        Hello I neeed a \\' escape.
+        >>> print(escape_single_quote("Hello I neeed two '' escapes."))
+        Hello I neeed two \\'\\' escapes.
+        >>> print(escape_single_quote(1))
+        Traceback (most recent call last):
+          ...
+        TypeError: The value '1' can not be escaped because is not a string
+
+    Returns:
+        str: The string with single quote characters escaped.
+    '''
+    try:
+        return value.replace("'", "\\'")
+    except AttributeError:
+        raise TypeError(('The value \'%s\' can not be escaped because is not'
+                         ' a string') % str(value))
+
+
+def escape_double_quote(value):
+    '''Escapes double quotes inside a string.
+
+    Args:
+        value (str): String for which double quotes will be escaped.
+
+    Raises:
+        TypeError: is the value is not a string.
+
+    Examples:
+        >>> print(escape_double_quote('Hello I neeed a " escape.'))
+        Hello I neeed a \\" escape.
+        >>> print(escape_double_quote('Hello I neeed two "" escapes.'))
+        Hello I neeed two \\"\\" escapes.
+        >>> print(escape_double_quote(1))
+        Traceback (most recent call last):
+          ...
+        TypeError: The value '1' can not be escaped because is not a string
+
+    Returns:
+        str: The string with double quote characters escaped.
+    '''
+    try:
+        return value.replace('"', '\\"')
+    except AttributeError:
+        raise TypeError(('The value \'%s\' can not be escaped because is not'
+                         ' a string') % str(value))
+
+
+def escape_backtick(value):
+    '''Escapes backticks inside a string.
+
+    Args:
+        value (str): String for which backticks will be escaped.
+
+    Raises:
+        TypeError: is the value is not a string.
+
+    Examples:
+        >>> print(escape_backtick('Hello I neeed a ` escape.'))
+        Hello I neeed a \\` escape.
+        >>> print(escape_backtick('Hello I neeed two `` escapes.'))
+        Hello I neeed two \\`\\` escapes.
+        >>> print(escape_backtick(1))
+        Traceback (most recent call last):
+          ...
+        TypeError: The value '1' can not be escaped because is not a string
+
+    Returns:
+        str: The string with double quote characters escaped.
+    '''
+    try:
+        return value.replace('`', '\\`')
+    except AttributeError:
+        raise TypeError(('The value \'%s\' can not be escaped because is not'
+                         ' a string') % str(value))

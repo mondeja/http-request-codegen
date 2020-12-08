@@ -1,0 +1,13 @@
+fetch(
+  'http:'
+  + '//l'
+  + 'oca'
+  + 'lho'
+  + 'st:'
+  + '887'
+  + '6'
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});

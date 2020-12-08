@@ -1,0 +1,14 @@
+fetch(
+  'http://localhost:8876',
+  {
+    headers: {
+      'Content-Type': 'application/jsonapplication/jsonapplication/jsonapplica'
+                      + 'tion/jsonapplication/json',
+      'Accept-Language': '*'
+    }
+  }
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});

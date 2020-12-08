@@ -10,7 +10,7 @@ from http_request_codegen.generators.python._utils import (
     escape_by_quote,
     kwarg_definition,
     kwarg_definition_dict_valued,
-    raw_str_definition
+    str_definition
 )
 from http_request_codegen.valuer import (
     lazy_name_by_parameter,
@@ -26,7 +26,8 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
     _oneline = oneline
     response = ''
 
-    # import
+    # initialization
+    setup_length = 0
     if setup:
         if isinstance(setup, str):
             response += setup
@@ -36,6 +37,8 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
                 'separator': ';' if oneline else '',
                 'newline': '\n' if not oneline else '',
             }
+        if oneline:
+            setup_length += len(response)
 
     # url length
     url_length = len(url) + 21  # 'req = requests.get(' (19) + '' (2)
@@ -50,7 +53,7 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
                 lazy_name_by_parameter(parameter, seed=seed),
                 quote_char
             )
-            value = raw_str_definition(
+            value = str_definition(
                 lazy_value_by_parameter(parameter, seed=seed, locale=locale),
                 quote_char=quote_char,
                 indent=indent + (' ' * (8 + len(name))),
@@ -90,8 +93,8 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
     # oneliner by wrapping
     #   here + 1 is function call end ')' and - 1 is the character wrapping,
     #   so both are negated
-    if url_length + parameters_line_length + headers_line_length + \
-            kwargs_line_length < wrap:
+    if setup_length + url_length + parameters_line_length + \
+            headers_line_length + kwargs_line_length < wrap:
         oneline = True
 
     # url
@@ -100,10 +103,10 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
         'url': ('%(quote_char)s%(url)s%(quote_char)s' % {
             'url': url,
             'quote_char': quote_char
-        }) if oneline else raw_str_definition(url,
-                                              indent=indent,
-                                              quote_char=quote_char,
-                                              wrap=wrap),
+        }) if oneline else str_definition(url,
+                                          indent=indent,
+                                          quote_char=quote_char,
+                                          wrap=wrap),
         'indent': indent if not oneline else '',
         'newline': '\n' if not oneline else '',
         'newline2': '\n' if not oneline and (
@@ -192,6 +195,8 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
     _oneline = oneline
     response = ''
 
+    # initialization
+    setup_length = 0
     if setup:
         if isinstance(setup, str):
             response += setup
@@ -201,6 +206,8 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
                 'separator': ';' if oneline else '',
                 'newline': '\n' if not oneline else '',
             }
+        if oneline:
+            setup_length += len(response)
 
     # url length
     url_length = len(url) + 22  # 'req = requests.post(' (20) + '' (2)
@@ -271,7 +278,7 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
                 value = _param_value
                 parameters_line_length += len(name) + 4 + len(str(value))
             else:
-                value = raw_str_definition(
+                value = str_definition(
                     lazy_value_by_parameter(parameter,
                                             seed=seed,
                                             locale=locale),
@@ -352,7 +359,7 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
 
             _filepath = value if isinstance(value, str) else value[0]
             _indent = indent * 4
-            _filepath_def = raw_str_definition(
+            _filepath_def = str_definition(
                 _filepath,
                 indent=_indent,
                 quote_char=quote_char,
@@ -387,8 +394,9 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
     # oneliner by wrapping
     #   here + 1 is function call end ')' and - 1 is the character wrapping,
     #   so both are negated
-    if url_length + parameters_line_length + headers_line_length + \
-            files_line_length + kwargs_line_length < wrap:
+    if setup_length + url_length + parameters_line_length + \
+            headers_line_length + files_line_length + \
+            kwargs_line_length < wrap:
         oneline = True
 
     # url
@@ -396,10 +404,10 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
                  '%(comma)s%(space)s%(newline3)s') % {
         'url': ('%(quote_char)s%(url)s%(quote_char)s' % {
             'url': url, 'quote_char': quote_char
-        }) if oneline else raw_str_definition(url,
-                                              indent=indent,
-                                              quote_char=quote_char,
-                                              wrap=wrap),
+        }) if oneline else str_definition(url,
+                                          indent=indent,
+                                          quote_char=quote_char,
+                                          wrap=wrap),
         'indent': indent if not oneline else '',
         'newline': '\n' if not oneline else '',
         'newline2': '\n' if not oneline and (
@@ -461,7 +469,7 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
                 'newline1': '\n' if not oneline else '',
                 'newline2': '\n' if not oneline else ' ',
                 'indent': indent * 3 if not oneline else '',
-                'fpath': raw_str_definition(
+                'fpath': str_definition(
                     fvalue[0],
                     quote_char=quote_char,
                     indent=indent * 3,
@@ -470,7 +478,7 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
             }
             if len(fvalue) > 2:
                 _value += ',%(newline)s%(indent)s%(content_type)s' % {
-                    'content_type': raw_str_definition(
+                    'content_type': str_definition(
                         fvalue[2],
                         quote_char=quote_char,
                         indent=indent * 3,

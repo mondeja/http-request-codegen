@@ -10,7 +10,7 @@ from http_request_codegen.string import lazy_string
 def generate_http_request_code(language=None, impl=None, method='GET',
                                url='http://localhost', parameters=[],
                                headers={}, files={}, indent=None,
-                               quote_char='\'', setup=True, teardown=None,
+                               quote_char='\'', setup=None, teardown=None,
                                oneline=False, seed=None, locale=None, wrap=80,
                                **kwargs):
     '''Generates a code snippet of an HTTP request for a library of a given
@@ -205,7 +205,7 @@ def generate_http_request_code(language=None, impl=None, method='GET',
     '''
     _function_kwargs = {
         'parameters': parameters, 'headers': headers,
-        'oneline': oneline, 'seed': seed, 'locale': locale, 'setup': setup,
+        'oneline': oneline, 'seed': seed, 'locale': locale,
         'teardown': teardown, 'wrap': wrap or float('inf')
     }
     if indent is not None:
@@ -214,6 +214,8 @@ def generate_http_request_code(language=None, impl=None, method='GET',
         _function_kwargs['quote_char'] = quote_char
     if method.lower() == 'post':
         _function_kwargs['files'] = files
+    if setup is not None:
+        _function_kwargs['setup'] = setup
     kwargs.update(_function_kwargs)
     return get_func_by_lang_impl_method(
         language=language, impl=impl, method=method

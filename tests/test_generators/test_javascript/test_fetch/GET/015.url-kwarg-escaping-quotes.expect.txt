@@ -1,0 +1,10 @@
+fetch(
+  'http://localhost:8876',
+  {
+    'cookies': {'foo': "value with '' quotes"}
+  }
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});

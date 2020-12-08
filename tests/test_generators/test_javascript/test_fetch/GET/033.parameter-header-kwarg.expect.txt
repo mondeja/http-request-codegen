@@ -1,0 +1,13 @@
+fetch(
+  'http://localhost:8876?param-1=value-1',
+  {
+    'headers': {
+      'Content-Type': 'application/json'
+    },
+    'timeout': 5
+  }
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});

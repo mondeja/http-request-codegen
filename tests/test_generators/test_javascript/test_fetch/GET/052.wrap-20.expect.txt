@@ -1,0 +1,8 @@
+fetch(
+  'http://localhos'
+  + 't:8876'
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});

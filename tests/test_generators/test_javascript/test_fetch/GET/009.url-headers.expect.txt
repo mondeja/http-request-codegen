@@ -1,0 +1,13 @@
+fetch(
+  'http://localhost:8876',
+  {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept-Language': 'es'
+    }
+  }
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});

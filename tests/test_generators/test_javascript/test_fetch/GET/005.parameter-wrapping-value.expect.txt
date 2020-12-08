@@ -1,0 +1,14 @@
+fetch(
+  'http://localhost:8876?param-1=foo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazf'
+  + 'oo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-'
+  + 'bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-'
+  + 'bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-baz'
+  + 'foo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar'
+  + '-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo'
+  + '-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-ba'
+  + 'zfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-baz',
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});

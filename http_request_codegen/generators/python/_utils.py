@@ -1,12 +1,16 @@
 '''Utilities for Python HTTP request generators.'''
 
-DEFAULT_INDENT = '    '
+from http_request_codegen.string import (
+    escape_double_quote,
+    escape_single_quote
+)
 
-VALID_QUOTE_CHARS = '"\''
+
+DEFAULT_INDENT = '    '
 DEFAULT_QUOTE_CHAR = "'"
 DEFAULT_WRAP = 80
 
-# TODO: Document all functions.
+VALID_QUOTE_CHARS = '"\''
 
 
 def validate_python_identifier(value):
@@ -54,65 +58,11 @@ def validate_quote_character(char):
         >>> validate_quote_character('1')
         Traceback (most recent call last):
           ...
-        ValueError: The character '1' is not a valid Python quotation character
+        ValueError: '1' is not a valid Python quotation character
     '''
     if char not in VALID_QUOTE_CHARS:
-        raise ValueError(('The character \'%s\' is not a valid Python'
-                          ' quotation character') % char)
-
-
-def escape_single_quote(value):
-    '''Escapes single quotes inside a string.
-
-    Args:
-        value (str): String for which single quotes will be escaped.
-
-    Raises:
-        TypeError: is the value is not a string.
-
-    Examples:
-        >>> print(escape_single_quote("Hello I neeed a ' escape."))
-        Hello I neeed a \\' escape.
-        >>> print(escape_single_quote(1))
-        Traceback (most recent call last):
-          ...
-        TypeError: The value '1' can not be escaped because is not a string
-
-    Returns:
-        str: The string with single quote characters escaped.
-    '''
-    try:
-        return value.replace("'", "\\'")
-    except AttributeError:
-        raise TypeError(('The value \'%s\' can not be escaped because is not'
-                         ' a string') % str(value))
-
-
-def escape_double_quote(value):
-    '''Escapes double quotes inside a string.
-
-    Args:
-        value (str): String for which double quotes will be escaped.
-
-    Raises:
-        TypeError: is the value is not a string.
-
-    Examples:
-        >>> print(escape_double_quote('Hello I neeed a " escape.'))
-        Hello I neeed a \\" escape.
-        >>> print(escape_double_quote(1))
-        Traceback (most recent call last):
-          ...
-        TypeError: The value '1' can not be escaped because is not a string
-
-    Returns:
-        str: The string with double quote characters escaped.
-    '''
-    try:
-        return value.replace('"', '\\"')
-    except AttributeError:
-        raise TypeError(('The value \'%s\' can not be escaped because is not'
-                         ' a string') % str(value))
+        raise ValueError('\'%s\' is not a valid Python quotation character' % (
+                         char))
 
 
 def escape_quote_func_by_quote_char(char):
@@ -312,7 +262,7 @@ def kwarg_definition_str_valued(kwarg_name, string,
 
     return '%(kwarg_name)s=%(value)s' % {
         'kwarg_name': kwarg_name,
-        'value': raw_str_definition(
+        'value': str_definition(
             string,
             indent=' ' * (len(kwarg_name) + len(indent) + 1),
             quote_char=quote_char,
@@ -400,9 +350,9 @@ def kwarg_definition_dict_valued(kwarg_name, dictionary,
     }
 
 
-def raw_str_definition(string, indent=DEFAULT_INDENT,
-                       quote_char=DEFAULT_QUOTE_CHAR, wrap=DEFAULT_WRAP,
-                       _escape=True):
+def str_definition(string, indent=DEFAULT_INDENT,
+                   quote_char=DEFAULT_QUOTE_CHAR, wrap=DEFAULT_WRAP,
+                   _escape=True):
     '''Creates a definition of a Python string, multilining it if neccesary.
     Does not handle spaces at all wrapping it, so it's useful to efficiently
     wrap non-spaced strings like URLs.
@@ -420,28 +370,28 @@ def raw_str_definition(string, indent=DEFAULT_INDENT,
             the given ``quote_char`` argument.
 
     Raises:
-        ValueError: id the argument ``quote_char`` is not a valid Python string
+        ValueError: if the argument ``quote_char`` is not a valid Python string
             quotation character.
 
     Examples:
 
-        >>> print(raw_str_definition(
+        >>> print(str_definition(
         ...           'Lorem Ipsum es simplemente el texto de'
         ...           + ' relleno de las imprentas y archivos de texto.',
         ...           wrap=70, indent=''))
         ('Lorem Ipsum es simplemente el texto de relleno de las imprentas y '
          'archivos de texto.')
 
-        >>> print(raw_str_definition('123', wrap=1, quote_char='"', indent=''))
+        >>> print(str_definition('123', wrap=1, quote_char='"', indent=''))
         ("1"
          "2"
          "3"
         )
-        >>> print(raw_str_definition('123', wrap=5, quote_char='"', indent=''))
+        >>> print(str_definition('123', wrap=5, quote_char='"', indent=''))
         ("1"
          "2"
          "3")
-        >>> print(raw_str_definition('123', wrap=6, quote_char='"', indent=''))
+        >>> print(str_definition('123', wrap=6, quote_char='"', indent=''))
         "123"
 
     Returns:
@@ -483,7 +433,8 @@ def raw_str_definition(string, indent=DEFAULT_INDENT,
 
 def dict_definition(dictionary, indent=DEFAULT_INDENT, indent_depth=0,
                     quote_char=DEFAULT_QUOTE_CHAR, wrap=DEFAULT_WRAP,
-                    newline='\n', _escape_keys=True, _escape_values=True):
+                    newline='\n', _escape_keys=True, _escape_values=True,
+                    _str_definition_func=str_definition):
     '''Creates a definition of a Python dictionary.
 
     Args:
@@ -516,11 +467,9 @@ def dict_definition(dictionary, indent=DEFAULT_INDENT, indent_depth=0,
         _key = key if not _escape_keys else escape_quote_func(key)
         if isinstance(value, str):
             _indent = indent * indent_depth * 2 + ' ' * (len(_key) + 4)
-            _value = raw_str_definition(value,
-                                        indent=_indent,
-                                        quote_char=quote_char,
-                                        wrap=wrap,
-                                        _escape=_escape_values)
+            _value = _str_definition_func(value, indent=_indent,
+                                          quote_char=quote_char, wrap=wrap,
+                                          _escape=_escape_values)
         else:
             _value = str(value)
         response += ('%(indents)s%(quote_char)s%(key)s%(quote_char)s:'

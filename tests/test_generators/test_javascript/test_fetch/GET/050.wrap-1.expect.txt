@@ -1,0 +1,29 @@
+fetch(
+  'h'
+  + 't'
+  + 't'
+  + 'p'
+  + ':'
+  + '/'
+  + '/'
+  + 'l'
+  + 'o'
+  + 'c'
+  + 'a'
+  + 'l'
+  + 'h'
+  + 'o'
+  + 's'
+  + 't'
+  + ':'
+  + '8'
+  + '8'
+  + '7'
+  + '6'
+  + ''
+  
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});

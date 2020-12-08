@@ -1,0 +1,1 @@
+fetch('http://localhost:8876?a=b', {'timeout': 10}).then(function(response) {console.log(response)}).catch(function(error) {console.error('Error:', error)});

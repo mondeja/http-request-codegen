@@ -1,0 +1,16 @@
+fetch(
+  'http://localhost:8876',
+  {
+    headers: {
+      'Accept-Language': 'es en fr * es en fr * es en fr * es en fr * es en fr'
+                         + ' * es en fr * es en fr * es en fr * es en fr * es '
+                         + 'en fr * es en fr * es en fr * es en fr * es en fr '
+                         + '* es en fr * es en fr * es en fr * es en fr * es e'
+                         + 'n fr * es en fr * '
+    }
+  }
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});

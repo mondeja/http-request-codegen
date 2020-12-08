@@ -1,0 +1,9 @@
+fetch(
+  'http://localhost:8876'
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});
+
+custom_teardown=1
