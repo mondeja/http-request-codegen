@@ -3,12 +3,12 @@
 import importlib
 from collections import OrderedDict
 
-from http_request_codegen.factory import (
+from http_request_codegen.hrc_factory import (
     get_func_by_lang_impl_method,
     get_generators_modules_by_lang_impl
 )
-from http_request_codegen.http import HTTP_METHODS
-from http_request_codegen.meta import function_has_kwarg
+from http_request_codegen.hrc_http import HTTP_METHODS
+from http_request_codegen.hrc_meta import function_has_kwarg
 
 
 FEATURES_KWARGS = OrderedDict({

@@ -1,6 +1,6 @@
 '''Utilities for Javascript HTTP request generators.'''
 
-from http_request_codegen.string import (
+from http_request_codegen.hrc_string import (
     escape_backtick,
     escape_double_quote,
     escape_single_quote

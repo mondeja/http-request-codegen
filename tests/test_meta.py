@@ -2,7 +2,7 @@
 
 import pytest
 
-from http_request_codegen.meta import function_has_kwarg
+from http_request_codegen.hrc_meta import function_has_kwarg
 
 
 def _func_without_parameters():

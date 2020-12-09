@@ -57,11 +57,11 @@ pre-commit run --all-files
 ## TODO
 
 - [x] Implement implementation autodiscovering in
- `http_request_codegen.factory`.
+ `http_request_codegen.hrc_factory`.
 - [x] Document and doctest `http_request_codegen.generators.python._utils`
  module.
 - [x] Document and doctest `http_request_codegen.inspector` module.
-- [x] Document `http_request_codegen.support` module.
+- [x] Document `http_request_codegen.hrc_support` module.
 - [x] Add parameter name randomization support.
 - [x] Add url randomization support.
 - [x] Implement random parameter type (lazy string and `'random'` type).
@@ -77,11 +77,11 @@ pre-commit run --all-files
 - [x] Add parametrizer that list all combinations of arguments passed to
  implementations.
 - [x] Implement custom code block fence string in
- `http_request_codegen.api::generate_http_request_md_fenced_code_block` function.
-- [x] Document `http_request_codegen.api::generate_http_request_md_fenced_code_block`
+ `http_request_codegen.hrc_api::generate_http_request_md_fenced_code_block` function.
+- [x] Document `http_request_codegen.hrc_api::generate_http_request_md_fenced_code_block`
  function.
-- [x] Document `http_request_codegen.valuer::lazy_value_by_parameter` function.
-- [x] Document `http_request_codegen.valuer::lazy_name_by_parameter` function.
+- [x] Document `http_request_codegen.hrc_valuer::lazy_value_by_parameter` function.
+- [x] Document `http_request_codegen.hrc_valuer::lazy_name_by_parameter` function.
 - [x] Change `init` argument by `setup`.
 - [x] Allow `setup` argument to take a string for customize the initialization.
 - [x] Implement `teardown` argument.
@@ -94,7 +94,7 @@ pre-commit run --all-files
 - [ ] Implement fetch Javascript POST. 
 - [ ] Implement curl Bash GET. 
 - [ ] Implement curl Bash POST. 
-- [ ] Test ``http_request_codegen.valuer.::lazy_name_by_parameter`` function.
+- [ ] Test ``http_request_codegen.hrc_valuer.::lazy_name_by_parameter`` function.
 - [ ] Add more oneline tests for POST requests.
 - [x] Implement real server testing for POST requests.
 - [ ] Add support for random URLs passing ``None`` to ``url`` argument.

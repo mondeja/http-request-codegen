@@ -1,5 +1,8 @@
 '''Javascript fetch code snippets generator.'''
 
+from collections import OrderedDict
+
+
 try:
     from urllib.parse import urlencode
 except ImportError:
@@ -12,7 +15,7 @@ from http_request_codegen.generators.javascript._utils import (
     escape_by_quote,
     str_definition
 )
-from http_request_codegen.valuer import (
+from http_request_codegen.hrc_valuer import (
     lazy_name_by_parameter,
     lazy_value_by_parameter
 )
@@ -22,8 +25,36 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
         quote_char=DEFAULT_QUOTE_CHAR, setup=False, teardown=None,
         oneline=False, wrap=DEFAULT_WRAP, seed=None, locale=None,
         **kwargs):
-    """Javascript fetch GET request code generator.
+    '''This implementation will emulate browsers\' fetch API by default.
+    using Promises response processing.
 
+    If you want to simulate a NodeJS environment, pass the parameter ``setup``
+    as ``True`` and the next initialization snippet will be prepended to the
+    generated code:
+
+    ```javascript
+    const fetch = require(\'node-fetch\');
+    ```
+
+    For ESM imports emulation, use
+    ``setup='import fetch from \\'node-fetch\\';\\n\\n'``, thus the
+    initialization snippet will be:
+
+    ```javascript
+    import fetch from \'node-fetch\';
+    ```
+
+    Of course, you can customize this initialization for other environments.
+    For example, polyfill the API using
+    [whatwg](https://github.com/github/fetch) as ESM module with
+    ``setup='import \\'whatwg-fetch\\';\\n\\n'``:
+
+    ```javascript
+    import \'whatwg-fetch\';
+    ```
+    '''
+
+    '''
     Note that this implementation does not discover the length of the code to
     generate it in multiple lines, like Python requests does. This is because
     in Javascript, promises are chained in multiple lines, thus next structure
@@ -35,7 +66,8 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
 
     So ``wrap`` argument is used only to wrap strings in multiples lines,
     instead of use it for implement the request in multiples or one line.
-    """
+    '''
+
     response = ''
 
     # initialization
@@ -50,7 +82,7 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
             }
 
     if parameters:
-        parameters_dict = {}
+        parameters_dict = OrderedDict({})
         for parameter in parameters:
             parameters_dict[lazy_name_by_parameter(parameter, seed=seed)] = \
                 lazy_value_by_parameter(parameter, seed=seed, locale=locale)

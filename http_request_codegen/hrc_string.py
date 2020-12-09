@@ -5,7 +5,7 @@ import random
 from collections.abc import Iterable
 from types import GeneratorType
 
-from http_request_codegen.meta import CallableTypes
+from http_request_codegen.hrc_meta import CallableTypes
 
 
 def lazy_string(string, seed=None, string_func_path=False):
@@ -98,6 +98,13 @@ def lazy_string(string, seed=None, string_func_path=False):
         >>> # Type input
         >>> lazy_string(str)
         'str'
+
+    Raises:
+        ValueError: if the value is an empty iterable (although this not
+            applies to string types) or if ``string_func_path`` is ``True`` but
+            '::' is not used to define the path to a Python function.
+        ModuleNotFoundError: if ``string_func_path`` is ``True`` but the
+            provided module can't be imported.
 
     Returns:
         str: A string resulted from one of the strategies, depends on the input

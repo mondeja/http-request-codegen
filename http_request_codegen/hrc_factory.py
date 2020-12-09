@@ -4,7 +4,7 @@ import importlib
 import os
 from functools import lru_cache
 
-from http_request_codegen.http import HTTP_METHODS
+from http_request_codegen.hrc_http import HTTP_METHODS
 
 
 DEFAULT_LANGUAGE = 'python'

@@ -1,10 +1,10 @@
 '''http-request-codegen public API.'''
 
-from http_request_codegen.factory import (
+from http_request_codegen.hrc_factory import (
     DEFAULT_LANGUAGE,
     get_func_by_lang_impl_method
 )
-from http_request_codegen.string import lazy_string
+from http_request_codegen.hrc_string import lazy_string
 
 
 def generate_http_request_code(language=None, impl=None, method='GET',
@@ -82,14 +82,15 @@ def generate_http_request_code(language=None, impl=None, method='GET',
                 value of the callable. Supports recursivity: until a string is
                 returned the recursion will not be stopped.
 
-            - **type** (*str*): Parameter data type. If not defined and
-                ``value``, ``values`` and ``faker`` are not defined, will be
-                considered as a string and the value of the parameter will be a
-                random word built using [faker][faker-doc] library. For some
-                types, other parameter dictionary attributes are supported,
-                documented, if so, in each type. The following parameter data
-                types are supported as attributes of parameters dictionaries,
-                as well as their corresponding names in capital letters:
+            - **type** (*str*, *iterable*, *callable*): Parameter data type.
+                If not defined and ``value``, ``values`` and ``faker`` are not
+                defined, will be considered as a string and the value of the
+                parameter will be a random word built using [faker][faker-doc]
+                library. For some types, other parameter dictionary attributes
+                are supported, documented, if so, in each type. The following
+                parameter data types are supported as attributes of parameters
+                dictionaries, as well as their corresponding names in capital
+                letters:
 
                 - ``'str'``: Basic string type. Can be defined with the Python
                     builtin type ``str`` or the strings ``'str'`` and
@@ -124,6 +125,11 @@ def generate_http_request_code(language=None, impl=None, method='GET',
                     can define a set of possible types passing an iterable
                     to ``types`` optional parameter attribute.
 
+                Defined as an iterable or callable, the type will be selected
+                randomly from the iterable, or the returned value from the
+                callable will be used. This allows you to select a random
+                type from a list of custom predefined types.
+
             - **value** (*str*, *iterable*, *callable*): Parameter value. If
                 not defined and ``type``, ``values`` and ``faker`` are not
                 defined, the value of the parameter will be a random word built
@@ -150,6 +156,7 @@ def generate_http_request_code(language=None, impl=None, method='GET',
                 - Defined as a callable, the value will be the returned
                 value of the callable. Supports recursivity: until a string is
                 returned the recursion will not be stopped.
+
             - **faker** (*str*, *function*): Python formatted module path to a
                 function of a Faker provider used to build the value
                 randomized. Can be a standard, external provider or any
@@ -232,7 +239,7 @@ def generate_http_request_md_fenced_code_block(language=None,
         fence_string (str): Code block fence string used wrapping the code.
             It does not perform any check about if the fenced string is a
             "valid" markdown code block fence string.
-        **kwargs: All optional arguments are passed to
+        **kwargs: All other optional arguments are passed to
             [``generate_http_request_code``](#generate_http_request_code)
             function.
 

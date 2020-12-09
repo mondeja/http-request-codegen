@@ -12,7 +12,7 @@ from http_request_codegen.generators.python._utils import (
     kwarg_definition_dict_valued,
     str_definition
 )
-from http_request_codegen.valuer import (
+from http_request_codegen.hrc_valuer import (
     lazy_name_by_parameter,
     lazy_value_by_parameter
 )
@@ -22,7 +22,26 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
         quote_char=DEFAULT_QUOTE_CHAR, setup=True, teardown=None,
         oneline=False, wrap=DEFAULT_WRAP, seed=None, locale=None,
         **kwargs):
-    '''GET method code generator for Python requests library.'''
+    '''Parameters are passed using
+    [``requests.get``](https://requests.readthedocs.io/en/api/#requests.get)
+    function ``params`` parameter, not by appending ``?foo=bar&...`` to the
+    URL. If you want this behaviour, build the passed URL using
+    [``lazy_name_by_parameter``](#lazy_name_by_parameter) and
+    [``lazy_value_by_parameter``](#lazy_value_by_parameter) functions instead
+    of use the ``parameters`` argument.
+
+    If you want to import more modules in the initialization snippet, keep
+    in mind that you must provide ``import requests`` line also in the
+    ``setup`` argument. For example,
+    ``setup=\'import requests\\nimport foo\\n\\n\'`` will render as:
+
+    ```python
+    import requests
+    import foo
+
+    requests.get('<url>'...
+    ```
+    '''
     _oneline = oneline
     response = ''
 

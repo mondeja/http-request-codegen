@@ -15,6 +15,12 @@
   end="<!--end-intro-->"
 %}
 
+!!! abstract "Remember"
+
+    This is not a greater level API across multiple HTTP request libraries,
+    but it is written so that you can generate the most common types of HTTP
+    requests regardless of the implementation. 
+
 ## Installation
 
 === "pip"
@@ -166,6 +172,11 @@
                     ]
                 )
                 ```
+                
+                {{get_func_by_lang_impl_method(
+                  language=lang,
+                  impl=impl,
+                  method=method).__doc__|indent(12)}}
 
             === "Output"
           
@@ -845,6 +856,22 @@ from http_request_codegen import generate_http_request_md_fenced_code_block
 ```
 
 ::: http_request_codegen.generate_http_request_md_fenced_code_block
+
+### **`lazy_name_by_parameter`**
+
+```python
+from http_request_codegen import lazy_name_by_parameter
+```
+
+::: http_request_codegen.lazy_name_by_parameter
+
+### **`lazy_value_by_parameter`**
+
+```python
+from http_request_codegen import lazy_value_by_parameter
+```
+
+::: http_request_codegen.lazy_value_by_parameter
 
 [pypi-version-image]: https://img.shields.io/pypi/v/http-request-codegen?label=version
 [pypi-link]: https://pypi.org/project/http-request-codegen

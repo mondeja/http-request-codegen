@@ -3,14 +3,13 @@
 import importlib
 import random
 import uuid
-from collections.abc import Iterable
 from functools import lru_cache
 
 from faker import Faker
 from faker.providers import lorem as faker_lorem_provider
 
-from http_request_codegen.meta import CallableTypes
-from http_request_codegen.string import lazy_string
+from http_request_codegen.hrc_meta import CallableTypes
+from http_request_codegen.hrc_string import lazy_string
 
 
 @lru_cache(maxsize=32)
@@ -22,9 +21,9 @@ def _instanciate_faker(seed=None, locale=None):
 
 
 def lazy_name_by_parameter(parameter_data, seed=None):
-    '''Given a dictionary of parameter options, returns the corresponding name
-    built following the rules listed in ``parameters`` argument of
-    :py:func:`http_request_codegen.api.generate_http_request_code` function
+    '''Given a dictionary of parameter options, returns the corresponding
+    parameter name built following the rules listed in ``parameters`` argument
+    of [``generate_http_request_code``](#generate_http_request_code) function
     documentation.
 
     The strategy of name building is to check next attributes in given order:
@@ -32,12 +31,21 @@ def lazy_name_by_parameter(parameter_data, seed=None):
     - ``name``
     - ``names``
 
+    You can use this function to build the parameters at lower level. This can
+    be used, for example, to append the parameters to an URL generating GET
+    method code snippets if an implementation does by building the parameters
+    as arguments of a function.
+
     Args:
         parameter_data (dict): Parameter specification data. It's defined at
             **name** and **names** sections of ``parameters`` argument of
-            ``http_request_codegen.api.generate_http_request_code`` function
-            documentation.
+            [``generate_http_request_code``](#generate_http_request_code)
+            function documentation.
         seed (int): Seed using randomizing names.
+
+    Raises:
+        ValueError: if none of the name or names attributes are defined inside
+            ``parameter_data`` dictionary.
 
     Returns:
         str: Parameter name.
@@ -64,24 +72,49 @@ def lazy_name_by_parameter(parameter_data, seed=None):
 def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
     '''Given a dictionary of parameter options, returns the corresponding value
     built following the rules listed in ``parameters`` argument of
-    :py:func:`http_request_codegen.api.generate_http_request_code` function
+    [``generate_http_request_code``](#generate_http_request_code) function
     documentation.
+
+    For example, giving ``{\'type\': int}`` as input, the output will be a
+    random number as string.
 
     The strategy of value building is to check next attributes in given order:
 
-    - ``value``
-    - ``values``
-    - ``faker``
-    - ``type``
+    - ``'value'``
+    - ``'values'``
+    - ``'faker'``
+    - ``'type'``
+
+    If any of the previous attributes are passed will be treated as if
+    ``{\'type\': str}`` has been passed, returning a random word.
+
+    You can use this function to build the parameters at lower level. This can
+    be used, for example, to append the parameters to an URL generating GET
+    method code snippets if an implementation does by building the parameters
+    as arguments of a function.
 
     Args:
         parameter_data (dict): Parameter specification data. It's defined at
             **type**, **value**, **values** and **faker** sections of
-            ``parameters`` argument of
-            ``http_request_codegen.api.generate_http_request_code`` function
-            documentation.
+            ``parameters`` argument as is defined at
+            [``generate_http_request_code``](#generate_http_request_code)
+            function documentation.
         seed (int): Seed using randomizing values.
         locale (str): Locale used for ``faker`` providers.
+
+    Examples:
+        >>> integer = lazy_value_by_parameter({'type': 'int'})
+        >>> integer.isnumeric() and isinstance(integer, str)
+        True
+
+    Raises:
+        ImportError: if ``'values'`` attribute value points to an inexistent
+            Python object.
+        TypeError: if ``'faker'`` attribute value does not contains an string
+            or Python callable object, or if the ``'type'`` attribute value
+            does not support the defined type.
+        ImportError: if ``'faker'`` attribute value, when passed as string,
+            points to an inexistent Python object.
 
     Returns:
         str: Parameter value.
@@ -112,13 +145,12 @@ def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
             return getattr(faker, parameter_data['faker'].__name__)()
         raise TypeError(
             ('\'faker\' \'%s\' attribute of parameter \'%s\' must be an'
-             ' instance of \'str\' or \'function\'') % (
+             ' instance of \'str\' or \'callable\'') % (
                  str(parameter_data['faker']), parameter_data['name']))
     if 'type' not in parameter_data:
         _type = 'str'
     else:
-        # TODO: Document that type can be a function, a list...
-        _type = lazy_string(parameter_data['type'])
+        _type = lazy_string(parameter_data['type'], seed=seed)
         if isinstance(_type, str):
             _type = _type.lower()
     if _type in ('str', 'string', str):
@@ -166,12 +198,7 @@ def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
         if seed is not None:
             random.seed(seed)
         if 'types' in parameter_data:
-            if not isinstance(parameter_data['types'], Iterable):
-                raise TypeError(
-                    ('\'types\' attribute specifying random type must be'
-                     ' an iterable, got type %s') % (
-                        str(type((parameter_data['types'])))))
-            _possible = list(parameter_data['types'])
+            _possible = lazy_string(parameter_data['types'], seed=seed)
         else:
             _possible = [
                 'str', 'int', 'float', 'bool', 'uuid', 'id', 'file']

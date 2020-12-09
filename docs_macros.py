@@ -3,6 +3,7 @@ import random
 import sys
 
 import http_request_codegen
+from http_request_codegen.hrc_factory import get_func_by_lang_impl_method
 
 
 DOCS_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), 'docs'))
@@ -15,6 +16,8 @@ import fake_module  # noqa: E402
 def define_env(env):
     # library module exposed globally
     env.variables['http_request_codegen'] = http_request_codegen
+    env.variables['get_func_by_lang_impl_method'] = \
+        get_func_by_lang_impl_method
 
     # random seed for each build, only for fun
     env.variables['seed'] = random.randint(1, 10000)

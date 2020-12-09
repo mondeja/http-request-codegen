@@ -8,7 +8,7 @@ import flask
 import inflection
 import pytest
 
-from http_request_codegen.string import replace_multiple
+from http_request_codegen.hrc_string import replace_multiple
 
 
 TEST_DIR = os.path.abspath(os.path.dirname(__file__))

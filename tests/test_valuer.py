@@ -9,7 +9,7 @@ import pytest
 from faker.providers.lorem import Provider as LoremProvider
 from faker.providers.lorem.en_US import Provider as EnUsLoremProvider
 
-from http_request_codegen.valuer import lazy_value_by_parameter
+from http_request_codegen.hrc_valuer import lazy_value_by_parameter
 from tests.conftest import (
     value as _value_func,
     values_list as _values_list_func
