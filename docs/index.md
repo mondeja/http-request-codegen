@@ -5,7 +5,7 @@
 
 !!! warning
     This library is currently under development, only supporting a few
-    methods and implementations (see [Support](#support)). Please wait before
+    methods and implementations (see [Support](#support)). Please, wait before
     use it and [help me][pull-requests-link] with implementations if you are
     interested.
 

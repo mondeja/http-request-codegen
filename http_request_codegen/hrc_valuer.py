@@ -104,7 +104,7 @@ def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
 
     Examples:
         >>> integer = lazy_value_by_parameter({'type': 'int'})
-        >>> integer.replace('.','',1).lstrip('-').isnumeric() and \\
+        >>> integer.replace('.', '', 1).lstrip('-').isnumeric() and \\
         ...     isinstance(integer, str)
         True
 

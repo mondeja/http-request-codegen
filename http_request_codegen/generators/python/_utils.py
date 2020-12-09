@@ -85,12 +85,7 @@ def escape_quote_func_by_quote_char(char):
         >>> escape_quote_func_by_quote_char("?")
         Traceback (most recent call last):
           ...
-        ValueError: Character '?' is not a valid Python quotation character
-
-        >>> escape_quote_func_by_quote_char("abc")
-        Traceback (most recent call last):
-          ...
-        ValueError: String 'abc' is not a valid Python quotation character
+        ValueError: '?' is an invalid Python quotation character
 
     Returns:
         function: Function that can escape the character passed as argument.
@@ -101,12 +96,8 @@ def escape_quote_func_by_quote_char(char):
             '"': escape_double_quote,
         }[char]
     except KeyError:
-        if isinstance(char, str):
-            raise ValueError(
-                ('%s \'%s\' is not a valid Python quotation character') % (
-                    'Character' if len(char) == 1 else 'String', char))
         raise ValueError(
-            ('%s is not a valid Python quotation character') % str(char))
+            ('\'%s\' is an invalid Python quotation character') % str(char))
 
 
 def escape_by_quote(string, char):
@@ -136,12 +127,12 @@ def escape_by_quote(string, char):
         >>> escape_by_quote('I need escape of ? character.', '?')
         Traceback (most recent call last):
           ...
-        ValueError: Character '?' is not a valid Python quotation character
+        ValueError: '?' is an invalid Python quotation character
 
         >>> escape_by_quote(12, '?')
         Traceback (most recent call last):
           ...
-        ValueError: Character '?' is not a valid Python quotation character
+        ValueError: '?' is an invalid Python quotation character
 
     Returns:
         str: The original string with the specified character escaped.
@@ -247,11 +238,11 @@ def kwarg_definition_str_valued(kwarg_name, string,
         >>> print(kwarg_definition_str_valued('foo', 'bar', quote_char='?'))
         Traceback (most recent call last):
           ...
-        ValueError: Character '?' is not a valid Python quotation character
+        ValueError: '?' is an invalid Python quotation character
         >>> print(kwarg_definition_str_valued('foo', 'bar', quote_char=123))
         Traceback (most recent call last):
           ...
-        ValueError: 123 is not a valid Python quotation character
+        ValueError: '123' is an invalid Python quotation character
 
     Returns:
         str: Reproduction of the kwarg defined as a Python keyword argument
