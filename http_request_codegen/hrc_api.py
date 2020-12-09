@@ -38,10 +38,10 @@ def generate_http_request_code(language=None, impl=None, method='GET',
 
     Args:
         language (str): Programming language or plataform of the resulting code
-            snippet. See [Support](#support) to check the supported platforms
+            snippet. See [Support](/#support) to check the supported platforms
             and programming languages.
         impl (str): Implementation type used for the code snippet. It can be a
-            library, a program, or a language API. See [Support](#support)
+            library, a program, or a language API. See [Support](/#support)
             to check the supported implementations by language.
         method (str): HTTP method of the generated request.
         url (str, iterable, callable): URL endpoint of the generated request.

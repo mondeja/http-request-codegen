@@ -15,7 +15,8 @@ theme:
     repo: fontawesome/brands/github
 
 nav:
-  - User guide: index.md
+  - Introduction: index.md
+  - Reference: reference.md
   - Development: dev.md
 
 markdown_extensions:

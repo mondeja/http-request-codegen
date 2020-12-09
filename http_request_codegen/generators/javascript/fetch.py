@@ -26,7 +26,7 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
         oneline=False, wrap=DEFAULT_WRAP, seed=None, locale=None,
         **kwargs):
     '''This implementation will emulate browsers\' fetch API by default.
-    using Promises response processing.
+    using Promises-like response processing.
 
     If you want to simulate a NodeJS environment, pass the parameter ``setup``
     as ``True`` and the next initialization snippet will be prepended to the

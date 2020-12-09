@@ -26,9 +26,9 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
     [``requests.get``](https://requests.readthedocs.io/en/api/#requests.get)
     function ``params`` parameter, not by appending ``?foo=bar&...`` to the
     URL. If you want this behaviour, build the passed URL using
-    [``lazy_name_by_parameter``](#lazy_name_by_parameter) and
-    [``lazy_value_by_parameter``](#lazy_value_by_parameter) functions instead
-    of use the ``parameters`` argument.
+    [``lazy_name_by_parameter``](/reference#lazy_name_by_parameter) and
+    [``lazy_value_by_parameter``](/reference#lazy_value_by_parameter) functions
+    instead of use the ``parameters`` argument.
 
     If you want to import more modules in the initialization snippet, keep
     in mind that you must provide ``import requests`` line also in the

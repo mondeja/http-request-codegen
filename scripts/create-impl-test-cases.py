@@ -12,10 +12,8 @@ from http_request_codegen.hrc_factory import (
     DEFAULT_IMPLEMENTATION,
     DEFAULT_LANGUAGE
 )
-from tests.conftest import (
-    combination_arguments_to_kwargs,
-    get_argument_combinations
-)
+from tests.combinations import get_argument_combinations
+from tests.conftest import combination_arguments_to_kwargs
 
 
 DESCRIPTION = ('Implementation test cases creator. This script creates a'

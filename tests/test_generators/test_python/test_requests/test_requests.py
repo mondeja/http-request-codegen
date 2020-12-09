@@ -5,7 +5,7 @@ import os
 import pytest
 
 from http_request_codegen import generate_http_request_code
-from tests.conftest import (
+from tests.combinations import (
     combination_arguments_to_kwargs,
     get_argument_combinations
 )
