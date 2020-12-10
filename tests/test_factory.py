@@ -5,10 +5,6 @@ from types import ModuleType
 
 import pytest
 
-from http_request_codegen.generators.python._urllib import (
-    get as urllib_get,
-    post as urllib_post
-)
 from http_request_codegen.generators.python.requests import (
     get as requests_get,
     post as requests_post
@@ -21,8 +17,8 @@ from http_request_codegen.hrc_factory import (
 
 @pytest.mark.parametrize(("language", "impl", "method", "result"), (
     # Default cases
-    (None, None, None, [requests_get, urllib_get]),
-    ('python', None, None, [requests_get, urllib_get]),
+    (None, None, None, requests_get),
+    ('python', None, None, requests_get),
     ('python', 'requests', None, requests_get),
 
     # Explicit valid cases
@@ -32,10 +28,10 @@ from http_request_codegen.hrc_factory import (
     ('python', 'requests', 'post', requests_post),
 
     # Define method
-    (None, None, 'GET', [requests_get, urllib_get]),
-    (None, None, 'get', [requests_get, urllib_get]),
-    (None, None, 'POST', [requests_post, urllib_post]),
-    (None, None, 'post', [requests_post, urllib_post]),
+    (None, None, 'GET', requests_get),
+    (None, None, 'get', requests_get),
+    (None, None, 'POST', requests_post),
+    (None, None, 'post', requests_post),
     (None, None, 'qwerty', ValueError),
 
     # Define implementation (language autodiscover)
