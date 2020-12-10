@@ -1,0 +1,20 @@
+const fetch = require('node-fetch');
+
+fetch(
+  'http://localhost:8876',
+  {  
+    method: 'POST',
+    body: JSON.stringify({
+      'param-1': 'value-1',
+      'param-2': '7.77'
+    }),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    'timeout': 5
+  }
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});

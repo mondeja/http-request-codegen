@@ -12,6 +12,9 @@ from http_request_codegen.generators.python._utils import (
     kwarg_definition_dict_valued,
     str_definition
 )
+from http_request_codegen.hrc_exceptions import (
+    raise_post_text_plain_n_parameters_not_1
+)
 from http_request_codegen.hrc_valuer import (
     lazy_name_by_parameter,
     lazy_value_by_parameter
@@ -265,9 +268,7 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
             headers_line_length += 2  # ', '
 
     if content_type == 'text/plain' and len(parameters) != 1:
-        raise ValueError(
-            ('You can only send one parameter making a POST request encoded'
-             ' as \'text/plain\', got %d') % len(parameters))
+        raise_post_text_plain_n_parameters_not_1(len(parameters))
 
     # data/json length
     parameters_line_length = 0
@@ -297,12 +298,16 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
                 value = _param_value
                 parameters_line_length += len(name) + 4 + len(str(value))
             else:
+                if content_type == 'text/plain':
+                    _param_value_def_indent = indent + (' ' * 5)
+                else:
+                    _param_value_def_indent = indent + (' ' * (8 + len(name)))
                 value = str_definition(
                     lazy_value_by_parameter(parameter,
                                             seed=seed,
                                             locale=locale),
                     quote_char=quote_char,
-                    indent=indent + (' ' * (8 + len(name))),
+                    indent=_param_value_def_indent,
                     wrap=wrap
                 )
                 parameters_line_length += len(name) + 4 + len(value)
@@ -476,7 +481,7 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
             }
 
     # files render
-    if len(files) > 0:
+    if files:
         response += '%(indent)sfiles={%(newline)s' % {
             'indent': indent if not oneline else '',
             'newline': '\n' if not oneline else '',

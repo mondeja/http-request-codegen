@@ -175,7 +175,7 @@ def str_definition(string, indent=DEFAULT_INDENT,
         response += ch
         _chars_in_current_line += 1
         if _chars_in_current_line >= wrap - 2:
-            if i >= len(string):
+            if i >= len(string) - 1:
                 break
             response += '%(quote_char)s\n%(indent)s+ %(quote_char)s' % {
                 'quote_char': quote_char,

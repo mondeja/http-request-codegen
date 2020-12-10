@@ -1,7 +1,10 @@
 # Scripts
 /__main__.py
-/__prueba.py
+/__dev__.*
 /cases/
+package.json
+package-lock.json
+/node_modules/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

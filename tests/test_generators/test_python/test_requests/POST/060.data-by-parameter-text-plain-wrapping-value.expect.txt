@@ -1,0 +1,14 @@
+import requests
+
+req = requests.post(
+    'http://localhost:8876',
+    data=('foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar'
+          ' baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz fo'
+          'o bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar b'
+          'az foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo '
+          'bar baz foo bar baz foo bar baz foo bar baz foo bar baz foo bar baz'
+          ' foo bar baz foo bar baz '),
+    headers={
+        'Content-Type': 'text/plain'
+    }
+)

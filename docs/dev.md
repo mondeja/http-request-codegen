@@ -160,8 +160,6 @@ specification.
  implementations as described in
  [``generate_http_request_code``](/reference#generate_http_request_code)
  function documentation.
-- Both always must take ``seed`` and ``locale`` arguments passed to the method
- function implementor.
 
 ### Language/platform utilities
 
@@ -218,12 +216,14 @@ the ``cases/`` directory would be placed at
 ## TODO
 
 - [x] Implement real server testing for POST requests.
-- [x] Implement fetch Javascript GET. 
-- [ ] Implement fetch Javascript POST.
-- [ ] Implement curl Bash GET. 
-- [ ] Implement curl Bash POST. 
+- [x] Implement Javascript fetch GET.
+- [x] Implement Javascript fetch POST.
+- [ ] Implement Bash curl GET.
+- [ ] Implement Bash curl POST.
+- [ ] Add "Method singularities" section to "Developing implementations"
+ tutorial.
 - [ ] Add more oneline tests for POST requests.
-- [ ] Add support for random URLs passing ``None`` to ``url`` argument.
+- [ ] Add support for lazy URLs.
 - [ ] Create Python string wrapping algorithm that could wrap whitespaces in a
  smart way.
 - [ ] Create Javascript string wrapping algorithm that could wrap whitespaces

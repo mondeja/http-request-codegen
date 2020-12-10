@@ -1,0 +1,38 @@
+const fs = require('fs');
+
+const fetch = require('node-fetch');
+const FormData = require('form-data');
+
+const formData = new FormData();
+formData.append('param-1','value-1');
+formData.append('param-2','value-2');
+formData.append(
+  'param-1',
+  fs.createReadStream('/tmp/file-1.ext'),
+  {
+    filename: 'file-1.ext'
+  }
+);
+formData.append(
+  'param-2',
+  fs.createReadStream('/tmp/file-2.ext'),
+  {
+    filename: 'file-2.ext'
+  }
+);
+
+fetch(
+  'http://localhost:8876',
+  {  
+    method: 'POST',
+    body: formData,
+    headers: {
+      'Accept-Language': 'fr',
+      'Accept-Charset': 'utf-8'
+    }
+  }
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});

@@ -1,0 +1,14 @@
+const fetch = require('node-fetch');
+
+fetch(
+  'http://loc'
+  + 'alhost:8'
+  + '876',
+  {  
+    method: 'POST'
+  }
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});

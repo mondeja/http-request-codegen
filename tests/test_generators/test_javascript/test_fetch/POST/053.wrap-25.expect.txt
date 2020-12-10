@@ -1,0 +1,13 @@
+const fetch = require('node-fetch');
+
+fetch(
+  'http://localhost:887'
+  + '6',
+  {  
+    method: 'POST'
+  }
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});

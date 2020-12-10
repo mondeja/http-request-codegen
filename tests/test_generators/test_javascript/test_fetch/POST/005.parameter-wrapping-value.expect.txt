@@ -1,0 +1,24 @@
+const fetch = require('node-fetch');
+
+fetch(
+  'http://localhost:8876',
+  {  
+    method: 'POST',
+    body: new URLSearchParams({
+      'param-1': 'foo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-b'
+                 + 'ar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-'
+                 + 'bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-baz'
+                 + 'foo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo'
+                 + '-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-ba'
+                 + 'r-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-b'
+                 + 'azfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazf'
+                 + 'oo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-'
+                 + 'bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar-bazfoo-bar'
+                 + '-bazfoo-bar-bazfoo-bar-baz'
+    })
+  }
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});

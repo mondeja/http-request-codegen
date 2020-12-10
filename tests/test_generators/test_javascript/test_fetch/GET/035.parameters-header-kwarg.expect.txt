@@ -1,7 +1,7 @@
 fetch(
   'http://localhost:8876?param-1=value-1&param-2=7.77',
   {
-    'headers': {
+    headers: {
       'Content-Type': 'application/json'
     },
     'timeout': 5

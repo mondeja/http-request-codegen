@@ -1,0 +1,16 @@
+const fetch = require('node-fetch');
+
+fetch(
+  'http://localhost:8876',
+  {  
+    method: 'POST',
+    body: 'foo bar baz foo bar baz foo bar baz ',
+    headers: {
+      'Content-Type': 'text/plain'
+    }
+  }
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});

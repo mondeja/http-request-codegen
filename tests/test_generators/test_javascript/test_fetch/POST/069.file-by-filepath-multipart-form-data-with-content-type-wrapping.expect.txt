@@ -1,0 +1,29 @@
+const fs = require('fs');
+
+const fetch = require('node-fetch');
+const FormData = require('form-data');
+
+const formData = new FormData();
+formData.append(
+  'param-1',
+  fs.createReadStream('/tmp/file-1.ext'),
+  {
+    filename: 'file-1.ext',
+    contentType: 'text/plain text/plain text/plain text/plain text/plain text/'
+                 + 'plain text/plain text/plain text/plain text/plain text/pla'
+                 + 'in text/plain text/plain text/plain text/plain text/plain '
+                 + 'text/plain text/plain text/plain text/plain '
+  }
+);
+
+fetch(
+  'http://localhost:8876',
+  {  
+    method: 'POST',
+    body: formData
+  }
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});

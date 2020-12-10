@@ -794,9 +794,9 @@
                         seed={{seed}},
                         parameters=[
                             {
-                                'name': 'fixed-value',
-                                'value': 3
-                            },
+                                'name': 'random-values-by-iterable',
+                                'values': ['foo', 'bar', 'baz']
+                            }
                         ]
                     )
                     ```
@@ -814,8 +814,8 @@
                         seed=seed,
                         parameters=[
                             {
-                                'name': 'fixed-value',
-                                'value': 3
+                                'name': 'random-values-by-iterable',
+                                'values': ['foo', 'bar', 'baz']
                             }
                         ]
                     )|indent(20)}}

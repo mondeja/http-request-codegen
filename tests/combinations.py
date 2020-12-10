@@ -769,6 +769,21 @@ def get_argument_combinations(method='GET', include_filenames=True,
                 }
             },
             {
+                'name': 'Data by parameter (text/plain) wrapping value',
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'parameters': [
+                        {
+                            'name': '',
+                            'value': 'foo bar baz ' * 30
+                        }
+                    ],
+                    'headers': {
+                        'Content-Type': 'text/plain'
+                    }
+                }
+            },
+            {
                 'name': 'Data by parameter (application/json)',
                 'arguments': {
                     'url': TEST_BASE_URL,
@@ -1248,6 +1263,36 @@ def get_argument_combinations(method='GET', include_filenames=True,
                          ' + headers + kwargs'),
                 'arguments': {
                     'url': TEST_BASE_URL,
+                    'files': {
+                        'param-1': os.path.join(TEMPDIR, 'file-1.ext'),
+                        'param-2': os.path.join(TEMPDIR, 'file-2.ext')
+                    },
+                    'parameters': [
+                        {
+                            'name': 'param-1',
+                            'value': 'value-1'
+                        },
+                        {
+                            'name': 'param-2',
+                            'value': 'value-2'
+                        }
+                    ],
+                    'headers': {
+                        'Accept-Language': 'fr',
+                        'Accept-Charset': 'utf-8'
+                    },
+                    'kwargs': {
+                        'timeout': 10,
+                        'stream': False
+                    }
+                }
+            },
+            {
+                'name': ('No setup + files by filepath (multipart/form-data)'
+                         ' + parameters + headers + kwargs + '),
+                'arguments': {
+                    'url': TEST_BASE_URL,
+                    'setup': False,
                     'files': {
                         'param-1': os.path.join(TEMPDIR, 'file-1.ext'),
                         'param-2': os.path.join(TEMPDIR, 'file-2.ext')

@@ -166,7 +166,7 @@ def generate_http_request_code(language=None, impl=None, method='GET',
                 ``'path.to.provider.module::function'``.
 
         files (dict): Mapping of files to send to URL. Only has effect for POST
-            methods. If you define this argument the `Content-Type` header
+            methods. If you define this argument, the `Content-Type` header
             of the request will be assumed to be `'multipart/form-data'`, but
             only will be explicitly specified in the code generated if the
             implementation needs it. Each value accepts a string, ``None`` or a

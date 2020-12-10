@@ -1,0 +1,18 @@
+const fetch = require('node-fetch');
+
+fetch(
+  'http://localhost:8876',
+  {  
+    method: 'POST',
+    body: new URLSearchParams({
+      'param-1': 'foo',
+      'param-2': '1',
+      'param-3': '0.777',
+      'param-4': 'True'
+    })
+  }
+).then(function(response) {
+  console.log(response);
+}).catch(function(error) {
+  console.error('Error:', error);
+});
