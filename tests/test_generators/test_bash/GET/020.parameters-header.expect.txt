@@ -1,0 +1,3 @@
+curl \
+    -H 'Content-Type: application/json' \
+    http://localhost:8876?param-1=value-1&param-2=value-2

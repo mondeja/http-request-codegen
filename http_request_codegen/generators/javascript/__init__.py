@@ -1,0 +1,1 @@
+'''Javascript implementations request generators.'''

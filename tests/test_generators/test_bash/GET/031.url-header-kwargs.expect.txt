@@ -1,0 +1,1 @@
+curl timeout '5' stream -H 'Accept-Language: *' http://localhost:8876

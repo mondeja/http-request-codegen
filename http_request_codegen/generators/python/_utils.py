@@ -2,7 +2,8 @@
 
 from http_request_codegen.hrc_string import (
     escape_double_quote,
-    escape_single_quote
+    escape_single_quote,
+    lazy_escape_quote_func_by_quote_char
 )
 
 
@@ -90,14 +91,15 @@ def escape_quote_func_by_quote_char(char):
     Returns:
         function: Function that can escape the character passed as argument.
     '''
-    try:
-        return {
-            "'": escape_single_quote,
+    return lazy_escape_quote_func_by_quote_char(
+        char,
+        replacers_funcs={
             '"': escape_double_quote,
-        }[char]
-    except KeyError:
-        raise ValueError(
-            ('\'%s\' is an invalid Python quotation character') % str(char))
+            '\'': escape_single_quote
+        },
+        error_msg_schema=('%(quote_char)s is an invalid Python quotation'
+                          ' character')
+    )
 
 
 def escape_by_quote(string, char):

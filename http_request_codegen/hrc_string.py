@@ -259,3 +259,40 @@ def escape_backtick(value):
     except AttributeError:
         raise TypeError(('The value \'%s\' can not be escaped because is not'
                          ' a string') % str(value))
+
+
+def lazy_escape_quote_func_by_quote_char(
+    quote_char,
+    replacers_funcs={'"': escape_double_quote, '\'': escape_single_quote},
+    error_msg_schema='Invalid quotation character %(quote_char)s',
+    exception_cls=ValueError
+):
+    '''Factory for quote-escaping functions. It is designed to be used in
+    languages utilities implementations to make easier to build quotation
+    character functions.
+
+    Arguments:
+        quote_char (str): Character to escape.
+        replacers_funcs (dict): Mapping of quotation characters to escape
+            functions.
+        error_msg_schema (str): Schema string that will be the error message
+            displayed if the quotation character is not handled by
+            ``replacers_funcs`` mapping. Takes the optional named sustituion
+            ``'quote_char'`` that will be replaced by the quotation character
+            passed in ``quote_char`` parameter.
+        exception_cls (type): Exception to be raised if the quotation character
+            is not handled by ``replacers_funcs`` mapping.
+
+    Returns:
+        str: Quotation character escape function for a string.
+    '''
+    try:
+        return replacers_funcs[quote_char]
+    except KeyError:
+        if '%(quote_char)s' in error_msg_schema:
+            _quote_quote_char = '"' if quote_char == '\'' else '\''
+            error_msg_schema = error_msg_schema % {
+                'quote_char': (
+                    _quote_quote_char + str(quote_char) + _quote_quote_char)
+            }
+        raise exception_cls(error_msg_schema)

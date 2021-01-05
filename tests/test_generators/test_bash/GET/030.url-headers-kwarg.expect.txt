@@ -1,0 +1,5 @@
+curl \
+    timeout '5' \
+    -H 'Content-Type: application/json' \
+    -H 'Accept-Language: *' \
+    http://localhost:8876

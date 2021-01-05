@@ -1,0 +1,4 @@
+curl \
+    -H 'Content-Type: application/jsonapplication/jsonapplication/jsonapplication/jsonapplication/json' \
+    -H 'Accept-Language: *' \
+    http://localhost:8876

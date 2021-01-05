@@ -129,7 +129,8 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
     ```
     '''
 
-    '''
+    '''Implementation details:
+
     Note that this implementation does not discover the length of the code to
     generate it in multiple lines, like Python requests does. This is because
     in Javascript, promises are chained in multiple lines, thus next structure

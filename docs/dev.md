@@ -62,7 +62,7 @@ in accounts all parameters described in
 function, but not the randomized values passed in ``parameters`` argument,
 because ``http_request_codegen`` provides functions that can handle these.
 
-### Oone line wrapping behaviour
+### One line wrapping behaviour
 
 The first thing to take in account (and the most complicated one) is the
 behaviour of wrapping (``wrap`` argument) rendering as if ``oneline=True``
@@ -218,12 +218,14 @@ the ``cases/`` directory would be placed at
 - [x] Implement real server testing for POST requests.
 - [x] Implement Javascript fetch GET.
 - [x] Implement Javascript fetch POST.
-- [ ] Implement Bash curl GET.
+- [x] Implement Bash curl GET.
 - [ ] Implement Bash curl POST.
 - [ ] Add "Method singularities" section to "Developing implementations"
  tutorial.
 - [ ] Add more oneline tests for POST requests.
 - [ ] Add support for lazy URLs.
+- [ ] Add ``lazy_name_by_parameter`` function examples.
+- [ ] Add ``lazy_value_by_parameter`` function examples.
 - [ ] Create Python string wrapping algorithm that could wrap whitespaces in a
  smart way.
 - [ ] Create Javascript string wrapping algorithm that could wrap whitespaces

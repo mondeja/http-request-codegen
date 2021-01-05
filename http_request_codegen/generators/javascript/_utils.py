@@ -3,74 +3,14 @@
 from http_request_codegen.hrc_string import (
     escape_backtick,
     escape_double_quote,
-    escape_single_quote
+    escape_single_quote,
+    lazy_escape_quote_func_by_quote_char
 )
 
 
 DEFAULT_INDENT = '  '
 DEFAULT_QUOTE_CHAR = "'"
 DEFAULT_WRAP = 80
-
-VALID_QUOTE_CHARS = '\'"`'
-
-
-def validate_quote_character(char):
-    '''Validates if a character is a valid Javascript string quotation
-    character.
-
-    Args:
-        char (str): Character to validate.
-
-    Raises:
-        ValueError: if the character is not a valid Javascript string quotation
-            character.
-
-    Examples:
-        >>> validate_quote_character('"')
-        >>> validate_quote_character('1')
-        Traceback (most recent call last):
-          ...
-        ValueError: '1' is not a valid Javascript quotation character
-    '''
-    if char not in VALID_QUOTE_CHARS:
-        raise ValueError(('\'%s\' is not a valid Javascript quotation'
-                          ' character') % char)
-
-
-def escape_quote_func_by_quote_char(char):
-    '''Get a function that can escape a string quotation character given
-    the character. This works as a factory for quotation string characters
-    escapes functions.
-
-    Args:
-        char (str): Character that the returned function is able to escape.
-
-    Raises:
-        ValueError: if the character passed is not a valid Python string
-            quotation character.
-
-    Examples:
-        >>> func = escape_quote_func_by_quote_char("'")
-        >>> print(func("String that must be ' escaped."))
-        String that must be \\' escaped.
-
-        >>> escape_quote_func_by_quote_char("?")
-        Traceback (most recent call last):
-          ...
-        ValueError: '?' is an invalid Javascript quotation character
-
-    Returns:
-        function: Function that can escape the character passed as argument.
-    '''
-    try:
-        return {
-            "'": escape_single_quote,
-            '"': escape_double_quote,
-            '`': escape_backtick,
-        }[char]
-    except KeyError:
-        raise ValueError(('\'%s\' is an invalid Javascript quotation'
-                          ' character') % str(char))
 
 
 def escape_by_quote(string, char):
@@ -116,7 +56,16 @@ def escape_by_quote(string, char):
     Returns:
         str: The original string with the specified character escaped.
     '''
-    return escape_quote_func_by_quote_char(char)(string)
+    return lazy_escape_quote_func_by_quote_char(
+        char,
+        replacers_funcs={
+            '"': escape_double_quote,
+            '\'': escape_single_quote,
+            '`': escape_backtick
+        },
+        error_msg_schema=('%(quote_char)s is an invalid Javascript quotation'
+                          ' character')
+    )(string)
 
 
 def str_definition(string, indent=DEFAULT_INDENT,
