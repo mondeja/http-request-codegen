@@ -47,6 +47,14 @@ def lazy_name_by_parameter(parameter_data, seed=None):
         ValueError: if none of the name or names attributes are defined inside
             ``parameter_data`` dictionary.
 
+    Examples:
+        >>> lazy_name_by_parameter({'name': 'foo'})
+        'foo'
+
+        >>> result = lazy_name_by_parameter({'names': ['foo', 'bar', 'baz']})
+        >>> result in ['foo', 'bar', 'baz']
+        True
+
     Returns:
         str: Parameter name.
     '''
@@ -103,9 +111,16 @@ def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
         locale (str): Locale used for ``faker`` providers.
 
     Examples:
-        >>> integer = lazy_value_by_parameter({'type': 'int'})
-        >>> integer.replace('.', '', 1).lstrip('-').isnumeric() and \\
-        ...     isinstance(integer, str)
+        >>> lazy_value_by_parameter({'value': 'foo'})
+        'foo'
+
+        >>> result = lazy_value_by_parameter({'values': ['foo', 'bar', 'baz']})
+        >>> result in ['foo', 'bar', 'baz']
+        True
+
+        >>> result = lazy_value_by_parameter({'type': 'int'})
+        >>> result.replace('.', '', 1).lstrip('-').isnumeric() and \\
+        ...     isinstance(result, str)
         True
 
     Raises:

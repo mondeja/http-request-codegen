@@ -223,9 +223,9 @@ the ``cases/`` directory would be placed at
 - [ ] Add "Method singularities" section to "Developing implementations"
  tutorial.
 - [ ] Add more oneline tests for POST requests.
-- [ ] Add support for lazy URLs.
-- [ ] Add ``lazy_name_by_parameter`` function examples.
-- [ ] Add ``lazy_value_by_parameter`` function examples.
+- [x] Add support for lazy URLs.
+- [x] Add ``lazy_name_by_parameter`` function examples.
+- [x] Add ``lazy_value_by_parameter`` function examples.
 - [ ] Create Python string wrapping algorithm that could wrap whitespaces in a
  smart way.
 - [ ] Create Javascript string wrapping algorithm that could wrap whitespaces
