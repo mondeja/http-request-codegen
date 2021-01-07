@@ -62,6 +62,43 @@ in accounts all parameters described in
 function, but not the randomized values passed in ``parameters`` argument,
 because ``http_request_codegen`` provides functions that can handle these.
 
+### Implementation arguments
+
+Each implementation function must contain the following arguments, which are
+passed from the API function
+[`generate_http_request_code`](/reference#generate_http_request_code), so it's
+recommended that you familiarize yourself with the arguments of that function
+before continuing with this guide because they are well documented there:
+
+- **``url``**: unique positional argument of the function, represents the
+ target URL of the request.
+- **``headers``**: dictionary of headers.
+- **``parameters``**: list of parameter data objects.
+- **``files``**: dictionary of files, only passed to POST requests, so this
+ should not be defined as argument is the function implementation's name is
+ different to ``post``.
+- **``wrap``**: maximum anchor of the rendered code snippet.
+- **``indent``**: indentation used in the rendered code snippet.
+- **``quote_char``**: string quotation character.
+- **``setup``** : code snippet prepended to generated request output.
+- **``teardown``** : code snippet appended at the end of the generated request
+ output.
+- **``oneline``**: if enabled, render the code snippet in one line.
+- **``seed``**: seed used generating random fake values of parameters.
+- **``locale``**: locale used by [faker](https://faker.readthedocs.io) library
+ for localization of the faked random values for parameters.
+
+### Method singularities
+
+#### POST
+
+{%
+  include-markdown "../http_request_codegen/hrc_api.py"
+  start="<!-- start-POST-singularities -->"
+  end="<!-- end-POST-singularities -->"
+  dedent=true
+%}
+
 ### One line wrapping behaviour
 
 The first thing to take in account (and the most complicated one) is the
@@ -154,12 +191,10 @@ The library provides the functions
 [``lazy_name_by_parameter``](/reference#lazy_name_by_parameter) and
 [``lazy_value_by_parameter``](/reference#lazy_value_by_parameter) which returns
 the name and the value of a parameter given a parameter dictionary
-specification. 
-
-- These must be used to randomize parameters in a unified way across
- implementations as described in
- [``generate_http_request_code``](/reference#generate_http_request_code)
- function documentation.
+specification. These must be used to randomize parameters in a unified way
+across implementations as described in
+[``generate_http_request_code``](/reference#generate_http_request_code)
+function documentation.
 
 ### Language/platform utilities
 
@@ -220,9 +255,8 @@ the ``cases/`` directory would be placed at
 - [x] Implement Javascript fetch POST.
 - [x] Implement Bash curl GET.
 - [ ] Implement Bash curl POST.
-- [ ] Add "Method singularities" section to "Developing implementations"
+- [x] Add "Method singularities" section to "Developing implementations"
  tutorial.
-- [ ] Add more oneline tests for POST requests.
 - [x] Add support for lazy URLs.
 - [x] Add ``lazy_name_by_parameter`` function examples.
 - [x] Add ``lazy_value_by_parameter`` function examples.

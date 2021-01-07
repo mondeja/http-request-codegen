@@ -21,20 +21,23 @@ def generate_http_request_code(language=None, impl=None, method='GET',
 
     ??? info "POST"
 
-        POST methods implementations includes some of the most used
-        "Content-Types" headers related behaviours:
+        <!-- start-POST-singularities -->
+        Most POST methods implementations render their code snippets different,
+        depending on *Content-Types* header, including by default some of the
+        most used *Content-Types* header related behaviours:
 
         - The default behavior, even if you don't specify it explicitly in the
-            `Content-Type` header is the generation of an
-            ``application/x-www-form-urlencoded`` encoded request.
+            *Content-Type* header is the generation of an
+            `application/x-www-form-urlencoded` encoded request.
         - If you want to generate a ``multipart/form-data`` encoded request,
             you need to specify the files to sent using the ``files`` argument.
-        - If you specifies the `Content-Type` header `application/json`, the
+        - If you specifies the *Content-Type* header `application/json`, the
             parameters sent will be adjusted according to the JSON encoded POST
             request.
-        - If you specifies the `Content-Type` header `text/plain`, you can only
+        - If you specifies the *Content-Type* header `text/plain`, you can only
             send one parameter and it will be adjusted accordingly following
             the implementation.
+        <!-- end-POST-singularities -->
 
     Args:
         language (str): Programming language or plataform of the resulting code
@@ -181,8 +184,9 @@ def generate_http_request_code(language=None, impl=None, method='GET',
             the second value the content-type of the file and the third a
             dictionary of custom headers for the file.
 
-        wrap (int): Maximum anchor of the code. If it exceeds it, the output
-            code will be conveniently formatted on multiple lines.
+        wrap (int): Maximum anchor of the rendered code snippet. If it exceeds
+            it, the rendered code will be conveniently formatted on multiple
+            lines.
         indent (str): Indentation string used in the generated code. If not
             defined, the indentation string commonly used in the implementation
             will be used.
@@ -199,7 +203,7 @@ def generate_http_request_code(language=None, impl=None, method='GET',
             Useful if you want to generate the same set of values between
             multiples code snippets.
         locale (str): Locale used by [faker](https://faker.readthedocs.io)
-            library for localization of the fake random values for parameters.
+            library for localization of the faked random values for parameters.
 
     Raises:
         ValueError: Value is not a valid value in their context.
