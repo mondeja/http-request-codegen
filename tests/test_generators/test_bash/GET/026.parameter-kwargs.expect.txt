@@ -1,1 +1,0 @@
-curl timeout '10' stream 'True' http://localhost:8876?param-1=value-1

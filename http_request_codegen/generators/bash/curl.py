@@ -44,7 +44,8 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
 
     options_string = ''
     options_map = []
-    if kwargs:
+    if kwargs or parameters:
+        _d_option_included = False
         for option_name, option_value in kwargs.items():
             options_string += ' %(option_name)s' % {'option_name': option_name}
             if option_value:
@@ -58,6 +59,30 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
             else:
                 option_value_string = None
             options_map.append([option_name, option_value_string])
+
+            if option_name == '-d':
+                _d_option_included = True
+
+        if parameters:
+            if _d_option_included:
+                raise ValueError(
+                    ('You can\'t pass the option \'-d\' and parameters with'
+                     ' \'parameters\' value.'))
+
+            parameters_dict = OrderedDict({})
+            for parameter in parameters:
+                parameter_name = lazy_name_by_parameter(parameter, seed=seed)
+                parameter_value = lazy_value_by_parameter(
+                    parameter, seed=seed, locale=locale)
+                parameters_dict[parameter_name] = parameter_value
+
+            params_string = escape_by_quote(urlencode(parameters_dict),
+                                            quote_char)
+            options_string += ' -d %(quote_char)s%(params)s%(quote_char)s' % {
+                'quote_char': quote_char,
+                'params': params_string
+            }
+            options_map.append(['-d', params_string])
 
     if headers:
         for name, value in headers.items():
@@ -75,13 +100,6 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
                 'value': value
             }
 
-    if parameters:
-        parameters_dict = OrderedDict({})
-        for parameter in parameters:
-            parameters_dict[lazy_name_by_parameter(parameter, seed=seed)] = \
-                lazy_value_by_parameter(parameter, seed=seed, locale=locale)
-        url = '?'.join([url, urlencode(parameters_dict)])
-
     # 1 here is a space
     if len(options_string) + len(url) + len(response) + 1 < wrap:
         oneline = True
@@ -91,10 +109,17 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
     else:
         response += ' \\\n'
         for option, value in options_map:
-            response += '%(indent)s%(option)s %(value)s \\\n' % {
+            if value:
+                value_string = ' %(quote_char)s%(value)s%(quote_char)s' % {
+                    'value': escape_by_quote(value, quote_char),
+                    'quote_char': quote_char
+                }
+            else:
+                value_string = ''
+            response += '%(indent)s%(option)s%(value_string)s \\\n' % {
                 'indent': indent,
                 'option': option,
-                'value': value
+                'value_string': value_string
             }
         response += '%(indent)s%(url)s' % {'indent': indent, 'url': url}
 

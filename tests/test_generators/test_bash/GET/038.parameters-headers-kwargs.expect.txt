@@ -1,6 +1,0 @@
-curl \
-    timeout '5' \
-    stream 'True' \
-    -H 'Content-Type: application/json' \
-    -H 'Accept-Language: fr' \
-    http://localhost:8876?param-1=value-1&param-2=7.77

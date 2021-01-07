@@ -1,0 +1,3 @@
+curl \
+    -d 'param-1-with-%27%27-quotes=value-1-with-%27%27-quotes' \
+    http://localhost:8876

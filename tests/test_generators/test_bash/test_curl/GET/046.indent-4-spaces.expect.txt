@@ -1,0 +1,3 @@
+curl \
+    -H '\'Accept-Language: es en fr * es en fr * es en fr * es en fr * es en fr * es en fr * es en fr * es en fr * es en fr * es en fr * es en fr * es en fr * es en fr * es en fr * es en fr * es en fr * es en fr * es en fr * es en fr * es en fr * \'' \
+    http://localhost:8876

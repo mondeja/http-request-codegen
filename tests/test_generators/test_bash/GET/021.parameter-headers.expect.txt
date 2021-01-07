@@ -1,4 +1,0 @@
-curl \
-    -H 'Content-Type: application/json' \
-    -H 'Accept-Language: *' \
-    http://localhost:8876?param-1=value-1
