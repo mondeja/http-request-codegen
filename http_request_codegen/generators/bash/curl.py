@@ -1,13 +1,12 @@
 '''Bash curl code snippets generator.'''
 
-import json
-from collections import OrderedDict
-
-
 try:
     from urllib.parse import urlencode
 except ImportError:
     from urllib import urlencode
+
+import json
+from collections import OrderedDict
 
 from http_request_codegen.generators.bash._utils import (
     DEFAULT_INDENT,
@@ -201,6 +200,7 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
                 else:
                     _x_post_defined = True
 
+    # Add method option
     if not _x_post_defined:
         options_string += ' -X POST'
         options_map.append(['-X', 'POST'])
@@ -276,6 +276,7 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
     if _current_length < wrap:
         oneline = True
 
+    # Renderize options
     response += ' '
     response += _render_options_map(options_map,
                                     options_string,
