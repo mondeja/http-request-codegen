@@ -88,12 +88,12 @@ def generate_http_request_code(language=None, impl=None, method='GET',
             - **type** (*str*, *iterable*, *callable*): Parameter data type.
                 If not defined and ``value``, ``values`` and ``faker`` are not
                 defined, will be considered as a string and the value of the
-                parameter will be a random word built using [faker][faker-doc]
-                library. For some types, other parameter dictionary attributes
-                are supported, documented, if so, in each type. The following
-                parameter data types are supported as attributes of parameters
-                dictionaries, as well as their corresponding names in capital
-                letters:
+                parameter will be a random word built using [faker](
+                https://faker.readthedocs.io) library. For some types, other
+                parameter dictionary attributes are supported, documented, if
+                so, in each type. The following parameter data types are
+                supported as attributes of parameters dictionaries, as well as
+                their corresponding names in capital letters:
 
                 - ``'str'``: Basic string type. Can be defined with the Python
                     builtin type ``str`` or the strings ``'str'`` and

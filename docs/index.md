@@ -3,12 +3,6 @@
 [![Documentation][docs-image]][docs-link]
 [![Coverage status][coverage-image]][coverage-link]
 
-!!! warning
-    This library is currently under development, only supporting a few
-    methods and implementations (see [Support](#support)). Please, wait before
-    use it and [help me][pull-requests-link] with implementations if you are
-    interested.
-
 {%
   include-markdown "../README.md"
   start="<!--start-intro-->"
@@ -848,8 +842,3 @@
 [docs-link]: https://mondeja.github.io/http-request-codegen
 [coverage-image]: https://img.shields.io/coveralls/github/mondeja/http-request-codegen?logo=coveralls
 [coverage-link]: https://coveralls.io/github/mondeja/http-request-codegen
-
-[pull-requests-link]: https://github.com/mondeja/http-request-codegen/pulls
-
-[faker-doc]: https://faker.readthedocs.io
-[faker-providers-doc]: https://faker.readthedocs.io/en/master/providers.html

@@ -251,7 +251,16 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
             elif isinstance(file_data, str):
                 file_data = file_data
             else:  # Iterable
-                file_data = file_data[0]
+                if file_data[0] is None:
+                    file_data = lazy_value_by_parameter(
+                        {
+                            'name': '',
+                            'faker': 'faker.providers.file::file_path',
+                        },
+                        seed=seed,
+                        locale=locale)
+                else:
+                    file_data = file_data[0]
             option_value = '%(name)s=@' % {'name': file_param_name}
             option_value += file_data
             options_string += ' -F %(value)s' % {'value': option_value}
