@@ -169,19 +169,18 @@ def generate_http_request_code(language=None, impl=None, method='GET',
                 ``'path.to.provider.module::function'``.
 
         files (dict): Mapping of files to send to URL. Only has effect for POST
-            methods. If you define this argument, the `Content-Type` header
-            of the request will be assumed to be `'multipart/form-data'`, but
-            only will be explicitly specified in the code generated if the
+            methods. If you define this argument, the `Content-Type` header of
+            the request will be assumed to be `'multipart/form-data'`, but only
+            will be explicitly specified in the code generated if the
             implementation needs it. Each value accepts a string, ``None`` or a
             tuple:
 
-            + Defined as a string, must be the filepath of the file to be
-            sent.
+            + Defined as a string, must be the filepath of the file to be sent.
             + Defined as ``None``, the filepath will be randomized using
             ``faker.providers.file::file_path`` function.
-            + Defined as a tuple, the first value must be the filepath of
-            the file to be sent (if ``None`` will be a randomized filepath),
-            the second value the content-type of the file and the third a
+            + Defined as a tuple, the first value must be the filepath of the
+            file to be sent (if ``None`` will be a randomized filepath), the
+            second value the content-type of the file and the third a
             dictionary of custom headers for the file.
 
         wrap (int): Maximum anchor of the rendered code snippet. If it exceeds
@@ -203,7 +202,7 @@ def generate_http_request_code(language=None, impl=None, method='GET',
             Useful if you want to generate the same set of values between
             multiples code snippets.
         locale (str): Locale used by [faker](https://faker.readthedocs.io)
-            library for localization of the faked random values for parameters.
+            library to localize the faked random values for parameters.
 
     Raises:
         ValueError: Value is not a valid value in their context.

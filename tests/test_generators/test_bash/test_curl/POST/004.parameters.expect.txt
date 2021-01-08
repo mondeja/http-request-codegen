@@ -1,0 +1,4 @@
+curl \
+    -X 'POST' \
+    -d 'param-1=foo&param-2=1&param-3=0.777&param-4=True' \
+    http://localhost:8876

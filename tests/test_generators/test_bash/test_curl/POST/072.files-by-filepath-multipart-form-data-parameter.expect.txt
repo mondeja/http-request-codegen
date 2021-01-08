@@ -1,0 +1,6 @@
+curl \
+    -X 'POST' \
+    -F 'param-1=value-1' \
+    -F 'param-1=@/tmp/file-1.ext' \
+    -F 'param-2=@/tmp/file-2.ext' \
+    http://localhost:8876

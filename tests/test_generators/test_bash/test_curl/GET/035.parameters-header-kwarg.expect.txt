@@ -1,5 +1,5 @@
 curl \
-    timeout '\'5\'' \
+    timeout '5' \
     -d 'param-1=value-1&param-2=7.77' \
-    -H '\'Content-Type: application/json\'' \
+    -H 'Content-Type: application/json' \
     http://localhost:8876

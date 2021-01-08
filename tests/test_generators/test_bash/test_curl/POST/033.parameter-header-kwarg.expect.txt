@@ -1,0 +1,6 @@
+curl \
+    timeout '5' \
+    -X 'POST' \
+    -d 'param-1=value-1' \
+    -H 'Content-Type: application/json' \
+    http://localhost:8876

@@ -1,6 +1,6 @@
 curl \
-    timeout '\'5\'' \
-    stream '\'True\'' \
+    timeout '5' \
+    stream 'True' \
     -d 'param-1=value-1' \
-    -H '\'Content-Type: application/json\'' \
+    -H 'Content-Type: application/json' \
     http://localhost:8876

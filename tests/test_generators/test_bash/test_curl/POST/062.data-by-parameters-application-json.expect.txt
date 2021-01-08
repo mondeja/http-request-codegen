@@ -1,0 +1,5 @@
+curl \
+    -X 'POST' \
+    -d 'param-int=1&param-float=0.777&param-bool=True' \
+    -H 'Content-Type: application/json' \
+    http://localhost:8876

@@ -1,0 +1,5 @@
+curl \
+    -X 'POST' \
+    -d 'param-int=1&param-float=0.777&param-bool=True' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    http://localhost:8876

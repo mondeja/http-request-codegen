@@ -86,7 +86,7 @@ before continuing with this guide because they are well documented there:
 - **``oneline``**: if enabled, render the code snippet in one line.
 - **``seed``**: seed used generating random fake values of parameters.
 - **``locale``**: locale used by [faker](https://faker.readthedocs.io) library
- for localization of the faked random values for parameters.
+ to localize the faked random values for parameters.
 
 ### Method singularities
 
@@ -250,16 +250,6 @@ the ``cases/`` directory would be placed at
 
 ## TODO
 
-- [x] Implement real server testing for POST requests.
-- [x] Implement Javascript fetch GET.
-- [x] Implement Javascript fetch POST.
-- [x] Implement Bash curl GET.
-- [ ] Implement Bash curl POST.
-- [x] Add "Method singularities" section to "Developing implementations"
- tutorial.
-- [x] Add support for lazy URLs.
-- [x] Add ``lazy_name_by_parameter`` function examples.
-- [x] Add ``lazy_value_by_parameter`` function examples.
 - [ ] Create Python string wrapping algorithm that could wrap whitespaces in a
  smart way.
 - [ ] Create Javascript string wrapping algorithm that could wrap whitespaces

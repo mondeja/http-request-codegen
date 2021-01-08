@@ -31,3 +31,19 @@ def test_bash_curl_get(args_group):
         **combination_arguments_to_kwargs(args_group['arguments']))
 
     assert result == expected_result
+
+
+@pytest.mark.parametrize(
+    'args_group',
+    get_argument_combinations(method='POST', dirpath=CASES_DIRS['POST']),
+    ids=lambda args_group: os.path.basename(args_group['filename'])
+)
+def test_bash_curl_post(args_group):
+    with open(args_group['filename'], 'r') as f:
+        expected_result = f.read()
+
+    result = generate_http_request_code(
+        'bash', 'curl', 'POST',
+        **combination_arguments_to_kwargs(args_group['arguments']))
+
+    assert result == expected_result

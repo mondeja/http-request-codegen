@@ -1,0 +1,4 @@
+curl \
+    -X 'POST' \
+    -F 'param-1=@/tmp/foofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoofoo.ext' \
+    http://localhost:8876

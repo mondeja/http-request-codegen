@@ -1,5 +1,5 @@
 curl \
     -d 'param-1=value-1&param-2=value-2' \
-    -H '\'Content-Type: application/json\'' \
-    -H '\'Accept-Language: *\'' \
+    -H 'Content-Type: application/json' \
+    -H 'Accept-Language: *' \
     http://localhost:8876

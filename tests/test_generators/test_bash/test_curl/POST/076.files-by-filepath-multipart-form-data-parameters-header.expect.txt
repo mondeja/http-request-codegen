@@ -1,0 +1,8 @@
+curl \
+    -X 'POST' \
+    -F 'param-1=value-1' \
+    -F 'param-2=value-2' \
+    -F 'param-1=@/tmp/file-1.ext' \
+    -F 'param-2=@/tmp/file-2.ext' \
+    -H 'Accept-Language: es' \
+    http://localhost:8876

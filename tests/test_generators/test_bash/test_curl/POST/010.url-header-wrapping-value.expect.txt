@@ -1,0 +1,4 @@
+curl \
+    -X 'POST' \
+    -H 'Content-Type: application/jsonapplication/jsonapplication/jsonapplication/jsonapplication/json' \
+    http://localhost:8876

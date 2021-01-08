@@ -1,5 +1,5 @@
 curl \
-    timeout '\'10\'' \
-    stream '\'True\'' \
+    timeout '10' \
+    stream 'True' \
     -d 'param-1=value-1&param-2=value-2' \
     http://localhost:8876

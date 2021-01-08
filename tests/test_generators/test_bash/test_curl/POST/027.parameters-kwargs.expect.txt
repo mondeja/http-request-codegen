@@ -1,0 +1,6 @@
+curl \
+    timeout '10' \
+    stream 'True' \
+    -X 'POST' \
+    -d 'param-1=value-1&param-2=value-2' \
+    http://localhost:8876
