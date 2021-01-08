@@ -16,6 +16,6 @@ fetch(
   }
 ).then(function(response) {
   console.log(response);
-}).catch(function(error) {
-  console.error('Error:', error);
+}).catch(function(err) {
+  console.error('Error:', err);
 });

@@ -107,9 +107,9 @@ def str_definition(string, indent=DEFAULT_INDENT,
         str: Javascript string definition reproducted.
     '''
     string_escaped = string if not _escape else \
-        escape_by_quote(string, quote_char)
+        escape_by_quote(str(string), quote_char)
 
-    if len(string) + len(indent) + len(quote_char) * 2 < wrap:
+    if len(str(string)) + len(indent) + len(quote_char) * 2 < wrap:
         return '%(quote_char)s%(value)s%(quote_char)s' % {
             'quote_char': quote_char,
             'value': string_escaped,

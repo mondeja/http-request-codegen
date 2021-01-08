@@ -30,8 +30,8 @@ def _promises_chain_render(quote_char=DEFAULT_QUOTE_CHAR,
                            oneline=False):
     return (').then(function(response) {%(newline)s%(indent)s'
             'console.log(response)%(separator)s%(newline)s}).catch('
-            'function(error) {%(newline)s%(indent)sconsole.error('
-            '%(quote_char)sError:%(quote_char)s, error)%(separator)s'
+            'function(err) {%(newline)s%(indent)sconsole.error('
+            '%(quote_char)sError:%(quote_char)s, err)%(separator)s'
             '%(newline)s});') % {
         'newline': '\n' if not oneline else '',
         'indent': indent if not oneline else '',
@@ -137,7 +137,7 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
     of code would be weird:
 
     ```javascript
-    fetch('<url>').then(function(response) {}, function(error) {});
+    fetch('<url>').then(function(response) {}, function(err) {});
     ```
 
     So ``wrap`` argument is used only to wrap strings in multiples lines,
@@ -280,7 +280,7 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
 
             # 20 here is the length of `formData.append(, );`
             _multiline_param = False
-            if 20 + len(quote_char) * 4 + len(name) + len(value) > wrap:
+            if 20 + len(quote_char) * 4 + len(name) + len(str(value)) > wrap:
                 _multiline_param = True
 
             if _multiline_param:
@@ -296,7 +296,7 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
                 }
                 _param_value = _value_name_schema % {
                     'quote_char': quote_char,
-                    'string': escape_by_quote(value, quote_char),
+                    'string': escape_by_quote(str(value), quote_char),
                 }
 
             response += ('formData.append(%(newline)s%(indent)s'

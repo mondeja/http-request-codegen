@@ -228,7 +228,9 @@ def generate_http_request_code(language=None, impl=None, method='GET',
         _function_kwargs['setup'] = setup
     kwargs.update(_function_kwargs)
     return get_func_by_lang_impl_method(
-        language=language, impl=impl, method=method
+        language=language.lower() if language else language,
+        impl=impl,
+        method=method
     )(lazy_string(url), **kwargs)
 
 

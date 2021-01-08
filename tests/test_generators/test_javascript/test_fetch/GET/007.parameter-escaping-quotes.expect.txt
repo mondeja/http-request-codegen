@@ -2,6 +2,6 @@ fetch(
   'http://localhost:8876?param-1-with-%27%27-quotes=value-1-with-%27%27-quotes',
 ).then(function(response) {
   console.log(response);
-}).catch(function(error) {
-  console.error('Error:', error);
+}).catch(function(err) {
+  console.error('Error:', err);
 });

@@ -2,6 +2,6 @@ fetch(
   'http://localhost:8876?param-1=foo&param-2=1&param-3=0.777&param-4=True',
 ).then(function(response) {
   console.log(response);
-}).catch(function(error) {
-  console.error('Error:', error);
+}).catch(function(err) {
+  console.error('Error:', err);
 });
