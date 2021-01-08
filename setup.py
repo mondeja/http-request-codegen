@@ -37,7 +37,7 @@ DOC_EXTRAS = [
     'mkdocs-material==6.2.3',
     'mkdocs_macros_plugin==0.5.0',
     'mkdocs-minify-plugin==0.3.0',
-    'mkdocs-include-markdown-plugin==2.7.0',
+    'mkdocs-include-markdown-plugin==2.7.1',
     'mkdocstrings==0.14.0',
     'mkdocs-exclude==1.0.2',
 ]
