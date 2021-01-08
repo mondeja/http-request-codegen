@@ -1,8 +1,8 @@
 const files = document.querySelector('input[type="file"]');
 
 const formData = new FormData();
-formData.append('param-1','value-1');
-formData.append('param-2','value-2');
+formData.append('param-1', 'value-1');
+formData.append('param-2', 'value-2');
 formData.append(
   'param-1',
   inputs[0].files[0]

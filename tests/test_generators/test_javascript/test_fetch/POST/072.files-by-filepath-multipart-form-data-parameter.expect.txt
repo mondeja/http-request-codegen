@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 const FormData = require('form-data');
 
 const formData = new FormData();
-formData.append('param-1','value-1');
+formData.append('param-1', 'value-1');
 formData.append(
   'param-1',
   fs.createReadStream('/tmp/file-1.ext'),

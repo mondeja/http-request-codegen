@@ -305,7 +305,7 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
                          '%(newline)s);') % {
                 'newline': '\n' if (not oneline and _multiline_param) else '',
                 'indent': indent if (not oneline and _multiline_param) else '',
-                'space': ' ' if (oneline or _multiline_param) else '',
+                'space': ' ',
                 'param_name': _param_name,
                 'param_value': _param_value,
             }
