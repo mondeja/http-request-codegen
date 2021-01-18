@@ -48,6 +48,7 @@ def generate_http_request_code(language=None, impl=None, method='GET',
             to check the supported implementations by language.
         method (str): HTTP method of the generated request.
         url (str, iterable, callable): URL endpoint of the generated request.
+
             - Defined as a string, the url will be the string itself.
             - Defined as an iterable, the url will be selected randomly
             from the iterable. Supports recursivity: until a string is not

@@ -8,15 +8,14 @@ implementations. It's perfect if you want to include examples documenting APIs.
 Supports the following features:
 
 - Request parameters values randomization using multiples strategies:
-    - Random values from lists and functions.
+    - Random values from iterables and callables.
     - Random values from data types.
     - Random values from [Faker providers](https://faker.readthedocs.io/en/master/providers.html).
-    - Randomization seeds.
-    - Localization.
+    - Randomization using seeds and localization.
 - Request headers customization.
-- Request optional arguments.
+- Request optional arguments by implementation.
 - Custom line wrapping.
 - Custom indentation.
-- Custom quotation character.
+- Custom quotation characters.
 - Rendering in one line.
 <!--end-intro-->
