@@ -35,6 +35,8 @@ rules:
   line-length:
     allow-non-breakable-words: true
     max: 80
+    ignore: |
+      .github
   new-lines:
     type: unix
   octal-values:
