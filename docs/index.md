@@ -13,7 +13,7 @@
 
     This is not a greater level API across multiple HTTP request libraries,
     but it is written so that you can generate the most common types of HTTP
-    requests regardless of the implementation. 
+    requests regardless of the implementation.
 
 ## Installation
 
@@ -52,19 +52,19 @@
 
     {% for impl, methods in impls.items() %}
     === "{{impl}}"
-        
+
         {% for method in methods %}
         === "{{method}}"
-        
+
             {% if method != 'POST' %}
-        
+
             === "Input"
-            
+
                 ```python
                 import fake_module
-                
+
                 from http_request_codegen import generate_http_request_code
-                
+
                 generate_http_request_code(
                     language='{{lang}}',
                     impl='{{impl}}',
@@ -152,7 +152,7 @@
                             'name': 'random-id',  # positive integer
                             'type': 'id'
                         },
-                        
+
                         # Parameter name randomization
                         {
                             'name': ['random-name-from-iterable',
@@ -166,14 +166,14 @@
                     ]
                 )
                 ```
-                
+
                 {{get_func_by_lang_impl_method(
                   language=lang,
                   impl=impl,
                   method=method).__doc__|indent(12)}}
 
             === "Output"
-          
+
                 {{http_request_codegen.generate_http_request_md_fenced_code_block(
                     language=lang,
                     impl=impl,
@@ -270,18 +270,18 @@
                         },
                     ]
                 )|indent(16)}}
-                
+
             {% else %}  {# POST method #}
 
             === "application/x-www-form-urlencoded"
-            
+
                 === "Input"
-                
+
                     ```python
                     import fake_module
-                    
+
                     from http_request_codegen import generate_http_request_code
-                    
+
                     generate_http_request_code(
                         language='{{lang}}',
                         impl='{{impl}}',
@@ -369,7 +369,7 @@
                                 'name': 'random-id',  # positive integer
                                 'type': 'id'
                             },
-                            
+
                             # Parameter name randomization
                             {
                                 'name': ['random-name-from-iterable',
@@ -385,7 +385,7 @@
                     ```
 
                 === "Output"
-                
+
                     {{http_request_codegen.generate_http_request_md_fenced_code_block(
                         language=lang,
                         impl=impl,
@@ -482,14 +482,14 @@
                             },
                         ]
                     )|indent(20)}}
-                
+
             === "multipart/form-data"
-                
+
                 === "Input"
-                
+
                     ```python
                     from http_request_codegen import generate_http_request_code
-                    
+
                     generate_http_request_code(
                         language='{{lang}}',
                         impl='{{impl}}',
@@ -524,7 +524,7 @@
                         }
                     )
                     ```
-                    
+
                 === "Output"
 
                     {{http_request_codegen.generate_http_request_md_fenced_code_block(
@@ -560,16 +560,16 @@
                             )
                         }
                     )|indent(20)}}
-            
+
             === "application/json"
-            
+
                 === "Input"
-                
+
                     ```python
                     import fake_module
-                    
+
                     from http_request_codegen import generate_http_request_code
-                    
+
                     generate_http_request_code(
                         language='{{lang}}',
                         impl='{{impl}}',
@@ -656,7 +656,7 @@
                                 'name': 'random-id',  # positive integer
                                 'type': 'id'
                             },
-                            
+
                             # Parameter name randomization
                             {
                                 'name': ['random-name-from-iterable',
@@ -670,9 +670,9 @@
                         ]
                     )
                     ```
-                    
+
                 === "Output"
-                
+
                     {{http_request_codegen.generate_http_request_md_fenced_code_block(
                         language=lang,
                         impl=impl,
@@ -768,15 +768,15 @@
                             },
                         ]
                     )|indent(20)}}
-                  
-                  
+
+
             === "text/plain"
-                  
+
                 === "Input"
-                
+
                     ```python
                     from http_request_codegen import generate_http_request_code
-                    
+
                     generate_http_request_code(
                         language='{{lang}}',
                         impl='{{impl}}',
@@ -794,9 +794,9 @@
                         ]
                     )
                     ```
-                
+
                 === "Output"
-                
+
                     {{http_request_codegen.generate_http_request_md_fenced_code_block(
                         language=lang,
                         impl=impl,
@@ -826,9 +826,9 @@
 
     {% for impl, methods in impls.items() %}
     === "{{impl}}"
-    
+
         {{supported_features_md_table(methods)}}
-    
+
     {% endfor %}
 
 {% endfor %}

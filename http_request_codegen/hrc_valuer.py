@@ -62,19 +62,29 @@ def lazy_name_by_parameter(parameter_data, seed=None):
         return lazy_string(parameter_data['name'], seed=seed)
     elif 'names' in parameter_data:
         try:
-            return lazy_string(parameter_data['names'],
-                               seed=seed,
-                               string_func_path=True)
+            return lazy_string(
+                parameter_data['names'],
+                seed=seed,
+                string_func_path=True,
+            )
         except (ModuleNotFoundError, ImportError):
             raise ValueError(
-                ('\'names\' \'%s\' attribute of parameter is pointing to an'
-                 ' inexistent Python callable object') % (
-                     parameter_data['names']))
+                (
+                    '\'names\' \'%s\' attribute of parameter is pointing to an'
+                    ' inexistent Python callable object'
+                ) % (
+                    parameter_data['names']
+                ),
+            )
 
-        return lazy_string(parameter_data['names'],
-                           seed=seed, string_func_path=True)
-    raise ValueError(('Parameter must contain \'name\' or \'names\''
-                      ' attribute, got "%s"') % str(parameter_data))
+        return lazy_string(
+            parameter_data['names'],
+            seed=seed, string_func_path=True,
+        )
+    raise ValueError((
+        'Parameter must contain \'name\' or \'names\''
+        ' attribute, got "%s"'
+    ) % str(parameter_data))
 
 
 def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
@@ -139,18 +149,24 @@ def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
         return lazy_string(parameter_data['value'], seed=seed)
     elif 'values' in parameter_data:
         try:
-            return lazy_string(parameter_data['values'],
-                               seed=seed,
-                               string_func_path=True)
+            return lazy_string(
+                parameter_data['values'],
+                seed=seed,
+                string_func_path=True,
+            )
         except (ModuleNotFoundError, ImportError):
             raise ImportError(
-                ('\'values\' \'%s\' attribute of parameter \'%s\' is'
-                 ' pointing to an inexistent Python callable object') % (
-                     parameter_data['values'], parameter_data['name']))
+                (
+                    '\'values\' \'%s\' attribute of parameter \'%s\' is'
+                    ' pointing to an inexistent Python callable object'
+                ) % (
+                    parameter_data['values'], parameter_data['name'],
+                ),
+            )
     elif 'faker' in parameter_data:
         if isinstance(parameter_data['faker'], str):
             # Search provider by string
-            provider_mod_name, func_name = parameter_data['faker'].split("::")
+            provider_mod_name, func_name = parameter_data['faker'].split('::')
             mod = importlib.import_module(provider_mod_name)
             faker = _instanciate_faker(seed=seed, locale=locale)
             faker.add_provider(mod)
@@ -160,9 +176,13 @@ def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
             faker.add_provider(parameter_data['faker'].__module__)
             return getattr(faker, parameter_data['faker'].__name__)()
         raise TypeError(
-            ('\'faker\' \'%s\' attribute of parameter \'%s\' must be an'
-             ' instance of \'str\' or \'callable\'') % (
-                 str(parameter_data['faker']), parameter_data['name']))
+            (
+                '\'faker\' \'%s\' attribute of parameter \'%s\' must be an'
+                ' instance of \'str\' or \'callable\''
+            ) % (
+                str(parameter_data['faker']), parameter_data['name'],
+            ),
+        )
     if 'type' not in parameter_data:
         _type = 'str'
     else:
@@ -203,7 +223,8 @@ def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
         return random.choice(_possibles)
     elif _type in ('uuid', 'uuid4', uuid.UUID):
         return _instanciate_faker(
-            seed=seed, locale=locale).uuid4(cast_to=None).hex
+            seed=seed, locale=locale,
+        ).uuid4(cast_to=None).hex
     elif _type in ('id', 'identifier'):
         if seed is not None:
             random.seed(seed)
@@ -217,9 +238,12 @@ def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
             _possible = lazy_string(parameter_data['types'], seed=seed)
         else:
             _possible = [
-                'str', 'int', 'float', 'bool', 'uuid', 'id', 'file']
+                'str', 'int', 'float', 'bool', 'uuid', 'id', 'file',
+            ]
         parameter_data['type'] = random.choice(_possible)
         return lazy_value_by_parameter(parameter_data['type'], seed=seed)
     raise TypeError(
         ('Data type \'%s\' of parameter \'%s\' not supported') % (
-            parameter_data['type'], parameter_data['name']))
+            parameter_data['type'], parameter_data['name'],
+        ),
+    )

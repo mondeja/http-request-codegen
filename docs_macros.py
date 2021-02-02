@@ -51,7 +51,8 @@ def define_env(env):
                     if i > 0:
                         response += '| '
                     response += (
-                        '%s ' % '✅' if methods[_method][feature] else ' ')
+                        '%s ' % '✅' if methods[_method][feature] else ' '
+                    )
 
                 response += '|\n'
         return response

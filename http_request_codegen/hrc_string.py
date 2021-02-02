@@ -114,7 +114,7 @@ def lazy_string(string, seed=None, string_func_path=False):
         if not string_func_path:
             return string
         try:
-            module_path, resolver_name = string.split("::")
+            module_path, resolver_name = string.split('::')
         except ValueError as err:
             if '::' not in string:
                 return string
@@ -126,29 +126,39 @@ def lazy_string(string, seed=None, string_func_path=False):
         except AttributeError:
             raise ImportError(
                 ('Object \'%s\' not found in module \'%s\'') % (
-                    resolver_name, module_path))
-        return lazy_string(resolved,
-                           seed=seed,
-                           string_func_path=string_func_path)
+                    resolver_name, module_path,
+                ),
+            )
+        return lazy_string(
+            resolved,
+            seed=seed,
+            string_func_path=string_func_path,
+        )
     elif isinstance(string, Iterable):
         if not string:
             # Prevent IndexError in ``random.choice``
-            raise ValueError(('The iterable used to build a lazy string can'
-                              ' not be empty.'))
+            raise ValueError(
+                'The iterable used to build a lazy string can'
+                ' not be empty.',
+            )
 
         if isinstance(string, (set, GeneratorType)):
             string = list(string)
         if seed is not None:
             random.seed(seed)
-        return lazy_string(random.choice(string),
-                           seed=seed,
-                           string_func_path=string_func_path)
+        return lazy_string(
+            random.choice(string),
+            seed=seed,
+            string_func_path=string_func_path,
+        )
     elif isinstance(string, CallableTypes):
         if seed is not None:
             random.seed(seed)
-        return lazy_string(string(),
-                           seed=seed,
-                           string_func_path=string_func_path)
+        return lazy_string(
+            string(),
+            seed=seed,
+            string_func_path=string_func_path,
+        )
     elif hasattr(string, '__name__'):
         return string.__name__
     return str(string)
@@ -199,8 +209,10 @@ def escape_single_quote(value):
     try:
         return value.replace("'", "\\'")
     except AttributeError:
-        raise TypeError(('The value \'%s\' can not be escaped because is not'
-                         ' a string') % str(value))
+        raise TypeError((
+            'The value \'%s\' can not be escaped because is not'
+            ' a string'
+        ) % str(value))
 
 
 def escape_double_quote(value):
@@ -228,8 +240,10 @@ def escape_double_quote(value):
     try:
         return value.replace('"', '\\"')
     except AttributeError:
-        raise TypeError(('The value \'%s\' can not be escaped because is not'
-                         ' a string') % str(value))
+        raise TypeError((
+            'The value \'%s\' can not be escaped because is not'
+            ' a string'
+        ) % str(value))
 
 
 def escape_backtick(value):
@@ -257,15 +271,17 @@ def escape_backtick(value):
     try:
         return value.replace('`', '\\`')
     except AttributeError:
-        raise TypeError(('The value \'%s\' can not be escaped because is not'
-                         ' a string') % str(value))
+        raise TypeError((
+            'The value \'%s\' can not be escaped because is not'
+            ' a string'
+        ) % str(value))
 
 
 def lazy_escape_quote_func_by_quote_char(
     quote_char,
     replacers_funcs={'"': escape_double_quote, '\'': escape_single_quote},
     error_msg_schema='Invalid quotation character %(quote_char)s',
-    exception_cls=ValueError
+    exception_cls=ValueError,
 ):
     '''Factory for quote-escaping functions. It is designed to be used in
     languages utilities implementations to make easier to build quotation
@@ -293,6 +309,7 @@ def lazy_escape_quote_func_by_quote_char(
             _quote_quote_char = '"' if quote_char == '\'' else '\''
             error_msg_schema = error_msg_schema % {
                 'quote_char': (
-                    _quote_quote_char + str(quote_char) + _quote_quote_char)
+                    _quote_quote_char + str(quote_char) + _quote_quote_char
+                ),
             }
         raise exception_cls(error_msg_schema)

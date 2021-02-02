@@ -2,17 +2,19 @@
 
 from http_request_codegen.hrc_factory import (
     DEFAULT_LANGUAGE,
-    get_func_by_lang_impl_method
+    get_func_by_lang_impl_method,
 )
 from http_request_codegen.hrc_string import lazy_string
 
 
-def generate_http_request_code(language=None, impl=None, method='GET',
-                               url='http://localhost', parameters=[],
-                               headers={}, files={}, indent=None,
-                               quote_char='\'', setup=None, teardown=None,
-                               oneline=False, seed=None, locale=None, wrap=80,
-                               **kwargs):
+def generate_http_request_code(
+    language=None, impl=None, method='GET',
+    url='http://localhost', parameters=[],
+    headers={}, files={}, indent=None,
+    quote_char='\'', setup=None, teardown=None,
+    oneline=False, seed=None, locale=None, wrap=80,
+    **kwargs,
+):
     '''Generates a code snippet of an HTTP request for a library of a given
     programming language or a CLI of a program, based on a valid HTTP method
     and a specification of parameters.
@@ -217,7 +219,7 @@ def generate_http_request_code(language=None, impl=None, method='GET',
     _function_kwargs = {
         'parameters': parameters, 'headers': headers,
         'oneline': oneline, 'seed': seed, 'locale': locale,
-        'teardown': teardown, 'wrap': wrap or float('inf')
+        'teardown': teardown, 'wrap': wrap or float('inf'),
     }
     if indent is not None:
         _function_kwargs['indent'] = indent
@@ -231,13 +233,15 @@ def generate_http_request_code(language=None, impl=None, method='GET',
     return get_func_by_lang_impl_method(
         language=language.lower() if language else language,
         impl=impl,
-        method=method
+        method=method,
     )(lazy_string(url), **kwargs)
 
 
-def generate_http_request_md_fenced_code_block(language=None,
-                                               fence_string='```',
-                                               **kwargs):
+def generate_http_request_md_fenced_code_block(
+    language=None,
+    fence_string='```',
+    **kwargs,
+):
     """Wraps [``generate_http_request_code``](#generate_http_request_code)
     function result in a Markdown fenced code block.
 
@@ -260,8 +264,8 @@ def generate_http_request_md_fenced_code_block(language=None,
     Returns:
         str: Fenced code block with HTTP request code snippet inside.
     """
-    return '%(fence_string)s%(language)s\n%(render)s\n%(fence_string)s' % {
-        'language': language if language else DEFAULT_LANGUAGE,
-        'render': generate_http_request_code(language=language, **kwargs),
-        'fence_string': fence_string
-    }
+    return '{fence_string}{language}\n{render}\n{fence_string}'.format(
+        language=language if language else DEFAULT_LANGUAGE,
+        render=generate_http_request_code(language=language, **kwargs),
+        fence_string=fence_string,
+    )

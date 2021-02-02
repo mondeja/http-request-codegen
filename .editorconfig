@@ -10,7 +10,7 @@ indent_size = 2
 trim_trailing_whitespace = true
 
 # Python settings
-[*.py]
+[*.{py,cfg}]
 indent_size = 4
 
 # Markdown settings

@@ -3,7 +3,7 @@
 from http_request_codegen.hrc_string import (
     escape_double_quote,
     escape_single_quote,
-    lazy_escape_quote_func_by_quote_char
+    lazy_escape_quote_func_by_quote_char,
 )
 
 
@@ -41,7 +41,8 @@ def validate_python_identifier(value):
             raise ValueError('\'%s\' is not a valid Python identifier' % value)
     except AttributeError:
         raise ValueError(
-            '\'%s\' is not a valid Python identifier' % str(value))
+            '\'%s\' is not a valid Python identifier' % str(value),
+        )
 
 
 def validate_quote_character(char):
@@ -62,8 +63,11 @@ def validate_quote_character(char):
         ValueError: '1' is not a valid Python quotation character
     '''
     if char not in VALID_QUOTE_CHARS:
-        raise ValueError('\'%s\' is not a valid Python quotation character' % (
-                         char))
+        raise ValueError(
+            '\'%s\' is not a valid Python quotation character' % (
+                char
+            ),
+        )
 
 
 def escape_quote_func_by_quote_char(char):
@@ -95,10 +99,12 @@ def escape_quote_func_by_quote_char(char):
         char,
         replacers_funcs={
             '"': escape_double_quote,
-            '\'': escape_single_quote
+            '\'': escape_single_quote,
         },
-        error_msg_schema=('%(quote_char)s is an invalid Python quotation'
-                          ' character')
+        error_msg_schema=(
+            '%(quote_char)s is an invalid Python quotation'
+            ' character'
+        ),
     )
 
 
@@ -187,24 +193,30 @@ def kwarg_definition(kwarg_name, value, indent=DEFAULT_INDENT, **kwargs):
     validate_python_identifier(kwarg_name)
 
     if isinstance(value, dict):
-        return kwarg_definition_dict_valued(kwarg_name, value, indent=indent,
-                                            _validate_identifier=False,
-                                            **kwargs)
+        return kwarg_definition_dict_valued(
+            kwarg_name, value, indent=indent,
+            _validate_identifier=False,
+            **kwargs,
+        )
     elif isinstance(value, str):
-        return kwarg_definition_str_valued(kwarg_name, value, indent=indent,
-                                           _validate_identifier=False,
-                                           **kwargs)
-    return '%(kwarg_name)s=%(value)s' % {
-        'kwarg_name': kwarg_name,
-        'value': repr(value),
-    }
+        return kwarg_definition_str_valued(
+            kwarg_name, value, indent=indent,
+            _validate_identifier=False,
+            **kwargs,
+        )
+    return '{kwarg_name}={value}'.format(
+        kwarg_name=kwarg_name,
+        value=repr(value),
+    )
 
 
-def kwarg_definition_str_valued(kwarg_name, string,
-                                quote_char=DEFAULT_QUOTE_CHAR,
-                                indent=DEFAULT_INDENT,
-                                wrap=DEFAULT_WRAP,
-                                _validate_identifier=True):
+def kwarg_definition_str_valued(
+    kwarg_name, string,
+    quote_char=DEFAULT_QUOTE_CHAR,
+    indent=DEFAULT_INDENT,
+    wrap=DEFAULT_WRAP,
+    _validate_identifier=True,
+):
     '''Returns the code of a string passed as Python keyword argument to
     a function.
 
@@ -253,22 +265,25 @@ def kwarg_definition_str_valued(kwarg_name, string,
     if _validate_identifier:
         validate_python_identifier(kwarg_name)
 
-    return '%(kwarg_name)s=%(value)s' % {
-        'kwarg_name': kwarg_name,
-        'value': str_definition(
+    return '{kwarg_name}={value}'.format(
+        kwarg_name=kwarg_name,
+        value=str_definition(
             string,
             indent=' ' * (len(kwarg_name) + len(indent) + 1),
             quote_char=quote_char,
-            wrap=wrap),
-    }
+            wrap=wrap,
+        ),
+    )
 
 
-def kwarg_definition_dict_valued(kwarg_name, dictionary,
-                                 quote_char=DEFAULT_QUOTE_CHAR,
-                                 indent=DEFAULT_INDENT, indent_depth=1,
-                                 newline='\n', wrap=DEFAULT_WRAP,
-                                 _validate_identifier=True, _escape_keys=True,
-                                 _escape_values=True):
+def kwarg_definition_dict_valued(
+    kwarg_name, dictionary,
+    quote_char=DEFAULT_QUOTE_CHAR,
+    indent=DEFAULT_INDENT, indent_depth=1,
+    newline='\n', wrap=DEFAULT_WRAP,
+    _validate_identifier=True, _escape_keys=True,
+    _escape_values=True,
+):
     '''Returns the code of a dictionary passed as Python keyword argument
     to a function.
 
@@ -327,10 +342,10 @@ def kwarg_definition_dict_valued(kwarg_name, dictionary,
     if _validate_identifier:
         validate_python_identifier(kwarg_name)
 
-    return '%(indent)s%(kwarg_name)s=%(dictionary)s' % {
-        'indent': indent * indent_depth,
-        'kwarg_name': kwarg_name,
-        'dictionary': dict_definition(
+    return '{indent}{kwarg_name}={dictionary}'.format(
+        indent=indent * indent_depth,
+        kwarg_name=kwarg_name,
+        dictionary=dict_definition(
             dictionary,
             indent=indent,
             indent_depth=indent_depth,
@@ -338,14 +353,16 @@ def kwarg_definition_dict_valued(kwarg_name, dictionary,
             wrap=wrap,
             newline=newline,
             _escape_keys=_escape_keys,
-            _escape_values=_escape_values
-        )
-    }
+            _escape_values=_escape_values,
+        ),
+    )
 
 
-def str_definition(string, indent=DEFAULT_INDENT,
-                   quote_char=DEFAULT_QUOTE_CHAR, wrap=DEFAULT_WRAP,
-                   _escape=True):
+def str_definition(
+    string, indent=DEFAULT_INDENT,
+    quote_char=DEFAULT_QUOTE_CHAR, wrap=DEFAULT_WRAP,
+    _escape=True,
+):
     '''Creates a definition of a Python string, multilining it if neccesary.
     Does not handle spaces at all wrapping it, so it's useful to efficiently
     wrap non-spaced strings like URLs.
@@ -395,15 +412,15 @@ def str_definition(string, indent=DEFAULT_INDENT,
         escape_by_quote(str(string), quote_char)
 
     if len(str(string)) + len(indent) + len(quote_char) * 2 < wrap:
-        return '%(quote_char)s%(value)s%(quote_char)s' % {
-            'quote_char': quote_char,
-            'value': string_escaped,
-        }
+        return '{quote_char}{value}{quote_char}'.format(
+            quote_char=quote_char,
+            value=string_escaped,
+        )
 
     indent_length = len(indent)
-    response = '(%(quote_char)s' % {
-        'quote_char': quote_char
-    }
+    response = '({quote_char}'.format(
+        quote_char=quote_char,
+    )
     _chars_in_current_line = len(response) + indent_length
     for i, ch in enumerate(string):
         response += ch
@@ -411,23 +428,25 @@ def str_definition(string, indent=DEFAULT_INDENT,
         if _chars_in_current_line >= wrap - 2:
             if i >= len(string) - 1:
                 break
-            response += '%(quote_char)s\n%(indent)s %(quote_char)s' % {
-                'quote_char': quote_char,
-                'indent': indent,
-            }
+            response += '{quote_char}\n{indent} {quote_char}'.format(
+                quote_char=quote_char,
+                indent=indent,
+            )
             _chars_in_current_line = 2 + indent_length  # ' ('
-    response += '%(quote_char)s%(newline)s%(indent)s)' % {
-        'newline': '\n' if _chars_in_current_line >= wrap - 1 else '',
-        'indent': indent if _chars_in_current_line >= wrap - 1 else '',
-        'quote_char': quote_char,
-    }
+    response += '{quote_char}{newline}{indent})'.format(
+        newline='\n' if _chars_in_current_line >= wrap - 1 else '',
+        indent=indent if _chars_in_current_line >= wrap - 1 else '',
+        quote_char=quote_char,
+    )
     return response
 
 
-def dict_definition(dictionary, indent=DEFAULT_INDENT, indent_depth=0,
-                    quote_char=DEFAULT_QUOTE_CHAR, wrap=DEFAULT_WRAP,
-                    newline='\n', _escape_keys=True, _escape_values=True,
-                    _str_definition_func=str_definition):
+def dict_definition(
+    dictionary, indent=DEFAULT_INDENT, indent_depth=0,
+    quote_char=DEFAULT_QUOTE_CHAR, wrap=DEFAULT_WRAP,
+    newline='\n', _escape_keys=True, _escape_values=True,
+    _str_definition_func=str_definition,
+):
     '''Creates a definition of a Python dictionary.
 
     Args:
@@ -455,18 +474,22 @@ def dict_definition(dictionary, indent=DEFAULT_INDENT, indent_depth=0,
     if _escape_keys:
         escape_quote_func = escape_quote_func_by_quote_char(quote_char)
 
-    response = '{%(newline)s' % {'newline': newline}
+    response = f'{{{newline}'
     for i, (key, value) in enumerate(dictionary.items()):
         _key = key if not _escape_keys else escape_quote_func(key)
         if isinstance(value, str):
             _indent = indent * indent_depth * 2 + ' ' * (len(_key) + 4)
-            _value = _str_definition_func(value, indent=_indent,
-                                          quote_char=quote_char, wrap=wrap,
-                                          _escape=_escape_values)
+            _value = _str_definition_func(
+                value, indent=_indent,
+                quote_char=quote_char, wrap=wrap,
+                _escape=_escape_values,
+            )
         else:
             _value = str(value)
-        response += ('%(indents)s%(quote_char)s%(key)s%(quote_char)s:'
-                     ' %(value)s%(comma)s%(newline)s') % {
+        response += (
+            '%(indents)s%(quote_char)s%(key)s%(quote_char)s:'
+            ' %(value)s%(comma)s%(newline)s'
+        ) % {
             'indents': indent * (indent_depth + 1),
             'key': _key,
             'value': _value,
@@ -474,7 +497,7 @@ def dict_definition(dictionary, indent=DEFAULT_INDENT, indent_depth=0,
             'newline': newline,
             'comma': ',' if i < len(dictionary) - 1 else '',
         }
-    response += '%(indent)s}' % {
-        'indent': (indent * indent_depth) if dictionary else ''
-    }
+    response += '{indent}}}'.format(
+        indent=(indent * indent_depth) if dictionary else '',
+    )
     return response

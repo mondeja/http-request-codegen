@@ -1,4 +1,3 @@
-
 import inspect
 from types import FunctionType, LambdaType, MethodType
 
@@ -66,10 +65,11 @@ def function_has_kwarg(func, kwarg_name):
         func_source = inspect.getsource(func)
     except TypeError:
         raise TypeError(
-            ('function or method was expected, got %s') % type(func).__name__)
+            ('function or method was expected, got %s') % type(func).__name__,
+        )
 
-    for line in func_source.split("\n"):
-        if not _inside_func_def and line.lstrip().startswith("def "):
+    for line in func_source.split('\n'):
+        if not _inside_func_def and line.lstrip().startswith('def '):
             _inside_func_def = True
 
         # Would be rare if a kwarg as a string with default value containing
@@ -78,6 +78,6 @@ def function_has_kwarg(func, kwarg_name):
             response = True
             break
 
-        if _inside_func_def and line.rstrip().endswith("):"):
+        if _inside_func_def and line.rstrip().endswith('):'):
             break
     return response

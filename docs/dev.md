@@ -10,7 +10,7 @@
         git clone https://github.com/mondeja/http-request-codegen.git
         python3 -m virtualenv venv
         . venv/bin/activate
-        pip install -e .[dev]
+        python3 -m pip install .[dev]
         pre-commit install
         ```
 
@@ -22,7 +22,7 @@
         git clone https://github.com/mondeja/http-request-codegen.git
         python3 -m virtualenv venv
         venv\Scripts\activate.bat
-        pip install -e .[dev]
+        python3 -m pip install .[dev]
         pre-commit install
         ```
 
@@ -154,7 +154,7 @@ argument, must be rendered as if ``oneline=True``.
 
     You can see an example of this type of implementation at
     ``http_request_codegen.generators.python.requests::get`` function.
-    
+
 But other implementations could be rendered in multiples lines regardless the
 ``wrap`` argument value.
 

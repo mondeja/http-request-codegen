@@ -10,41 +10,54 @@ import sys
 from http_request_codegen import __version__, generate_http_request_code
 from http_request_codegen.hrc_factory import (
     DEFAULT_IMPLEMENTATION,
-    DEFAULT_LANGUAGE
+    DEFAULT_LANGUAGE,
 )
+
 from tests.combinations import (
     combination_arguments_to_kwargs,
-    get_argument_combinations
+    get_argument_combinations,
 )
 
 
-DESCRIPTION = ('Implementation test cases creator. This script creates a'
-               ' directory where are placed all expected outputs of a method'
-               ' for one implementation supported in http-request-codegen.'
-               ' Is needed for help testing this library.')
+DESCRIPTION = (
+    'Implementation test cases creator. This script creates a'
+    ' directory where are placed all expected outputs of a method'
+    ' for one implementation supported in http-request-codegen.'
+    ' Is needed for help testing this library.'
+)
 
 
 def build_parser():
     parser = argparse.ArgumentParser(description=DESCRIPTION)
-    parser.add_argument('-v', '--version', action='version',
-                        version='%(prog)s ' + __version__,
-                        help='Show program version number and exit.')
-    parser.add_argument('-l', '--language', dest='language',
-                        default=DEFAULT_LANGUAGE, required=True,
-                        help='Language or platform for which the test cases'
-                             ' will be created.', metavar='LANGUAGE')
-    parser.add_argument('-i', '--implementation', dest='implementation',
-                        default=DEFAULT_IMPLEMENTATION, required=True,
-                        help='Implementation for which the test cases will be'
-                             ' created.', metavar='IMPLEMENTATION')
-    parser.add_argument('-m', '--method', dest='method', default='GET',
-                        required=True,
-                        help='HTTP request method for which the test cases'
-                             ' will be created.', metavar='METHOD')
-    parser.add_argument('-d', '--directory', dest='directory', default=None,
-                        required=True,
-                        help='Directory inside which the test cases will be'
-                             ' placed.', metavar='DIR')
+    parser.add_argument(
+        '-v', '--version', action='version',
+        version='%(prog)s ' + __version__,
+        help='Show program version number and exit.',
+    )
+    parser.add_argument(
+        '-l', '--language', dest='language',
+        default=DEFAULT_LANGUAGE, required=True,
+        help='Language or platform for which the test cases'
+             ' will be created.', metavar='LANGUAGE',
+    )
+    parser.add_argument(
+        '-i', '--implementation', dest='implementation',
+        default=DEFAULT_IMPLEMENTATION, required=True,
+        help='Implementation for which the test cases will be'
+             ' created.', metavar='IMPLEMENTATION',
+    )
+    parser.add_argument(
+        '-m', '--method', dest='method', default='GET',
+        required=True,
+        help='HTTP request method for which the test cases'
+             ' will be created.', metavar='METHOD',
+    )
+    parser.add_argument(
+        '-d', '--directory', dest='directory', default=None,
+        required=True,
+        help='Directory inside which the test cases will be'
+             ' placed.', metavar='DIR',
+    )
     return parser
 
 
@@ -71,7 +84,7 @@ def main(args=[]):
                 language=opts.language,
                 impl=opts.implementation,
                 method=opts.method,
-                **combination_arguments_to_kwargs(args_group['arguments'])
+                **combination_arguments_to_kwargs(args_group['arguments']),
             )
 
             fpath = os.path.join(opts.directory, args_group['filename'])

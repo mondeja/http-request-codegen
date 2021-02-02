@@ -12,69 +12,75 @@ from http_request_codegen.generators.bash._utils import (
     DEFAULT_INDENT,
     DEFAULT_QUOTE_CHAR,
     DEFAULT_WRAP,
-    escape_by_quote
+    escape_by_quote,
 )
 from http_request_codegen.hrc_valuer import (
     lazy_name_by_parameter,
-    lazy_value_by_parameter
+    lazy_value_by_parameter,
 )
 
 
-def _render_options_map(options_map, options_string, url, oneline=False,
-                        indent=DEFAULT_INDENT, quote_char=DEFAULT_QUOTE_CHAR):
+def _render_options_map(
+    options_map, options_string, url, oneline=False,
+    indent=DEFAULT_INDENT, quote_char=DEFAULT_QUOTE_CHAR,
+):
     response = ''
     if not oneline:
         response += '\\\n'
     for i, (option, value) in enumerate(options_map):
         if value:
-            value_string = ' %(quote_char)s%(value)s%(quote_char)s' % {
-                'value': escape_by_quote(value, quote_char),
-                'quote_char': quote_char
-            }
+            value_string = ' {quote_char}{value}{quote_char}'.format(
+                value=escape_by_quote(value, quote_char),
+                quote_char=quote_char,
+            )
         else:
             value_string = ''
-        response += '%(indent)s%(option)s%(value_string)s %(newline)s' % {
-            'indent': indent if not oneline else '',
-            'option': option,
-            'value_string': value_string,
-            'newline': '\\\n' if not oneline else ''
-        }
-    response += '%(indent)s%(url)s' % {
-        'indent': indent if not oneline else '',
-        'url': url
-    }
+        response += '{indent}{option}{value_string} {newline}'.format(
+            indent=indent if not oneline else '',
+            option=option,
+            value_string=value_string,
+            newline='\\\n' if not oneline else '',
+        )
+    response += '{indent}{url}'.format(
+        indent=indent if not oneline else '',
+        url=url,
+    )
     return response
 
 
-def _build_headers(headers, quote_char=DEFAULT_QUOTE_CHAR,
-                   content_type='application/x-www-form-urlencoded'):
+def _build_headers(
+    headers, quote_char=DEFAULT_QUOTE_CHAR,
+    content_type='application/x-www-form-urlencoded',
+):
     map, string = ([], '')
     for name, value in headers.items():
         option = '-H'
         value = ('%(header_name)s: %(header_value)s') % {
             'header_name': name,
-            'header_value': escape_by_quote(str(value), quote_char)
+            'header_value': escape_by_quote(str(value), quote_char),
         }
         map.append([option, value])
 
         string += (' %(option)s %(value)s') % {
             'option': option,
-            'value': value
+            'value': value,
         }
         if name.lower() == 'content-type':
             if value in (
                 'multipart/form-data',
                 'application/json',
                 'application/x-www-form-urlencoded',
-                'text/plain'
+                'text/plain',
             ):
                 content_type = value
     return (map, string, content_type)
 
 
-def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
-        quote_char=DEFAULT_QUOTE_CHAR, setup=False, teardown=None,
-        oneline=False, wrap=DEFAULT_WRAP, seed=None, locale=None, **kwargs):
+def get(
+    url, parameters=[], headers={}, indent=DEFAULT_INDENT,
+    quote_char=DEFAULT_QUOTE_CHAR, setup=False, teardown=None,
+    oneline=False, wrap=DEFAULT_WRAP, seed=None, locale=None, **kwargs,
+):
     '''Pass extra options to 'curl' command in ``kwargs`` parameter. For
     example, to save the response in a file, pass
     ``kwargs={'-o': 'filename.ext'}``:
@@ -98,16 +104,17 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
     if kwargs or parameters:
         _d_option_included = False
         for option_name, option_value in kwargs.items():
-            options_string += ' %(option_name)s' % {'option_name': option_name}
+            options_string += f' {option_name}'
             if option_value:
                 option_value_string = escape_by_quote(
-                    str(option_value), quote_char)
+                    str(option_value), quote_char,
+                )
                 options_string += ' ' + option_value_string
             else:
                 option_value_string = None
             options_map.append([option_name, option_value_string])
 
-            if option_name == '-X' and option_value != "GET":
+            if option_name == '-X' and option_value != 'GET':
                 raise ValueError('\'-X\' option, if defined, must be \'GET\'')
 
             if option_name == '-d':
@@ -116,27 +123,33 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
         if parameters:
             if _d_option_included:
                 raise ValueError(
-                    ('You can\'t pass the option \'-d\' and parameters with'
-                     ' \'parameters\' value.'))
+                    'You can\'t pass the option \'-d\' and parameters with'
+                    ' \'parameters\' value.',
+                )
 
             parameters_dict = OrderedDict({})
             for parameter in parameters:
                 parameter_name = lazy_name_by_parameter(parameter, seed=seed)
                 parameter_value = lazy_value_by_parameter(
-                    parameter, seed=seed, locale=locale)
+                    parameter, seed=seed, locale=locale,
+                )
                 parameters_dict[parameter_name] = parameter_value
 
-            params_string = escape_by_quote(urlencode(parameters_dict),
-                                            quote_char)
-            options_string += ' -d %(quote_char)s%(params)s%(quote_char)s' % {
-                'quote_char': quote_char,
-                'params': params_string
-            }
+            params_string = escape_by_quote(
+                urlencode(parameters_dict),
+                quote_char,
+            )
+            options_string += ' -d {quote_char}{params}{quote_char}'.format(
+                quote_char=quote_char,
+                params=params_string,
+            )
             options_map.append(['-d', params_string])
 
     if headers:
-        headers_map, headers_string, _ = _build_headers(headers,
-                                                        quote_char=quote_char)
+        headers_map, headers_string, _ = _build_headers(
+            headers,
+            quote_char=quote_char,
+        )
         options_map.extend(headers_map)
         options_string += headers_string
 
@@ -145,12 +158,14 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
         oneline = True
     response += ' '
 
-    response += _render_options_map(options_map,
-                                    options_string,
-                                    url,
-                                    oneline=oneline,
-                                    indent=indent,
-                                    quote_char=quote_char)
+    response += _render_options_map(
+        options_map,
+        options_string,
+        url,
+        oneline=oneline,
+        indent=indent,
+        quote_char=quote_char,
+    )
 
     if teardown:
         response += str(teardown)
@@ -158,9 +173,11 @@ def get(url, parameters=[], headers={}, indent=DEFAULT_INDENT,
     return response
 
 
-def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
-         quote_char=DEFAULT_QUOTE_CHAR, setup=False, teardown=None,
-         oneline=False, wrap=DEFAULT_WRAP, seed=None, locale=None, **kwargs):
+def post(
+    url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
+    quote_char=DEFAULT_QUOTE_CHAR, setup=False, teardown=None,
+    oneline=False, wrap=DEFAULT_WRAP, seed=None, locale=None, **kwargs,
+):
     response = ''
 
     if setup:
@@ -176,16 +193,19 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
         headers,
         quote_char=quote_char,
         content_type='application/x-www-form-urlencoded'
-                     if not files else 'multipart/form-data')
+                     if not files else 'multipart/form-data',
+    )
 
     _x_post_defined = False
     if kwargs:
         for option_name, option_value in kwargs.items():
-            options_string += ' %(option_name)s' % {'option_name': option_name}
+            options_string += f' {option_name}'
             if option_value:
                 option_value_str = str(option_value)
-                options_string += (' %(quote_char)s%(value)s'
-                                   '%(quote_char)s') % {
+                options_string += (
+                    ' %(quote_char)s%(value)s'
+                    '%(quote_char)s'
+                ) % {
                     'quote_char': quote_char,
                     'value': option_value_str,
                 }
@@ -194,9 +214,10 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
             options_map.append([option_name, option_value_str])
 
             if option_name == '-X':
-                if option_value != "POST":
+                if option_value != 'POST':
                     raise ValueError(
-                        '\'-X\' option, if defined, must be \'POST\'')
+                        '\'-X\' option, if defined, must be \'POST\'',
+                    )
                 else:
                     _x_post_defined = True
 
@@ -210,30 +231,32 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
         parameters_dict = OrderedDict({})
         for parameter in parameters:
             parameter_name = lazy_name_by_parameter(parameter, seed=seed)
-            parameter_value = lazy_value_by_parameter(parameter,
-                                                      seed=seed,
-                                                      locale=locale)
+            parameter_value = lazy_value_by_parameter(
+                parameter,
+                seed=seed,
+                locale=locale,
+            )
             parameters_dict[parameter_name] = parameter_value
 
         # parameters codification
         if content_type == 'multipart/form-data':
             for param_name, param_value in parameters_dict.items():
-                option_value = '%(name)s=%(value)s' % {
-                    'name': param_name,
-                    'value': param_value
-                }
+                option_value = '{name}={value}'.format(
+                    name=param_name,
+                    value=param_value,
+                )
                 options_map.append(['-F', option_value])
-                options_string += ' -F %(params)s' % {'params': option_value}
+                options_string += f' -F {option_value}'
         else:
             encode_func = json.dumps if content_type == 'application/json' \
                 else urlencode
 
             option_value = encode_func(parameters_dict)
             options_map.append(['-d', option_value])
-            options_string += ' -d %(quote_char)s%(params)s%(quote_char)s' % {
-                'quote_char': quote_char,
-                'params': option_value,
-            }
+            options_string += ' -d {quote_char}{params}{quote_char}'.format(
+                quote_char=quote_char,
+                params=option_value,
+            )
     else:
         parameters_dict = {}
 
@@ -247,7 +270,8 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
                         'faker': 'faker.providers.file::file_path',
                     },
                     seed=seed,
-                    locale=locale)
+                    locale=locale,
+                )
             elif isinstance(file_data, str):
                 file_data = file_data
             else:  # Iterable
@@ -258,12 +282,13 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
                             'faker': 'faker.providers.file::file_path',
                         },
                         seed=seed,
-                        locale=locale)
+                        locale=locale,
+                    )
                 else:
                     file_data = file_data[0]
-            option_value = '%(name)s=@' % {'name': file_param_name}
+            option_value = f'{file_param_name}=@'
             option_value += file_data
-            options_string += ' -F %(value)s' % {'value': option_value}
+            options_string += f' -F {option_value}'
             options_map.append(['-F', option_value])
 
     # Add headers
@@ -278,12 +303,14 @@ def post(url, parameters=[], files={}, headers={}, indent=DEFAULT_INDENT,
 
     # Renderize options
     response += ' '
-    response += _render_options_map(options_map,
-                                    options_string,
-                                    url,
-                                    oneline=oneline,
-                                    indent=indent,
-                                    quote_char=quote_char)
+    response += _render_options_map(
+        options_map,
+        options_string,
+        url,
+        oneline=oneline,
+        indent=indent,
+        quote_char=quote_char,
+    )
 
     if teardown:
         response += str(teardown)

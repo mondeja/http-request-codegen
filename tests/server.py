@@ -27,13 +27,13 @@ def build_test_server():
             'cookies': {
                 name: value
                 for name, value in flask.request.cookies.items()
-            }
+            },
         }
         if flask.request.method == 'GET':
             response['parameters'] = [
                 {
                     'name': name,
-                    'value': value
+                    'value': value,
                 } for name, value in flask.request.args.items()
             ]
         elif flask.request.method == 'POST':
@@ -46,7 +46,7 @@ def build_test_server():
                     response['parameters'] = [
                         {
                             'name': name,
-                            'value': value
+                            'value': value,
                         } for name, value in flask.request.form.items()
                     ]
                 elif content_type == 'application/json':
@@ -55,7 +55,7 @@ def build_test_server():
                         response['parameters'] = [
                             {
                                 'name': name,
-                                'value': str(value)
+                                'value': str(value),
                             } for name, value in json_data.items()
                         ]
                 elif content_type == 'text/plain':
@@ -63,13 +63,13 @@ def build_test_server():
                         {
                             'name': '',
                             'value': flask.request.data.decode('utf-8'),
-                        }
+                        },
                     ]
                 elif 'multipart/form-data' in content_type:
                     response['parameters'] = [
                         {
                             'name': name,
-                            'value': value
+                            'value': value,
                         } for name, value in flask.request.form.items()
                     ]
 
@@ -83,8 +83,10 @@ def build_test_server():
                             if file.headers is not None:
                                 file_headers = {}
                                 for name, value in file.headers.items():
-                                    if name in ['Content-Disposition',
-                                                'Content-Type']:
+                                    if name in [
+                                        'Content-Disposition',
+                                        'Content-Type',
+                                    ]:
                                         continue
                                     file_headers[name] = value
                                 if file_headers:
@@ -92,23 +94,31 @@ def build_test_server():
                             response['files'][file_param_name] = fvalue
                 elif len(content_type) < 50:
                     raise NotImplementedError(
-                        ('Content-Type \'%s\' not supported by POST method of'
-                         ' Flask testing server') % content_type)
+                        (
+                            'Content-Type \'%s\' not supported by POST method'
+                            ' of Flask testing server'
+                        ) % content_type,
+                    )
                 # else:  fake content type, only for test header wrapping
         else:
             raise NotImplementedError(
-                ('Method %s must be implemented in Flask testing'
-                 ' server') % flask.request.method)
+                (
+                    'Method %s must be implemented in Flask testing'
+                    ' server'
+                ) % flask.request.method,
+            )
         return response
 
     return test_server
 
 
 def test_server_process():
-    build_test_server().run(host=TEST_SERVER_HOST,
-                            port=TEST_SERVER_PORT,
-                            debug=True,
-                            use_reloader=False)
+    build_test_server().run(
+        host=TEST_SERVER_HOST,
+        port=TEST_SERVER_PORT,
+        debug=True,
+        use_reloader=False,
+    )
 
 
 if __name__ == '__main__':

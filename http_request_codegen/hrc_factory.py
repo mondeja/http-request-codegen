@@ -11,7 +11,8 @@ DEFAULT_LANGUAGE = 'python'
 DEFAULT_IMPLEMENTATION = 'requests'
 
 GENERATORS_DIR = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), 'generators'))
+    os.path.join(os.path.dirname(__file__), 'generators'),
+)
 
 
 @lru_cache(maxsize=1)
@@ -59,8 +60,12 @@ def get_func_by_lang_impl_method(language=None, impl=None, method=None):
     try:
         lang_impls = generators_by_lang_impl[_language]
     except KeyError:
-        raise ValueError(('The language \'%s\' is not implemented in'
-                          ' http-request-codegen.') % language)
+        raise ValueError(
+            (
+                'The language \'%s\' is not implemented in'
+                ' http-request-codegen.'
+            ) % language,
+        )
     if impl is None:
         _impl = list(lang_impls.keys())[0]
     else:
@@ -70,9 +75,13 @@ def get_func_by_lang_impl_method(language=None, impl=None, method=None):
         impl_modpath = lang_impls[_impl]
     except KeyError:
         raise ValueError(
-            ('The implementation \'%s\' is not implemented'
-             ' for the language \'%s\' in http-request-codegen.') % (
-                 impl, _language))
+            (
+                'The implementation \'%s\' is not implemented'
+                ' for the language \'%s\' in http-request-codegen.'
+            ) % (
+                impl, _language,
+            ),
+        )
 
     module = importlib.import_module(impl_modpath)
 
@@ -86,7 +95,9 @@ def get_func_by_lang_impl_method(language=None, impl=None, method=None):
         if method.upper() not in HTTP_METHODS:
             raise ValueError('Invalid HTTP method \'%s\'' % method.upper())
         raise ValueError(
-            ('The implementation \'%s\' of the language \'%s\' does not'
-             ' support HTTP %s methods.') % (impl, _language, _method.upper())
+            (
+                'The implementation \'%s\' of the language \'%s\' does not'
+                ' support HTTP %s methods.'
+            ) % (impl, _language, _method.upper()),
         )
     return func

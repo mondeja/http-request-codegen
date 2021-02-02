@@ -4,7 +4,7 @@ from http_request_codegen.hrc_string import (
     escape_backtick,
     escape_double_quote,
     escape_single_quote,
-    lazy_escape_quote_func_by_quote_char
+    lazy_escape_quote_func_by_quote_char,
 )
 
 
@@ -61,16 +61,20 @@ def escape_by_quote(string, char):
         replacers_funcs={
             '"': escape_double_quote,
             '\'': escape_single_quote,
-            '`': escape_backtick
+            '`': escape_backtick,
         },
-        error_msg_schema=('%(quote_char)s is an invalid Javascript quotation'
-                          ' character')
+        error_msg_schema=(
+            '%(quote_char)s is an invalid Javascript quotation'
+            ' character'
+        ),
     )(string)
 
 
-def str_definition(string, indent=DEFAULT_INDENT,
-                   quote_char=DEFAULT_QUOTE_CHAR, wrap=DEFAULT_WRAP,
-                   _escape=True):
+def str_definition(
+    string, indent=DEFAULT_INDENT,
+    quote_char=DEFAULT_QUOTE_CHAR, wrap=DEFAULT_WRAP,
+    _escape=True,
+):
     '''Creates a definition of a Javascript string, multilining it if
     neccesary. Does not handle spaces at all wrapping it, so it's useful to
     efficiently wrap non-spaced strings like URLs.
@@ -110,15 +114,15 @@ def str_definition(string, indent=DEFAULT_INDENT,
         escape_by_quote(str(string), quote_char)
 
     if len(str(string)) + len(indent) + len(quote_char) * 2 < wrap:
-        return '%(quote_char)s%(value)s%(quote_char)s' % {
-            'quote_char': quote_char,
-            'value': string_escaped,
-        }
+        return '{quote_char}{value}{quote_char}'.format(
+            quote_char=quote_char,
+            value=string_escaped,
+        )
 
     indent_length = len(indent)
-    response = '%(quote_char)s' % {
-        'quote_char': quote_char
-    }
+    response = '{quote_char}'.format(
+        quote_char=quote_char,
+    )
     _chars_in_current_line = len(response) + indent_length
     for i, ch in enumerate(string):
         response += ch
@@ -126,14 +130,14 @@ def str_definition(string, indent=DEFAULT_INDENT,
         if _chars_in_current_line >= wrap - 2:
             if i >= len(string) - 1:
                 break
-            response += '%(quote_char)s\n%(indent)s+ %(quote_char)s' % {
-                'quote_char': quote_char,
-                'indent': indent,
-            }
+            response += '{quote_char}\n{indent}+ {quote_char}'.format(
+                quote_char=quote_char,
+                indent=indent,
+            )
             _chars_in_current_line = 3 + indent_length  # ' ('
-    response += '%(quote_char)s%(newline)s%(indent)s' % {
-        'newline': '\n' if _chars_in_current_line >= wrap - 1 else '',
-        'indent': indent if _chars_in_current_line >= wrap - 1 else '',
-        'quote_char': quote_char,
-    }
+    response += '{quote_char}{newline}{indent}'.format(
+        newline='\n' if _chars_in_current_line >= wrap - 1 else '',
+        indent=indent if _chars_in_current_line >= wrap - 1 else '',
+        quote_char=quote_char,
+    )
     return response

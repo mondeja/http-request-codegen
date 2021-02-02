@@ -5,7 +5,7 @@ from collections import OrderedDict
 
 from http_request_codegen.hrc_factory import (
     get_func_by_lang_impl_method,
-    get_generators_modules_by_lang_impl
+    get_generators_modules_by_lang_impl,
 )
 from http_request_codegen.hrc_http import HTTP_METHODS
 from http_request_codegen.hrc_meta import function_has_kwarg
@@ -28,7 +28,8 @@ FEATURES_KWARGS = OrderedDict({
 def _func_has_kwarg_support_factory(kwarg_name):
     def _func_has_kwarg(language, impl, method):
         func = get_func_by_lang_impl_method(
-            language=language, impl=impl, method=method)
+            language=language, impl=impl, method=method,
+        )
         return function_has_kwarg(func, kwarg_name)
     return _func_has_kwarg
 

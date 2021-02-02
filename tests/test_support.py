@@ -3,7 +3,7 @@
 from http_request_codegen import supported_features, supported_methods
 from http_request_codegen.hrc_factory import (
     DEFAULT_IMPLEMENTATION,
-    DEFAULT_LANGUAGE
+    DEFAULT_LANGUAGE,
 )
 from http_request_codegen.hrc_http import HTTP_METHODS
 
