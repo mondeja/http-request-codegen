@@ -5,8 +5,8 @@ site_author: Álvaro Mondéjar Rubio
 
 repo_url: https://github.com/mondeja/http-request-codegen
 repo_name: http-request-codegen
-edit_uri: ''
-copyright: Copyright &copy; 2020-2021 Álvaro Mondéjar
+edit_uri: tree/master/docs
+copyright: Copyright &copy; 2020 Álvaro Mondéjar
 
 docs_dir: docs
 theme:
