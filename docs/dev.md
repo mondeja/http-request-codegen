@@ -246,11 +246,3 @@ the ``cases/`` directory would be placed at
 
     You can use an already implemented test module as a reference to write the
     one for the implementation.
-
-
-## TODO
-
-- [ ] Create Python string wrapping algorithm that could wrap whitespaces in a
- smart way.
-- [ ] Create Javascript string wrapping algorithm that could wrap whitespaces
- in a smart way.
