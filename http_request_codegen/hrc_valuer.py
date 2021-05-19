@@ -44,8 +44,8 @@ def lazy_name_by_parameter(parameter_data, seed=None):
         seed (int): Seed using randomizing names.
 
     Raises:
-        ValueError: if none of the name or names attributes are defined inside
-            ``parameter_data`` dictionary.
+        ValueError: none of the ``name`` or ``names`` attributes are defined
+            inside ``parameter_data`` dictionary.
 
     Examples:
         >>> lazy_name_by_parameter({'name': 'foo'})
@@ -134,12 +134,12 @@ def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
         True
 
     Raises:
-        ImportError: if ``'values'`` attribute value points to an inexistent
+        ImportError: ``'values'`` attribute value points to an inexistent
             Python object.
-        TypeError: if ``'faker'`` attribute value does not contains an string
-            or Python callable object, or if the ``'type'`` attribute value
-            does not support the defined type.
-        ImportError: if ``'faker'`` attribute value, when passed as string,
+        TypeError: ``'faker'`` attribute value does not contains an string or
+            Python callable object, or if the ``'type'`` attribute value does
+            not support the defined type.
+        ImportError: ``'faker'`` attribute value, when passed as string,
             points to an inexistent Python object.
 
     Returns:
