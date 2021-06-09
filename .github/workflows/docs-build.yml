@@ -27,6 +27,6 @@ jobs:
       - name: Show documentation configuration
         run: cat mkdocs.yml
       - name: Test documentation build
-        run: python -m mkdocs build --strict --verbose
+        run: python -m mkdocs build --verbose
       - name: Show tree
         run: tree site
