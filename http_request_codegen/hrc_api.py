@@ -104,7 +104,7 @@ def generate_http_request_code(
                 - ``'int'``: Basic integer type. Can be defined with the Python
                     builtin type ``int``, or the strings ``'int'`` and
                     ``'integer'``. As default will be an integer in the range
-                    -65536 to -65536. The minimum and maximum values can be
+                    -65536 to 65536. The minimum and maximum values can be
                     defined with ``min`` and ``max`` parameter optional
                     attributes.
                 - ``'float'``: Floating point number type. Can be defined
