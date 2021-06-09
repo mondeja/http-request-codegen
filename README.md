@@ -1,6 +1,6 @@
 <h1 align="center">http-request-codegen</h1>
 
-<h2 align="center"><a href="https://mondeja.github.io/http-request-codegen">Documentation</a></h2>
+<h2 align="center">Documentation: <a href="https://mondeja.github.io/http-request-codegen">en</a> - <a href="https://mondeja.github.io/http-request-codegen/es/">es</a></h2>
 
 <!--start-intro-->
 **http-request-codegen** generates HTTP request code snippets for different
