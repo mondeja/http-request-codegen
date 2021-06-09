@@ -103,7 +103,7 @@ def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
     - ``'faker'``
     - ``'type'``
 
-    If any of the previous attributes are passed will be treated as if
+    If none of the previous attributes are passed will be treated as if
     ``{\'type\': str}`` has been passed, returning a random word.
 
     You can use this function to build the parameters at lower level. This can
@@ -136,7 +136,7 @@ def lazy_value_by_parameter(parameter_data, seed=None, locale=None):
     Raises:
         ImportError: ``'values'`` attribute value points to an inexistent
             Python object.
-        TypeError: ``'faker'`` attribute value does not contains an string or
+        TypeError: ``'faker'`` attribute value does not contains a string or
             Python callable object, or if the ``'type'`` attribute value does
             not support the defined type.
         ImportError: ``'faker'`` attribute value, when passed as string,

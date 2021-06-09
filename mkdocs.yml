@@ -11,8 +11,17 @@ copyright: Copyright &copy; 2020-2021 Álvaro Mondéjar
 docs_dir: docs
 theme:
   name: material
+  language: en
   icon:
     repo: fontawesome/brands/github
+
+extra:
+  alternate:
+    - name: English
+      lang: en
+    - name: Español
+      link: es
+      lang: es
 
 nav:
   - Introduction: index.md
@@ -52,3 +61,5 @@ plugins:
       glob:
         - '*.py'
         - '*.pyc'
+  - mdpo:
+      relative_material_language_selector: true

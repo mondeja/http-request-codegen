@@ -1,7 +1,9 @@
+<!-- mdpo-disable -->
 [![PyPI version][pypi-version-image]][pypi-link]
 [![Test][test-image]][test-link]
 [![Documentation][docs-image]][docs-link]
 [![Coverage status][coverage-image]][coverage-link]
+<!-- mdpo-enable -->
 
 {%
   include-markdown "../README.md"
@@ -17,18 +19,21 @@
 
 ## Installation
 
+<!-- mdpo-disable-next-line -->
 === "pip"
 
     ```bash
     pip install http-request-codegen
     ```
 
+<!-- mdpo-disable-next-line -->
 === "pipenv"
 
     ```bash
     pipenv install http-request-codegen
     ```
 
+<!-- mdpo-disable-next-line -->
 === "source"
 
     ```bash
@@ -37,6 +42,7 @@
     python setup.py install
     ```
 
+<!-- mdpo-disable-next-line -->
 === "development"
 
     ```bash

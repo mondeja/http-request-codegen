@@ -1,0 +1,9 @@
+#
+msgid ""
+msgstr ""
+
+msgid "POST"
+msgstr "POST"
+
+msgid "Permanent link"
+msgstr "Link permanente"
