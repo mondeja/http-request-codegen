@@ -1,5 +1,5 @@
 site_name: http-request-codegen
-site_url: https://mondeja.github.io/http-request-codegen/
+site_url: https://hrcgen.ml/
 site_description: Multilanguage HTTP request code snippet generator.
 site_author: Álvaro Mondéjar Rubio
 
@@ -62,4 +62,5 @@ plugins:
         - '*.py'
         - '*.pyc'
   - mdpo
-  - material-relative-language-selector
+  - material-relative-language-selector:
+      root_domain: true

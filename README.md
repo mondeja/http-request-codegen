@@ -1,6 +1,6 @@
 <h1 align="center">http-request-codegen</h1>
 
-<h2 align="center">Documentation: <a href="https://mondeja.github.io/http-request-codegen">en</a> - <a href="https://mondeja.github.io/http-request-codegen/es/">es</a></h2>
+<h2 align="center">Documentation: <a href="https://hrcgen.ml">en</a> - <a href="https://hrcgen.ml/es/">es</a></h2>
 
 <!--start-intro-->
 **http-request-codegen** generates HTTP request code snippets for different
@@ -20,6 +20,8 @@ Supports the following features:
 - Rendering in one line.
 <!--end-intro-->
 
+---
+
 [![PyPI version][pypi-version-image]][pypi-link]
 [![Test][test-image]][test-link]
 [![Documentation][docs-image]][docs-link]
@@ -30,6 +32,6 @@ Supports the following features:
 [test-image]: https://img.shields.io/github/workflow/status/mondeja/http-request-codegen/CI?label=tests&logo=github
 [test-link]: https://github.com/mondeja/http-request-codegen/actions?query=workflow%3ACI
 [docs-image]: https://img.shields.io/github/workflow/status/mondeja/http-request-codegen/Github%20Pages?label=docs&logo=github
-[docs-link]: https://mondeja.github.io/http-request-codegen
+[docs-link]: https://hrcgen.ml
 [coverage-image]: https://img.shields.io/coveralls/github/mondeja/http-request-codegen?logo=coveralls
 [coverage-link]: https://coveralls.io/github/mondeja/http-request-codegen
