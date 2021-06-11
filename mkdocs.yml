@@ -61,5 +61,5 @@ plugins:
       glob:
         - '*.py'
         - '*.pyc'
-  - mdpo:
-      relative_material_language_selector: true
+  - mdpo
+  - material-relative-language-selector

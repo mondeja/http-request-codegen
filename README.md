@@ -19,3 +19,17 @@ Supports the following features:
 - Custom quotation characters.
 - Rendering in one line.
 <!--end-intro-->
+
+[![PyPI version][pypi-version-image]][pypi-link]
+[![Test][test-image]][test-link]
+[![Documentation][docs-image]][docs-link]
+[![Coverage status][coverage-image]][coverage-link]
+
+[pypi-version-image]: https://img.shields.io/pypi/v/http-request-codegen?label=version
+[pypi-link]: https://pypi.org/project/http-request-codegen
+[test-image]: https://img.shields.io/github/workflow/status/mondeja/http-request-codegen/CI?label=tests&logo=github
+[test-link]: https://github.com/mondeja/http-request-codegen/actions?query=workflow%3ACI
+[docs-image]: https://img.shields.io/github/workflow/status/mondeja/http-request-codegen/Github%20Pages?label=docs&logo=github
+[docs-link]: https://mondeja.github.io/http-request-codegen
+[coverage-image]: https://img.shields.io/coveralls/github/mondeja/http-request-codegen?logo=coveralls
+[coverage-link]: https://coveralls.io/github/mondeja/http-request-codegen

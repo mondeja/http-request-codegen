@@ -61,52 +61,6 @@ msgstr "Demostración"
 msgid "Support"
 msgstr "Soporte"
 
-msgid ""
-"[pypi-version-image]: https://img.shields.io/pypi/v/http-request-"
-"codegen?label=version"
-msgstr ""
-"[pypi-version-image]: https://img.shields.io/pypi/v/http-request-"
-"codegen?label=version"
-
-msgid "[pypi-link]: https://pypi.org/project/http-request-codegen"
-msgstr "[pypi-link]: https://pypi.org/project/http-request-codegen"
-
-msgid ""
-"[test-image]: https://img.shields.io/github/workflow/status/mondeja/http-"
-"request-codegen/CI?label=tests&logo=github"
-msgstr ""
-"[test-image]: https://img.shields.io/github/workflow/status/mondeja/http-"
-"request-codegen/CI?label=tests&logo=github"
-
-msgid ""
-"[test-link]: https://github.com/mondeja/http-request-"
-"codegen/actions?query=workflow%3ACI"
-msgstr ""
-"[test-link]: https://github.com/mondeja/http-request-"
-"codegen/actions?query=workflow%3ACI"
-
-msgid ""
-"[docs-image]: https://img.shields.io/github/workflow/status/mondeja/http-"
-"request-codegen/Github%20Pages?label=docs&logo=github"
-msgstr ""
-"[docs-image]: https://img.shields.io/github/workflow/status/mondeja/http-"
-"request-codegen/Github%20Pages?label=docs&logo=github"
-
-msgid "[docs-link]: https://mondeja.github.io/http-request-codegen"
-msgstr "[docs-link]: https://mondeja.github.io/http-request-codegen"
-
-msgid ""
-"[coverage-image]: https://img.shields.io/coveralls/github/mondeja/http-"
-"request-codegen?logo=coveralls"
-msgstr ""
-"[coverage-image]: https://img.shields.io/coveralls/github/mondeja/http-"
-"request-codegen?logo=coveralls"
-
-msgid ""
-"[coverage-link]: https://coveralls.io/github/mondeja/http-request-codegen"
-msgstr ""
-"[coverage-link]: https://coveralls.io/github/mondeja/http-request-codegen"
-
 msgid "Javascript"
 msgstr "Javascript"
 
