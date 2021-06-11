@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
-     <loc>https://mondeja.github.io/http-request-codegen/</loc>
+     <loc>https://hrcgen.ml/</loc>
      <lastmod>2021-06-11</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://mondeja.github.io/http-request-codegen/reference/</loc>
+     <loc>https://hrcgen.ml/reference/</loc>
      <lastmod>2021-06-11</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://mondeja.github.io/http-request-codegen/dev/</loc>
+     <loc>https://hrcgen.ml/dev/</loc>
      <lastmod>2021-06-11</lastmod>
      <changefreq>daily</changefreq>
     </url>

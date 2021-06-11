@@ -1,6 +1,6 @@
 var ORIGINAL_LANG = "en";
 
-var PATH_SPLITTER_INDEX = false ? 1 : 2;
+var PATH_SPLITTER_INDEX = true ? 1 : 2;
 
 var getCurrentLang = function() {
   var pathSplit = window.location.pathname.split("/");
