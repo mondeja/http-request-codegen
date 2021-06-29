@@ -1,5 +1,7 @@
 '''Utilities for Python HTTP request generators.'''
 
+# editorconfig-checker-disable-file
+
 from http_request_codegen.hrc_string import (
     escape_double_quote,
     escape_single_quote,
@@ -28,12 +30,12 @@ def validate_python_identifier(value):
         >>> validate_python_identifier('_hello')
         >>> validate_python_identifier('123')
         Traceback (most recent call last):
-          ...
+        ...
         ValueError: '123' is not a valid Python identifier
 
         >>> validate_python_identifier(123)
         Traceback (most recent call last):
-          ...
+        ...
         ValueError: '123' is not a valid Python identifier
     '''
     try:
@@ -59,7 +61,7 @@ def validate_quote_character(char):
         >>> validate_quote_character('"')
         >>> validate_quote_character('1')
         Traceback (most recent call last):
-          ...
+        ...
         ValueError: '1' is not a valid Python quotation character
     '''
     if char not in VALID_QUOTE_CHARS:
@@ -89,7 +91,7 @@ def escape_quote_func_by_quote_char(char):
 
         >>> escape_quote_func_by_quote_char("?")
         Traceback (most recent call last):
-          ...
+        ...
         ValueError: '?' is an invalid Python quotation character
 
     Returns:
@@ -129,17 +131,17 @@ def escape_by_quote(string, char):
 
         >>> escape_by_quote(12, '"')
         Traceback (most recent call last):
-          ...
+        ...
         TypeError: The value '12' can not be escaped because is not a string
 
         >>> escape_by_quote('I need escape of ? character.', '?')
         Traceback (most recent call last):
-          ...
+        ...
         ValueError: '?' is an invalid Python quotation character
 
         >>> escape_by_quote(12, '?')
         Traceback (most recent call last):
-          ...
+        ...
         ValueError: '?' is an invalid Python quotation character
 
     Returns:
@@ -182,7 +184,7 @@ def kwarg_definition(kwarg_name, value, indent=DEFAULT_INDENT, **kwargs):
 
         >>> print(kwarg_definition(123, 'a'))
         Traceback (most recent call last):
-          ...
+        ...
         ValueError: '123' is not a valid Python identifier
 
     Returns:
@@ -247,15 +249,15 @@ def kwarg_definition_str_valued(
         foo="bar"
         >>> print(kwarg_definition_str_valued('123', 'bar'))
         Traceback (most recent call last):
-          ...
+        ...
         ValueError: '123' is not a valid Python identifier
         >>> print(kwarg_definition_str_valued('foo', 'bar', quote_char='?'))
         Traceback (most recent call last):
-          ...
+        ...
         ValueError: '?' is an invalid Python quotation character
         >>> print(kwarg_definition_str_valued('foo', 'bar', quote_char=123))
         Traceback (most recent call last):
-          ...
+        ...
         ValueError: '123' is an invalid Python quotation character
 
     Returns:
