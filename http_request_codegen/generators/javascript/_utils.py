@@ -40,17 +40,17 @@ def escape_by_quote(string, char):
 
         >>> escape_by_quote(12, '"')
         Traceback (most recent call last):
-          ...
+        ...
         TypeError: The value '12' can not be escaped because is not a string
 
         >>> escape_by_quote('I need escape of ? character.', '?')
         Traceback (most recent call last):
-          ...
+        ...
         ValueError: '?' is an invalid Javascript quotation character
 
         >>> escape_by_quote(12, '?')
         Traceback (most recent call last):
-          ...
+        ...
         ValueError: '?' is an invalid Javascript quotation character
 
     Returns:

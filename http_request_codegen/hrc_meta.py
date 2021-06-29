@@ -47,7 +47,7 @@ def function_has_kwarg(func, kwarg_name):
 
         >>> function_has_kwarg('bar', 'foo')
         Traceback (most recent call last):
-          ...
+        ...
         TypeError: function or method was expected, got str
 
         >>> def function_with_kwarg_def_123_valued(foo=123):

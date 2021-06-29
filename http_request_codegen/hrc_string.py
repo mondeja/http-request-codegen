@@ -67,7 +67,7 @@ def lazy_string(string, seed=None, string_func_path=False):
         ...     return func_returning_itself
         >>> result = lazy_string(func_returning_itself)
         Traceback (most recent call last):
-          ...
+        ...
         RecursionError: maximum recursion depth exceeded in comparison
 
         >>> # Lambda input
@@ -200,7 +200,7 @@ def escape_single_quote(value):
         Hello I neeed two \\'\\' escapes.
         >>> print(escape_single_quote(1))
         Traceback (most recent call last):
-          ...
+        ...
         TypeError: The value '1' can not be escaped because is not a string
 
     Returns:
@@ -231,7 +231,7 @@ def escape_double_quote(value):
         Hello I neeed two \\"\\" escapes.
         >>> print(escape_double_quote(1))
         Traceback (most recent call last):
-          ...
+        ...
         TypeError: The value '1' can not be escaped because is not a string
 
     Returns:
@@ -262,7 +262,7 @@ def escape_backtick(value):
         Hello I neeed two \\`\\` escapes.
         >>> print(escape_backtick(1))
         Traceback (most recent call last):
-          ...
+        ...
         TypeError: The value '1' can not be escaped because is not a string
 
     Returns:
