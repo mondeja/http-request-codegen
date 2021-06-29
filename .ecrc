@@ -1,0 +1,4 @@
+{
+  "IgnoreDefaults": false,
+  "Exclude": ["\\.expect\\.txt$"]
+}
