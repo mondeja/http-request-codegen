@@ -35,7 +35,7 @@ repos:
           - flake8-print
           - flake8-implicit-str-concat
   - repo: https://github.com/mondeja/pre-commit-hooks
-    rev: v1.5.1
+    rev: v1.5.2
     hooks:
       - id: dev-extras-required
   - repo: https://github.com/PyCQA/isort
@@ -67,7 +67,7 @@ repos:
           - -config=https://github.com/mondeja/repo-stream-config
           - -updater=upstream
   - repo: https://github.com/mondeja/pre-commit-hooks
-    rev: v1.5.1
+    rev: v1.5.2
     hooks:
       - id: dev-extras-required
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
