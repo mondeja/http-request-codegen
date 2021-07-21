@@ -37,6 +37,7 @@ repos:
   - repo: https://github.com/mondeja/pre-commit-hooks
     rev: v1.5.1
     hooks:
+      - id: root-editorconfig-required
       - id: dev-extras-required
   - repo: https://github.com/PyCQA/isort
     rev: 5.9.1
