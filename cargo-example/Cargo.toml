@@ -1,0 +1,15 @@
+[package]
+name = "my-package"
+version = "0.1.0"
+edition = "2018"
+
+[dependencies]
+actix-web = "4.0.0-beta.9"
+sqlx = { version = "0.5.7", features = ["macros", "postgres", "runtime-async-std-native-tls"] }
+serde = "1.0.117"
+serde_json = "1.0.59"
+anyhow = "1.0.44"
+
+[dev-dependencies]
+rstest = "0.11.0"
+async-std = {version = "1.9.0", features = ["attributes"]}

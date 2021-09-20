@@ -8,7 +8,7 @@ except ImportError:
 import json
 from collections import OrderedDict
 
-from http_request_codegen.generators.bash._utils import (
+from http_request_codegen.codegen.bash import (
     DEFAULT_INDENT,
     DEFAULT_QUOTE_CHAR,
     DEFAULT_WRAP,

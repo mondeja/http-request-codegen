@@ -5,6 +5,7 @@
 package.json
 package-lock.json
 /node_modules/
+cargo-example/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

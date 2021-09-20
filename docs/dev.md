@@ -153,7 +153,7 @@ argument, must be rendered as if ``oneline=True``.
 !!! tip
 
     You can see an example of this type of implementation at
-    ``http_request_codegen.generators.python.requests::get`` function.
+    ``http_request_codegen.http.generators.python.requests::get`` function.
 
 But other implementations could be rendered in multiples lines regardless the
 ``wrap`` argument value.
@@ -176,7 +176,7 @@ length before build their output.
 !!! tip
 
     You can see an example of this type of implementation at
-    ``http_request_codegen.generators.javascript.fetch::get`` function.
+    ``http_request_codegen.http.generators.javascript.fetch::get`` function.
 
 In the first case, you need to iterate over ``parameters``, ``headers`` and
 ``kwargs`` arguments to compute the expected length, then compare the expected

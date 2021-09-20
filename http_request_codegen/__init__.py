@@ -2,13 +2,13 @@ from http_request_codegen.hrc_api import (
     generate_http_request_code,
     generate_http_request_md_fenced_code_block,
 )
-from http_request_codegen.hrc_support import (
-    supported_features,
-    supported_methods,
-)
 from http_request_codegen.hrc_valuer import (
     lazy_name_by_parameter,
     lazy_value_by_parameter,
+)
+from http_request_codegen.http.support import (
+    supported_features,
+    supported_methods,
 )
 
 

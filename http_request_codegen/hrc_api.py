@@ -1,10 +1,10 @@
 '''http-request-codegen public API.'''
 
-from http_request_codegen.hrc_factory import (
+from http_request_codegen.hrc_string import lazy_string
+from http_request_codegen.http.factory import (
     DEFAULT_LANGUAGE,
     get_func_by_lang_impl_method,
 )
-from http_request_codegen.hrc_string import lazy_string
 
 
 def generate_http_request_code(

@@ -2,7 +2,7 @@
 
 from collections import OrderedDict
 
-from http_request_codegen.generators.python._utils import (
+from http_request_codegen.codegen.python import (
     DEFAULT_INDENT,
     DEFAULT_QUOTE_CHAR,
     DEFAULT_WRAP,

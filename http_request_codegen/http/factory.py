@@ -4,25 +4,25 @@ import importlib
 import os
 from functools import lru_cache
 
-from http_request_codegen.hrc_http import HTTP_METHODS
+from http_request_codegen.http import (
+    METHODS as HTTP_METHODS,
+    http_generators_dir,
+)
 
 
 DEFAULT_LANGUAGE = 'python'
 DEFAULT_IMPLEMENTATION = 'requests'
-
-GENERATORS_DIR = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), 'generators'),
-)
+DEFAULT_METHOD = 'get'
 
 
 @lru_cache(maxsize=1)
 def get_generators_modules_by_lang_impl():
     response = {}
 
-    for fname in os.listdir(GENERATORS_DIR):
+    for fname in os.listdir(http_generators_dir):
         if fname.startswith('_'):
             continue
-        fpath = os.path.join(GENERATORS_DIR, fname)
+        fpath = os.path.join(http_generators_dir, fname)
         if not os.path.isdir(fpath):
             continue
         response[fname] = {}
@@ -32,18 +32,22 @@ def get_generators_modules_by_lang_impl():
                 continue
             modname = modfname.rstrip('.py')
             response[fname][modname] = (
-                'http_request_codegen.generators.%s.%s'
+                'http_request_codegen.http.generators.%s.%s'
             ) % (fname, modname)
     return response
 
 
 @lru_cache(maxsize=32)
-def get_func_by_lang_impl_method(language=None, impl=None, method=None):
+def get_func_by_lang_impl_method(
+        language=None,
+        impl=None,
+        method=None,
+):
     generators_by_lang_impl = get_generators_modules_by_lang_impl()
 
     if language is None:
         if impl is None:
-            _language = 'python'
+            _language = DEFAULT_LANGUAGE
         else:
             _language = None
             for __lang, __imps in generators_by_lang_impl.items():
@@ -54,7 +58,7 @@ def get_func_by_lang_impl_method(language=None, impl=None, method=None):
                 if _language is not None:
                     break
             if _language is None:
-                _language = 'python'
+                _language = DEFAULT_LANGUAGE
     else:
         _language = language
     try:
@@ -86,7 +90,7 @@ def get_func_by_lang_impl_method(language=None, impl=None, method=None):
     module = importlib.import_module(impl_modpath)
 
     if method is None:
-        _method = 'get'
+        _method = DEFAULT_METHOD
     else:
         _method = method.lower()
     try:

@@ -9,7 +9,7 @@ try:
 except ImportError:
     from urllib import urlencode
 
-from http_request_codegen.generators.javascript._utils import (
+from http_request_codegen.codegen.javascript import (
     DEFAULT_INDENT,
     DEFAULT_QUOTE_CHAR,
     DEFAULT_WRAP,

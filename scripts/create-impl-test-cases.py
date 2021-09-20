@@ -8,7 +8,7 @@ import shutil
 import sys
 
 from http_request_codegen import __version__, generate_http_request_code
-from http_request_codegen.hrc_factory import (
+from http_request_codegen.http.factory import (
     DEFAULT_IMPLEMENTATION,
     DEFAULT_LANGUAGE,
 )

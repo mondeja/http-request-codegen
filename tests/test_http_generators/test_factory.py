@@ -5,13 +5,13 @@ from types import ModuleType
 
 import pytest
 
-from http_request_codegen.generators.python.requests import (
-    get as requests_get,
-    post as requests_post,
-)
-from http_request_codegen.hrc_factory import (
+from http_request_codegen.http.factory import (
     get_func_by_lang_impl_method,
     get_generators_modules_by_lang_impl,
+)
+from http_request_codegen.http.generators.python.requests import (
+    get as requests_get,
+    post as requests_post,
 )
 
 
@@ -80,7 +80,7 @@ def test_get_generators_modules_by_lang_impl():
             assert impl
             assert isinstance(impl, str)
             assert isinstance(modpath, str)
-            assert 'http_request_codegen.generators.' in modpath
+            assert 'http_request_codegen.http.generators.' in modpath
 
             mod = importlib.import_module(modpath)
             assert mod

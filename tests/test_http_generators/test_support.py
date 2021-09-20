@@ -1,11 +1,11 @@
 '''Supports meta functionalities of http-request-codegen.'''
 
 from http_request_codegen import supported_features, supported_methods
-from http_request_codegen.hrc_factory import (
+from http_request_codegen.http import METHODS as HTTP_METHODS
+from http_request_codegen.http.factory import (
     DEFAULT_IMPLEMENTATION,
     DEFAULT_LANGUAGE,
 )
-from http_request_codegen.hrc_http import HTTP_METHODS
 
 
 def test_supported_features():
