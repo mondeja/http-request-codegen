@@ -2,6 +2,7 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 
 import pytest
@@ -21,7 +22,7 @@ from http_request_codegen.modelservice.users.rust.actix4_sqlx_postgres import (
             {
                 re.compile(r'^migrations/\d+_users\.up\.sql$'): (
                     '''create table if not exists users (
-    id serial,
+    id serial primary key,
     username varchar(128) not null,
     password varchar(512) not null,
     email varchar(256) not null
@@ -41,7 +42,7 @@ from http_request_codegen.modelservice.users.rust.actix4_sqlx_postgres import (
             {
                 re.compile(r'^migrations/\d+_users\.up\.sql$'): (
                     '''create table if not exists foo_table_name (
-    id serial,
+    id serial primary key,
     password varchar(512) not null,
     enabled boolean default true not null
 );
@@ -161,9 +162,8 @@ async fn main() -> std::io::Result<()> {
             )
             with open(os.path.join(tmpdirname, filename), 'w') as f:
                 f.write(content)
-                print(filename)
-                print(content)
-                print('-------------------------------')
+                sys.stdout.write(f'------------------------------- {filename}')
+                sys.stdout.write(f'\n{content}')
 
         with temporal_env_var(
             'DATABASE_URL',
