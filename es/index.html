@@ -19,7 +19,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
         <span class=s1>&#39;Content-Type&#39;</span><span class=p>:</span> <span class=s1>&#39;application/json&#39;</span><span class=p>,</span>
         <span class=s1>&#39;Accept-Language&#39;</span><span class=p>:</span> <span class=s1>&#39;*&#39;</span>
     <span class=p>},</span>
-    <span class=n>seed</span><span class=o>=</span><span class=mi>5843</span><span class=p>,</span>
+    <span class=n>seed</span><span class=o>=</span><span class=mi>3273</span><span class=p>,</span>
     <span class=n>parameters</span><span class=o>=</span><span class=p>[</span>
         <span class=p>{</span>
             <span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;fixed-value&#39;</span><span class=p>,</span>
@@ -115,14 +115,14 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
 </code></pre></div> <p>Por supuesto, puedes personalizar esta inicialización para otros entornos. Por ejemplo, hacer un polyfill a la API usando <a href=https://github.com/github/fetch>whatwg</a> como módulo ESM usando <code>setup='import \'whatwg-fetch\';\n\n'</code>:</p> <div class=highlight><pre><span></span><code><span class=k>import</span> <span class=s1>&#39;whatwg-fetch&#39;</span><span class=p>;</span>
 </code></pre></div> </div> <input id=__tabbed_5_2 name=__tabbed_5 type=radio><label for=__tabbed_5_2>Salida</label><div class=tabbed-content> <div class=highlight><pre><span></span><code><span class=nx>fetch</span><span class=p>(</span>
   <span class=s1>&#39;https://github.com/mondeja/http-request-codegen?fixed-value=3&amp;dinamic-value&#39;</span>
-  <span class=o>+</span> <span class=s1>&#39;-by-iterable=1&amp;dinamic-value-by-function=2&amp;random-values-by-iterable=foo&amp;&#39;</span>
-  <span class=o>+</span> <span class=s1>&#39;random-values-by-function=2&amp;random-values-by-function-path=2&amp;random-value&#39;</span>
-  <span class=o>+</span> <span class=s1>&#39;-by-faker-provider-function-path=Copywriter%2C+advertising&amp;random-string=&#39;</span>
-  <span class=o>+</span> <span class=s1>&#39;yourself&amp;random-integer=-29481&amp;random-integer-in-range=3&amp;random-float=-47&#39;</span>
-  <span class=o>+</span> <span class=s1>&#39;508.23735615247&amp;random-rounded-float-in-range=1.693&amp;random-boolean=true&amp;r&#39;</span>
-  <span class=o>+</span> <span class=s1>&#39;andom-boolean-nullable=true&amp;random-type=ahead&amp;random-unique-identifier=d7&#39;</span>
-  <span class=o>+</span> <span class=s1>&#39;b24b9f80104aa7919aa58822c7ae6d&amp;random-id=18028&amp;random-name-from-iterable=&#39;</span>
-  <span class=o>+</span> <span class=s1>&#39;story&amp;random-name-from-function=conference&#39;</span><span class=p>,</span>
+  <span class=o>+</span> <span class=s1>&#39;-by-iterable=2&amp;dinamic-value-by-function=7&amp;random-values-by-iterable=bar&amp;&#39;</span>
+  <span class=o>+</span> <span class=s1>&#39;random-values-by-function=7&amp;random-values-by-function-path=7&amp;random-value&#39;</span>
+  <span class=o>+</span> <span class=s1>&#39;-by-faker-provider-function-path=Regulatory+affairs+officer&amp;random-string&#39;</span>
+  <span class=o>+</span> <span class=s1>&#39;=really&amp;random-integer=63385&amp;random-integer-in-range=5&amp;random-float=-1075&#39;</span>
+  <span class=o>+</span> <span class=s1>&#39;.3128345962905&amp;random-rounded-float-in-range=2.047&amp;random-boolean=false&amp;r&#39;</span>
+  <span class=o>+</span> <span class=s1>&#39;andom-boolean-nullable=false&amp;random-type=group&amp;random-unique-identifier=4&#39;</span>
+  <span class=o>+</span> <span class=s1>&#39;053c2718a99495bb4c63a462b550528&amp;random-id=64461&amp;random-name-by-iterable=l&#39;</span>
+  <span class=o>+</span> <span class=s1>&#39;ook&amp;random-name-by-function=successful&#39;</span><span class=p>,</span>
   <span class=p>{</span>
     <span class=nx>headers</span><span class=o>:</span> <span class=p>{</span>
       <span class=s1>&#39;Content-Type&#39;</span><span class=o>:</span> <span class=s1>&#39;application/json&#39;</span><span class=p>,</span>
@@ -147,7 +147,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
         <span class=s1>&#39;Accept-Language&#39;</span><span class=p>:</span> <span class=s1>&#39;*&#39;</span><span class=p>,</span>
         <span class=s1>&#39;Accept-Charset&#39;</span><span class=p>:</span> <span class=s1>&#39;utf-8&#39;</span>
     <span class=p>},</span>
-    <span class=n>seed</span><span class=o>=</span><span class=mi>5843</span><span class=p>,</span>
+    <span class=n>seed</span><span class=o>=</span><span class=mi>3273</span><span class=p>,</span>
     <span class=n>parameters</span><span class=o>=</span><span class=p>[</span>
         <span class=p>{</span>
             <span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;fixed-value&#39;</span><span class=p>,</span>
@@ -246,24 +246,24 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
     <span class=nx>method</span><span class=o>:</span> <span class=s1>&#39;POST&#39;</span><span class=p>,</span>
     <span class=nx>body</span><span class=o>:</span> <span class=ow>new</span> <span class=nx>URLSearchParams</span><span class=p>({</span>
       <span class=s1>&#39;fixed-value&#39;</span><span class=o>:</span> <span class=s1>&#39;3&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;dinamic-value-by-iterable&#39;</span><span class=o>:</span> <span class=s1>&#39;1&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;dinamic-value-by-function&#39;</span><span class=o>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-values-by-iterable&#39;</span><span class=o>:</span> <span class=s1>&#39;foo&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-values-by-function&#39;</span><span class=o>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-values-by-function-path&#39;</span><span class=o>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-value-by-faker-provider-function-path&#39;</span><span class=o>:</span> <span class=s1>&#39;Occupational therapist&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-string&#39;</span><span class=o>:</span> <span class=s1>&#39;international&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-integer&#39;</span><span class=o>:</span> <span class=s1>&#39;-29481&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-integer-in-range&#39;</span><span class=o>:</span> <span class=s1>&#39;3&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-float&#39;</span><span class=o>:</span> <span class=s1>&#39;-47508.23735615247&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-rounded-float-in-range&#39;</span><span class=o>:</span> <span class=s1>&#39;1.693&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-boolean&#39;</span><span class=o>:</span> <span class=s1>&#39;true&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-boolean-nullable&#39;</span><span class=o>:</span> <span class=s1>&#39;true&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-type&#39;</span><span class=o>:</span> <span class=s1>&#39;leave&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-unique-identifier&#39;</span><span class=o>:</span> <span class=s1>&#39;7220a930ec9f42609a358afe03e687c4&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-id&#39;</span><span class=o>:</span> <span class=s1>&#39;18028&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-name-from-iterable&#39;</span><span class=o>:</span> <span class=s1>&#39;never&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-name-from-function&#39;</span><span class=o>:</span> <span class=s1>&#39;action&#39;</span>
+      <span class=s1>&#39;dinamic-value-by-iterable&#39;</span><span class=o>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;dinamic-value-by-function&#39;</span><span class=o>:</span> <span class=s1>&#39;7&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-values-by-iterable&#39;</span><span class=o>:</span> <span class=s1>&#39;bar&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-values-by-function&#39;</span><span class=o>:</span> <span class=s1>&#39;7&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-values-by-function-path&#39;</span><span class=o>:</span> <span class=s1>&#39;7&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-value-by-faker-provider-function-path&#39;</span><span class=o>:</span> <span class=s1>&#39;Chemical engineer&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-string&#39;</span><span class=o>:</span> <span class=s1>&#39;nearly&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-integer&#39;</span><span class=o>:</span> <span class=s1>&#39;63385&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-integer-in-range&#39;</span><span class=o>:</span> <span class=s1>&#39;5&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-float&#39;</span><span class=o>:</span> <span class=s1>&#39;-1075.3128345962905&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-rounded-float-in-range&#39;</span><span class=o>:</span> <span class=s1>&#39;2.047&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-boolean&#39;</span><span class=o>:</span> <span class=s1>&#39;false&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-boolean-nullable&#39;</span><span class=o>:</span> <span class=s1>&#39;false&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-type&#39;</span><span class=o>:</span> <span class=s1>&#39;describe&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-unique-identifier&#39;</span><span class=o>:</span> <span class=s1>&#39;48a3b49950e140b0883e135d2208e592&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-id&#39;</span><span class=o>:</span> <span class=s1>&#39;64461&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-name-by-iterable&#39;</span><span class=o>:</span> <span class=s1>&#39;its&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-name-by-function&#39;</span><span class=o>:</span> <span class=s1>&#39;decide&#39;</span>
     <span class=p>}),</span>
     <span class=nx>headers</span><span class=o>:</span> <span class=p>{</span>
       <span class=s1>&#39;Accept-Language&#39;</span><span class=o>:</span> <span class=s1>&#39;*&#39;</span><span class=p>,</span>
@@ -286,7 +286,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
         <span class=s1>&#39;Accept-Language&#39;</span><span class=p>:</span> <span class=s1>&#39;*&#39;</span><span class=p>,</span>
         <span class=s1>&#39;Accept-Charset&#39;</span><span class=p>:</span> <span class=s1>&#39;utf-8&#39;</span>
     <span class=p>},</span>
-    <span class=n>seed</span><span class=o>=</span><span class=mi>5843</span><span class=p>,</span>
+    <span class=n>seed</span><span class=o>=</span><span class=mi>3273</span><span class=p>,</span>
     <span class=n>files</span><span class=o>=</span><span class=p>{</span>
         <span class=s1>&#39;fixed-filepath&#39;</span><span class=p>:</span> <span class=s1>&#39;/tmp/foo.txt&#39;</span><span class=p>,</span>
         <span class=s1>&#39;random-filepath&#39;</span><span class=p>:</span> <span class=kc>None</span><span class=p>,</span>
@@ -325,9 +325,9 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
 <span class=p>);</span>
 <span class=nx>formData</span><span class=p>.</span><span class=nx>append</span><span class=p>(</span>
   <span class=s1>&#39;random-filepath&#39;</span><span class=p>,</span>
-  <span class=nx>fs</span><span class=p>.</span><span class=nx>createReadStream</span><span class=p>(</span><span class=s1>&#39;/human/receive.wav&#39;</span><span class=p>),</span>
+  <span class=nx>fs</span><span class=p>.</span><span class=nx>createReadStream</span><span class=p>(</span><span class=s1>&#39;/sort/pull.xls&#39;</span><span class=p>),</span>
   <span class=p>{</span>
-    <span class=nx>filename</span><span class=o>:</span> <span class=s1>&#39;receive.wav&#39;</span>
+    <span class=nx>filename</span><span class=o>:</span> <span class=s1>&#39;pull.xls&#39;</span>
   <span class=p>}</span>
 <span class=p>);</span>
 <span class=nx>formData</span><span class=p>.</span><span class=nx>append</span><span class=p>(</span>
@@ -348,17 +348,17 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
 <span class=p>);</span>
 <span class=nx>formData</span><span class=p>.</span><span class=nx>append</span><span class=p>(</span>
   <span class=s1>&#39;random-filepath-content-type&#39;</span><span class=p>,</span>
-  <span class=nx>fs</span><span class=p>.</span><span class=nx>createReadStream</span><span class=p>(</span><span class=s1>&#39;/also/financial.txt&#39;</span><span class=p>),</span>
+  <span class=nx>fs</span><span class=p>.</span><span class=nx>createReadStream</span><span class=p>(</span><span class=s1>&#39;/yes/it.html&#39;</span><span class=p>),</span>
   <span class=p>{</span>
-    <span class=nx>filename</span><span class=o>:</span> <span class=s1>&#39;financial.txt&#39;</span><span class=p>,</span>
+    <span class=nx>filename</span><span class=o>:</span> <span class=s1>&#39;it.html&#39;</span><span class=p>,</span>
     <span class=nx>contentType</span><span class=o>:</span> <span class=s1>&#39;text/plain&#39;</span>
   <span class=p>}</span>
 <span class=p>);</span>
 <span class=nx>formData</span><span class=p>.</span><span class=nx>append</span><span class=p>(</span>
   <span class=s1>&#39;random-filepath-ct-header&#39;</span><span class=p>,</span>
-  <span class=nx>fs</span><span class=p>.</span><span class=nx>createReadStream</span><span class=p>(</span><span class=s1>&#39;/beat/board.jpeg&#39;</span><span class=p>),</span>
+  <span class=nx>fs</span><span class=p>.</span><span class=nx>createReadStream</span><span class=p>(</span><span class=s1>&#39;/they/hot.numbers&#39;</span><span class=p>),</span>
   <span class=p>{</span>
-    <span class=nx>filename</span><span class=o>:</span> <span class=s1>&#39;board.jpeg&#39;</span><span class=p>,</span>
+    <span class=nx>filename</span><span class=o>:</span> <span class=s1>&#39;hot.numbers&#39;</span><span class=p>,</span>
     <span class=nx>contentType</span><span class=o>:</span> <span class=s1>&#39;text/csv&#39;</span>
   <span class=p>}</span>
 <span class=p>);</span>
@@ -390,7 +390,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
     <span class=n>headers</span><span class=o>=</span><span class=p>{</span>
         <span class=s1>&#39;Content-Type&#39;</span><span class=p>:</span> <span class=s1>&#39;application/json&#39;</span>
     <span class=p>},</span>
-    <span class=n>seed</span><span class=o>=</span><span class=mi>5843</span><span class=p>,</span>
+    <span class=n>seed</span><span class=o>=</span><span class=mi>3273</span><span class=p>,</span>
     <span class=n>parameters</span><span class=o>=</span><span class=p>[</span>
         <span class=p>{</span>
             <span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;fixed-value&#39;</span><span class=p>,</span>
@@ -489,24 +489,24 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
     <span class=nx>method</span><span class=o>:</span> <span class=s1>&#39;POST&#39;</span><span class=p>,</span>
     <span class=nx>body</span><span class=o>:</span> <span class=nb>JSON</span><span class=p>.</span><span class=nx>stringify</span><span class=p>({</span>
       <span class=s1>&#39;fixed-value&#39;</span><span class=o>:</span> <span class=s1>&#39;3&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;dinamic-value-by-iterable&#39;</span><span class=o>:</span> <span class=s1>&#39;1&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;dinamic-value-by-function&#39;</span><span class=o>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-values-by-iterable&#39;</span><span class=o>:</span> <span class=s1>&#39;foo&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-values-by-function&#39;</span><span class=o>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-values-by-function-path&#39;</span><span class=o>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-value-by-faker-provider-function-path&#39;</span><span class=o>:</span> <span class=s1>&#39;Chief Strategy Officer&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-string&#39;</span><span class=o>:</span> <span class=s1>&#39;building&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-integer&#39;</span><span class=o>:</span> <span class=s1>&#39;-29481&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-integer-in-range&#39;</span><span class=o>:</span> <span class=s1>&#39;3&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-float&#39;</span><span class=o>:</span> <span class=s1>&#39;-47508.23735615247&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-rounded-float-in-range&#39;</span><span class=o>:</span> <span class=s1>&#39;1.693&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-boolean&#39;</span><span class=o>:</span> <span class=s1>&#39;true&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-boolean-nullable&#39;</span><span class=o>:</span> <span class=s1>&#39;true&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-type&#39;</span><span class=o>:</span> <span class=s1>&#39;set&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-unique-identifier&#39;</span><span class=o>:</span> <span class=s1>&#39;023b748bd67f4502b4c51e3fdd846364&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-id&#39;</span><span class=o>:</span> <span class=s1>&#39;18028&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-name-from-iterable&#39;</span><span class=o>:</span> <span class=s1>&#39;table&#39;</span><span class=p>,</span>
-      <span class=s1>&#39;random-name-from-function&#39;</span><span class=o>:</span> <span class=s1>&#39;beat&#39;</span>
+      <span class=s1>&#39;dinamic-value-by-iterable&#39;</span><span class=o>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;dinamic-value-by-function&#39;</span><span class=o>:</span> <span class=s1>&#39;7&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-values-by-iterable&#39;</span><span class=o>:</span> <span class=s1>&#39;bar&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-values-by-function&#39;</span><span class=o>:</span> <span class=s1>&#39;7&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-values-by-function-path&#39;</span><span class=o>:</span> <span class=s1>&#39;7&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-value-by-faker-provider-function-path&#39;</span><span class=o>:</span> <span class=s1>&#39;Town planner&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-string&#39;</span><span class=o>:</span> <span class=s1>&#39;interview&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-integer&#39;</span><span class=o>:</span> <span class=s1>&#39;63385&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-integer-in-range&#39;</span><span class=o>:</span> <span class=s1>&#39;5&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-float&#39;</span><span class=o>:</span> <span class=s1>&#39;-1075.3128345962905&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-rounded-float-in-range&#39;</span><span class=o>:</span> <span class=s1>&#39;2.047&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-boolean&#39;</span><span class=o>:</span> <span class=s1>&#39;false&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-boolean-nullable&#39;</span><span class=o>:</span> <span class=s1>&#39;false&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-type&#39;</span><span class=o>:</span> <span class=s1>&#39;process&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-unique-identifier&#39;</span><span class=o>:</span> <span class=s1>&#39;c2ae6c8110904fb4a8b5fc1fe4f15885&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-id&#39;</span><span class=o>:</span> <span class=s1>&#39;64461&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-name-by-iterable&#39;</span><span class=o>:</span> <span class=s1>&#39;much&#39;</span><span class=p>,</span>
+      <span class=s1>&#39;random-name-by-function&#39;</span><span class=o>:</span> <span class=s1>&#39;girl&#39;</span>
     <span class=p>}),</span>
     <span class=nx>headers</span><span class=o>:</span> <span class=p>{</span>
       <span class=s1>&#39;Content-Type&#39;</span><span class=o>:</span> <span class=s1>&#39;application/json&#39;</span>
@@ -527,7 +527,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
     <span class=n>headers</span><span class=o>=</span><span class=p>{</span>
         <span class=s1>&#39;Content-Type&#39;</span><span class=p>:</span> <span class=s1>&#39;text/plain&#39;</span>
     <span class=p>},</span>
-    <span class=n>seed</span><span class=o>=</span><span class=mi>5843</span><span class=p>,</span>
+    <span class=n>seed</span><span class=o>=</span><span class=mi>3273</span><span class=p>,</span>
     <span class=n>parameters</span><span class=o>=</span><span class=p>[</span>
         <span class=p>{</span>
             <span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;random-values-by-iterable&#39;</span><span class=p>,</span>
@@ -541,7 +541,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
   <span class=s1>&#39;https://github.com/mondeja/http-request-codegen&#39;</span><span class=p>,</span>
   <span class=p>{</span>  
     <span class=nx>method</span><span class=o>:</span> <span class=s1>&#39;POST&#39;</span><span class=p>,</span>
-    <span class=nx>body</span><span class=o>:</span> <span class=s1>&#39;foo&#39;</span><span class=p>,</span>
+    <span class=nx>body</span><span class=o>:</span> <span class=s1>&#39;bar&#39;</span><span class=p>,</span>
     <span class=nx>headers</span><span class=o>:</span> <span class=p>{</span>
       <span class=s1>&#39;Content-Type&#39;</span><span class=o>:</span> <span class=s1>&#39;text/plain&#39;</span>
     <span class=p>}</span>
@@ -564,7 +564,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
         <span class=s1>&#39;Content-Type&#39;</span><span class=p>:</span> <span class=s1>&#39;application/json&#39;</span><span class=p>,</span>
         <span class=s1>&#39;Accept-Language&#39;</span><span class=p>:</span> <span class=s1>&#39;*&#39;</span>
     <span class=p>},</span>
-    <span class=n>seed</span><span class=o>=</span><span class=mi>5843</span><span class=p>,</span>
+    <span class=n>seed</span><span class=o>=</span><span class=mi>3273</span><span class=p>,</span>
     <span class=n>parameters</span><span class=o>=</span><span class=p>[</span>
         <span class=p>{</span>
             <span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;fixed-value&#39;</span><span class=p>,</span>
@@ -657,7 +657,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
 <span class=p>)</span>
 </code></pre></div> <p>Pasa opciones extra al comando 'curl' en el parámetro <code>kwargs</code>. Por ejemplo, para guardar la respuesta en un archivo, pasa <code>kwargs={'-o': 'filename.ext'}</code>:</p> <div class=highlight><pre><span></span><code>curl -o <span class=s2>&quot;filename.ext&quot;</span>
 </code></pre></div> </div> <input id=__tabbed_13_2 name=__tabbed_13 type=radio><label for=__tabbed_13_2>Salida</label><div class=tabbed-content> <div class=highlight><pre><span></span><code>curl <span class=se>\</span>
-    -d <span class=s1>&#39;fixed-value=3&amp;dinamic-value-by-iterable=1&amp;dinamic-value-by-function=2&amp;random-values-by-iterable=foo&amp;random-values-by-function=2&amp;random-values-by-function-path=2&amp;random-value-by-faker-provider-function-path=Field+trials+officer&amp;random-string=line&amp;random-integer=-29481&amp;random-integer-in-range=3&amp;random-float=-47508.23735615247&amp;random-rounded-float-in-range=1.693&amp;random-boolean=true&amp;random-boolean-nullable=true&amp;random-type=offer&amp;random-unique-identifier=9eabe395c4034bc7a34e3bb4bbd1c077&amp;random-id=18028&amp;random-name-from-iterable=stock&amp;random-name-from-function=rock&#39;</span> <span class=se>\</span>
+    -d <span class=s1>&#39;fixed-value=3&amp;dinamic-value-by-iterable=2&amp;dinamic-value-by-function=7&amp;random-values-by-iterable=bar&amp;random-values-by-function=7&amp;random-values-by-function-path=7&amp;random-value-by-faker-provider-function-path=Best+boy&amp;random-string=view&amp;random-integer=63385&amp;random-integer-in-range=5&amp;random-float=-1075.3128345962905&amp;random-rounded-float-in-range=2.047&amp;random-boolean=false&amp;random-boolean-nullable=false&amp;random-type=remember&amp;random-unique-identifier=f8ee90a632a24048aecb2ba10b3a5d60&amp;random-id=64461&amp;random-name-by-iterable=real&amp;random-name-by-function=number&#39;</span> <span class=se>\</span>
     -H <span class=s1>&#39;Content-Type: application/json&#39;</span> <span class=se>\</span>
     -H <span class=s1>&#39;Accept-Language: *&#39;</span> <span class=se>\</span>
     https://github.com/mondeja/http-request-codegen
@@ -674,7 +674,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
         <span class=s1>&#39;Accept-Language&#39;</span><span class=p>:</span> <span class=s1>&#39;*&#39;</span><span class=p>,</span>
         <span class=s1>&#39;Accept-Charset&#39;</span><span class=p>:</span> <span class=s1>&#39;utf-8&#39;</span>
     <span class=p>},</span>
-    <span class=n>seed</span><span class=o>=</span><span class=mi>5843</span><span class=p>,</span>
+    <span class=n>seed</span><span class=o>=</span><span class=mi>3273</span><span class=p>,</span>
     <span class=n>parameters</span><span class=o>=</span><span class=p>[</span>
         <span class=p>{</span>
             <span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;fixed-value&#39;</span><span class=p>,</span>
@@ -767,7 +767,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
 <span class=p>)</span>
 </code></pre></div> </div> <input id=__tabbed_15_2 name=__tabbed_15 type=radio><label for=__tabbed_15_2>Salida</label><div class=tabbed-content> <div class=highlight><pre><span></span><code>curl <span class=se>\</span>
     -X <span class=s1>&#39;POST&#39;</span> <span class=se>\</span>
-    -d <span class=s1>&#39;fixed-value=3&amp;dinamic-value-by-iterable=1&amp;dinamic-value-by-function=2&amp;random-values-by-iterable=foo&amp;random-values-by-function=2&amp;random-values-by-function-path=2&amp;random-value-by-faker-provider-function-path=Health+service+manager&amp;random-string=section&amp;random-integer=-29481&amp;random-integer-in-range=3&amp;random-float=-47508.23735615247&amp;random-rounded-float-in-range=1.693&amp;random-boolean=true&amp;random-boolean-nullable=true&amp;random-type=along&amp;random-unique-identifier=d23aaa5bb7674fa79d54be29575617a3&amp;random-id=18028&amp;random-name-from-iterable=realize&amp;random-name-from-function=since&#39;</span> <span class=se>\</span>
+    -d <span class=s1>&#39;fixed-value=3&amp;dinamic-value-by-iterable=2&amp;dinamic-value-by-function=7&amp;random-values-by-iterable=bar&amp;random-values-by-function=7&amp;random-values-by-function-path=7&amp;random-value-by-faker-provider-function-path=Psychologist%2C+prison+and+probation+services&amp;random-string=page&amp;random-integer=63385&amp;random-integer-in-range=5&amp;random-float=-1075.3128345962905&amp;random-rounded-float-in-range=2.047&amp;random-boolean=false&amp;random-boolean-nullable=false&amp;random-type=now&amp;random-unique-identifier=a0368885205f49f7b86d88fa4699b669&amp;random-id=64461&amp;random-name-by-iterable=and&amp;random-name-by-function=research&#39;</span> <span class=se>\</span>
     -H <span class=s1>&#39;Accept-Language: *&#39;</span> <span class=se>\</span>
     -H <span class=s1>&#39;Accept-Charset: utf-8&#39;</span> <span class=se>\</span>
     https://github.com/mondeja/http-request-codegen
@@ -782,7 +782,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
         <span class=s1>&#39;Accept-Language&#39;</span><span class=p>:</span> <span class=s1>&#39;*&#39;</span><span class=p>,</span>
         <span class=s1>&#39;Accept-Charset&#39;</span><span class=p>:</span> <span class=s1>&#39;utf-8&#39;</span>
     <span class=p>},</span>
-    <span class=n>seed</span><span class=o>=</span><span class=mi>5843</span><span class=p>,</span>
+    <span class=n>seed</span><span class=o>=</span><span class=mi>3273</span><span class=p>,</span>
     <span class=n>files</span><span class=o>=</span><span class=p>{</span>
         <span class=s1>&#39;fixed-filepath&#39;</span><span class=p>:</span> <span class=s1>&#39;/tmp/foo.txt&#39;</span><span class=p>,</span>
         <span class=s1>&#39;random-filepath&#39;</span><span class=p>:</span> <span class=kc>None</span><span class=p>,</span>
@@ -809,11 +809,11 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
 </code></pre></div> </div> <input id=__tabbed_16_2 name=__tabbed_16 type=radio><label for=__tabbed_16_2>Salida</label><div class=tabbed-content> <div class=highlight><pre><span></span><code>curl <span class=se>\</span>
     -X <span class=s1>&#39;POST&#39;</span> <span class=se>\</span>
     -F <span class=s1>&#39;fixed-filepath=@/tmp/foo.txt&#39;</span> <span class=se>\</span>
-    -F <span class=s1>&#39;random-filepath=@/bed/seek.png&#39;</span> <span class=se>\</span>
+    -F <span class=s1>&#39;random-filepath=@/general/everyone.flac&#39;</span> <span class=se>\</span>
     -F <span class=s1>&#39;fixed-filepath-content-type=@/tmp/bar.csv&#39;</span> <span class=se>\</span>
     -F <span class=s1>&#39;fixed-filepath-ct-header=@/tmp/bar.json&#39;</span> <span class=se>\</span>
-    -F <span class=s1>&#39;random-filepath-content-type=@/describe/education.ppt&#39;</span> <span class=se>\</span>
-    -F <span class=s1>&#39;random-filepath-ct-header=@/accept/himself.ppt&#39;</span> <span class=se>\</span>
+    -F <span class=s1>&#39;random-filepath-content-type=@/back/always.gif&#39;</span> <span class=se>\</span>
+    -F <span class=s1>&#39;random-filepath-ct-header=@/actually/maintain.bmp&#39;</span> <span class=se>\</span>
     -H <span class=s1>&#39;Accept-Language: *&#39;</span> <span class=se>\</span>
     -H <span class=s1>&#39;Accept-Charset: utf-8&#39;</span> <span class=se>\</span>
     https://github.com/mondeja/http-request-codegen
@@ -829,7 +829,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
     <span class=n>headers</span><span class=o>=</span><span class=p>{</span>
         <span class=s1>&#39;Content-Type&#39;</span><span class=p>:</span> <span class=s1>&#39;application/json&#39;</span>
     <span class=p>},</span>
-    <span class=n>seed</span><span class=o>=</span><span class=mi>5843</span><span class=p>,</span>
+    <span class=n>seed</span><span class=o>=</span><span class=mi>3273</span><span class=p>,</span>
     <span class=n>parameters</span><span class=o>=</span><span class=p>[</span>
         <span class=p>{</span>
             <span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;fixed-value&#39;</span><span class=p>,</span>
@@ -922,7 +922,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
 <span class=p>)</span>
 </code></pre></div> </div> <input id=__tabbed_17_2 name=__tabbed_17 type=radio><label for=__tabbed_17_2>Salida</label><div class=tabbed-content> <div class=highlight><pre><span></span><code>curl <span class=se>\</span>
     -X <span class=s1>&#39;POST&#39;</span> <span class=se>\</span>
-    -d <span class=s1>&#39;fixed-value=3&amp;dinamic-value-by-iterable=1&amp;dinamic-value-by-function=2&amp;random-values-by-iterable=foo&amp;random-values-by-function=2&amp;random-values-by-function-path=2&amp;random-value-by-faker-provider-function-path=Camera+operator&amp;random-string=understand&amp;random-integer=-29481&amp;random-integer-in-range=3&amp;random-float=-47508.23735615247&amp;random-rounded-float-in-range=1.693&amp;random-boolean=true&amp;random-boolean-nullable=true&amp;random-type=admit&amp;random-unique-identifier=780ee2babc8b4503a22d9d3c8d79c939&amp;random-id=18028&amp;random-name-from-iterable=attorney&amp;random-name-from-function=back&#39;</span> <span class=se>\</span>
+    -d <span class=s1>&#39;fixed-value=3&amp;dinamic-value-by-iterable=2&amp;dinamic-value-by-function=7&amp;random-values-by-iterable=bar&amp;random-values-by-function=7&amp;random-values-by-function-path=7&amp;random-value-by-faker-provider-function-path=Engineer%2C+site&amp;random-string=thus&amp;random-integer=63385&amp;random-integer-in-range=5&amp;random-float=-1075.3128345962905&amp;random-rounded-float-in-range=2.047&amp;random-boolean=false&amp;random-boolean-nullable=false&amp;random-type=take&amp;random-unique-identifier=9aa9c786099d43e5820128797798d6d5&amp;random-id=64461&amp;random-name-by-iterable=maintain&amp;random-name-by-function=campaign&#39;</span> <span class=se>\</span>
     -H <span class=s1>&#39;Content-Type: application/json&#39;</span> <span class=se>\</span>
     https://github.com/mondeja/http-request-codegen
 </code></pre></div> </div> </div> </div> <input id=__tabbed_14_4 name=__tabbed_14 type=radio><label for=__tabbed_14_4>text/plain</label><div class=tabbed-content> <div class=tabbed-set data-tabs=18:2><input checked=checked id=__tabbed_18_1 name=__tabbed_18 type=radio><label for=__tabbed_18_1>Entrada</label><div class=tabbed-content> <div class=highlight><pre><span></span><code><span class=kn>from</span> <span class=nn>http_request_codegen</span> <span class=kn>import</span> <span class=n>generate_http_request_code</span>
@@ -935,7 +935,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
     <span class=n>headers</span><span class=o>=</span><span class=p>{</span>
         <span class=s1>&#39;Content-Type&#39;</span><span class=p>:</span> <span class=s1>&#39;text/plain&#39;</span>
     <span class=p>},</span>
-    <span class=n>seed</span><span class=o>=</span><span class=mi>5843</span><span class=p>,</span>
+    <span class=n>seed</span><span class=o>=</span><span class=mi>3273</span><span class=p>,</span>
     <span class=n>parameters</span><span class=o>=</span><span class=p>[</span>
         <span class=p>{</span>
             <span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;random-values-by-iterable&#39;</span><span class=p>,</span>
@@ -945,7 +945,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
 <span class=p>)</span>
 </code></pre></div> </div> <input id=__tabbed_18_2 name=__tabbed_18 type=radio><label for=__tabbed_18_2>Salida</label><div class=tabbed-content> <div class=highlight><pre><span></span><code>curl <span class=se>\</span>
     -X <span class=s1>&#39;POST&#39;</span> <span class=se>\</span>
-    -d <span class=s1>&#39;random-values-by-iterable=foo&#39;</span> <span class=se>\</span>
+    -d <span class=s1>&#39;random-values-by-iterable=bar&#39;</span> <span class=se>\</span>
     -H <span class=s1>&#39;Content-Type: text/plain&#39;</span> <span class=se>\</span>
     https://github.com/mondeja/http-request-codegen
 </code></pre></div> </div> </div> </div> </div> </div> </div> </div> </div> </div> <input id=__tabbed_2_3 name=__tabbed_2 type=radio><label for=__tabbed_2_3>Python</label><div class=tabbed-content> <div class=tabbed-set data-tabs=19:1><input checked=checked id=__tabbed_19_1 name=__tabbed_19 type=radio><label for=__tabbed_19_1>requests</label><div class=tabbed-content> <div class=tabbed-set data-tabs=20:2><input checked=checked id=__tabbed_20_1 name=__tabbed_20 type=radio><label for=__tabbed_20_1>GET</label><div class=tabbed-content> <div class=tabbed-set data-tabs=21:2><input checked=checked id=__tabbed_21_1 name=__tabbed_21 type=radio><label for=__tabbed_21_1>Entrada</label><div class=tabbed-content> <div class=highlight><pre><span></span><code><span class=kn>import</span> <span class=nn>fake_module</span>
@@ -961,7 +961,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
         <span class=s1>&#39;Content-Type&#39;</span><span class=p>:</span> <span class=s1>&#39;application/json&#39;</span><span class=p>,</span>
         <span class=s1>&#39;Accept-Language&#39;</span><span class=p>:</span> <span class=s1>&#39;*&#39;</span>
     <span class=p>},</span>
-    <span class=n>seed</span><span class=o>=</span><span class=mi>5843</span><span class=p>,</span>
+    <span class=n>seed</span><span class=o>=</span><span class=mi>3273</span><span class=p>,</span>
     <span class=n>parameters</span><span class=o>=</span><span class=p>[</span>
         <span class=p>{</span>
             <span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;fixed-value&#39;</span><span class=p>,</span>
@@ -1062,26 +1062,24 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
     <span class=s1>&#39;https://github.com/mondeja/http-request-codegen&#39;</span><span class=p>,</span>
     <span class=n>params</span><span class=o>=</span><span class=p>{</span>
         <span class=s1>&#39;fixed-value&#39;</span><span class=p>:</span> <span class=s1>&#39;3&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;dinamic-value-by-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;1&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;dinamic-value-by-function&#39;</span><span class=p>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-values-by-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;foo&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-values-by-function&#39;</span><span class=p>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-values-by-function-path&#39;</span><span class=p>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-value-by-faker-provider-function-path&#39;</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;Production designer,&#39;</span>
-                                                         <span class=s1>&#39; theatre/television/&#39;</span>
-                                                         <span class=s1>&#39;film&#39;</span><span class=p>),</span>
-        <span class=s1>&#39;random-string&#39;</span><span class=p>:</span> <span class=s1>&#39;maybe&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-integer&#39;</span><span class=p>:</span> <span class=s1>&#39;-29481&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-integer-in-range&#39;</span><span class=p>:</span> <span class=s1>&#39;3&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-float&#39;</span><span class=p>:</span> <span class=s1>&#39;-47508.23735615247&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-rounded-float-in-range&#39;</span><span class=p>:</span> <span class=s1>&#39;1.693&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-boolean&#39;</span><span class=p>:</span> <span class=s1>&#39;true&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-boolean-nullable&#39;</span><span class=p>:</span> <span class=s1>&#39;true&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-type&#39;</span><span class=p>:</span> <span class=s1>&#39;head&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-unique-identifier&#39;</span><span class=p>:</span> <span class=s1>&#39;543fb02e10f84fd285054777c77dd504&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-id&#39;</span><span class=p>:</span> <span class=s1>&#39;18028&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-name-from-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;and&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-name-from-function&#39;</span><span class=p>:</span> <span class=s1>&#39;toward&#39;</span>
+        <span class=s1>&#39;dinamic-value-by-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;dinamic-value-by-function&#39;</span><span class=p>:</span> <span class=s1>&#39;7&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-values-by-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;bar&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-values-by-function&#39;</span><span class=p>:</span> <span class=s1>&#39;7&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-values-by-function-path&#39;</span><span class=p>:</span> <span class=s1>&#39;7&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-value-by-faker-provider-function-path&#39;</span><span class=p>:</span> <span class=s1>&#39;Financial manager&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-string&#39;</span><span class=p>:</span> <span class=s1>&#39;tough&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-integer&#39;</span><span class=p>:</span> <span class=s1>&#39;63385&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-integer-in-range&#39;</span><span class=p>:</span> <span class=s1>&#39;5&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-float&#39;</span><span class=p>:</span> <span class=s1>&#39;-1075.3128345962905&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-rounded-float-in-range&#39;</span><span class=p>:</span> <span class=s1>&#39;2.047&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-boolean&#39;</span><span class=p>:</span> <span class=s1>&#39;false&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-boolean-nullable&#39;</span><span class=p>:</span> <span class=s1>&#39;false&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-type&#39;</span><span class=p>:</span> <span class=s1>&#39;second&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-unique-identifier&#39;</span><span class=p>:</span> <span class=s1>&#39;4b62e0444b15484c813376f553a99417&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-id&#39;</span><span class=p>:</span> <span class=s1>&#39;64461&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-name-by-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;machine&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-name-by-function&#39;</span><span class=p>:</span> <span class=s1>&#39;safe&#39;</span>
     <span class=p>},</span>
     <span class=n>headers</span><span class=o>=</span><span class=p>{</span>
         <span class=s1>&#39;Content-Type&#39;</span><span class=p>:</span> <span class=s1>&#39;application/json&#39;</span><span class=p>,</span>
@@ -1101,7 +1099,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
         <span class=s1>&#39;Accept-Language&#39;</span><span class=p>:</span> <span class=s1>&#39;*&#39;</span><span class=p>,</span>
         <span class=s1>&#39;Accept-Charset&#39;</span><span class=p>:</span> <span class=s1>&#39;utf-8&#39;</span>
     <span class=p>},</span>
-    <span class=n>seed</span><span class=o>=</span><span class=mi>5843</span><span class=p>,</span>
+    <span class=n>seed</span><span class=o>=</span><span class=mi>3273</span><span class=p>,</span>
     <span class=n>parameters</span><span class=o>=</span><span class=p>[</span>
         <span class=p>{</span>
             <span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;fixed-value&#39;</span><span class=p>,</span>
@@ -1198,25 +1196,25 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
     <span class=s1>&#39;https://github.com/mondeja/http-request-codegen&#39;</span><span class=p>,</span>
     <span class=n>data</span><span class=o>=</span><span class=p>{</span>
         <span class=s1>&#39;fixed-value&#39;</span><span class=p>:</span> <span class=s1>&#39;3&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;dinamic-value-by-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;1&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;dinamic-value-by-function&#39;</span><span class=p>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-values-by-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;foo&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-values-by-function&#39;</span><span class=p>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-values-by-function-path&#39;</span><span class=p>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-value-by-faker-provider-function-path&#39;</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;Engineer, communicat&#39;</span>
-                                                         <span class=s1>&#39;ions&#39;</span><span class=p>),</span>
-        <span class=s1>&#39;random-string&#39;</span><span class=p>:</span> <span class=s1>&#39;price&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-integer&#39;</span><span class=p>:</span> <span class=s1>&#39;-29481&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-integer-in-range&#39;</span><span class=p>:</span> <span class=s1>&#39;3&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-float&#39;</span><span class=p>:</span> <span class=s1>&#39;-47508.23735615247&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-rounded-float-in-range&#39;</span><span class=p>:</span> <span class=s1>&#39;1.693&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-boolean&#39;</span><span class=p>:</span> <span class=s1>&#39;true&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-boolean-nullable&#39;</span><span class=p>:</span> <span class=s1>&#39;true&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-type&#39;</span><span class=p>:</span> <span class=s1>&#39;clear&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-unique-identifier&#39;</span><span class=p>:</span> <span class=s1>&#39;83306b3a6f1d44bfae6b279400fd09fc&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-id&#39;</span><span class=p>:</span> <span class=s1>&#39;18028&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-name-from-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;general&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-name-from-function&#39;</span><span class=p>:</span> <span class=s1>&#39;line&#39;</span>
+        <span class=s1>&#39;dinamic-value-by-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;dinamic-value-by-function&#39;</span><span class=p>:</span> <span class=s1>&#39;7&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-values-by-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;bar&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-values-by-function&#39;</span><span class=p>:</span> <span class=s1>&#39;7&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-values-by-function-path&#39;</span><span class=p>:</span> <span class=s1>&#39;7&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-value-by-faker-provider-function-path&#39;</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;Community developmen&#39;</span>
+                                                         <span class=s1>&#39;t worker&#39;</span><span class=p>),</span>
+        <span class=s1>&#39;random-string&#39;</span><span class=p>:</span> <span class=s1>&#39;much&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-integer&#39;</span><span class=p>:</span> <span class=s1>&#39;63385&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-integer-in-range&#39;</span><span class=p>:</span> <span class=s1>&#39;5&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-float&#39;</span><span class=p>:</span> <span class=s1>&#39;-1075.3128345962905&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-rounded-float-in-range&#39;</span><span class=p>:</span> <span class=s1>&#39;2.047&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-boolean&#39;</span><span class=p>:</span> <span class=s1>&#39;false&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-boolean-nullable&#39;</span><span class=p>:</span> <span class=s1>&#39;false&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-type&#39;</span><span class=p>:</span> <span class=s1>&#39;card&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-unique-identifier&#39;</span><span class=p>:</span> <span class=s1>&#39;302c9436eba643dd8c9a413d6a9661ee&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-id&#39;</span><span class=p>:</span> <span class=s1>&#39;64461&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-name-by-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;official&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-name-by-function&#39;</span><span class=p>:</span> <span class=s1>&#39;mean&#39;</span>
     <span class=p>},</span>
     <span class=n>headers</span><span class=o>=</span><span class=p>{</span>
         <span class=s1>&#39;Accept-Language&#39;</span><span class=p>:</span> <span class=s1>&#39;*&#39;</span><span class=p>,</span>
@@ -1234,7 +1232,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
         <span class=s1>&#39;Accept-Language&#39;</span><span class=p>:</span> <span class=s1>&#39;*&#39;</span><span class=p>,</span>
         <span class=s1>&#39;Accept-Charset&#39;</span><span class=p>:</span> <span class=s1>&#39;utf-8&#39;</span>
     <span class=p>},</span>
-    <span class=n>seed</span><span class=o>=</span><span class=mi>5843</span><span class=p>,</span>
+    <span class=n>seed</span><span class=o>=</span><span class=mi>3273</span><span class=p>,</span>
     <span class=n>files</span><span class=o>=</span><span class=p>{</span>
         <span class=s1>&#39;fixed-filepath&#39;</span><span class=p>:</span> <span class=s1>&#39;/tmp/foo.txt&#39;</span><span class=p>,</span>
         <span class=s1>&#39;random-filepath&#39;</span><span class=p>:</span> <span class=kc>None</span><span class=p>,</span>
@@ -1268,8 +1266,8 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
             <span class=nb>open</span><span class=p>(</span><span class=s1>&#39;/tmp/foo.txt&#39;</span><span class=p>,</span> <span class=s1>&#39;rb&#39;</span><span class=p>)</span>
         <span class=p>),</span>
         <span class=s1>&#39;random-filepath&#39;</span><span class=p>:</span> <span class=p>(</span>
-            <span class=s1>&#39;/probably/leave.pdf&#39;</span><span class=p>,</span>
-            <span class=nb>open</span><span class=p>(</span><span class=s1>&#39;/probably/leave.pdf&#39;</span><span class=p>,</span> <span class=s1>&#39;rb&#39;</span><span class=p>)</span>
+            <span class=s1>&#39;/five/size.flac&#39;</span><span class=p>,</span>
+            <span class=nb>open</span><span class=p>(</span><span class=s1>&#39;/five/size.flac&#39;</span><span class=p>,</span> <span class=s1>&#39;rb&#39;</span><span class=p>)</span>
         <span class=p>),</span>
         <span class=s1>&#39;fixed-filepath-content-type&#39;</span><span class=p>:</span> <span class=p>(</span>
             <span class=s1>&#39;/tmp/bar.csv&#39;</span><span class=p>,</span>
@@ -1285,13 +1283,13 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
             <span class=p>}</span>
         <span class=p>),</span>
         <span class=s1>&#39;random-filepath-content-type&#39;</span><span class=p>:</span> <span class=p>(</span>
-            <span class=s1>&#39;/professor/box.bmp&#39;</span><span class=p>,</span>
-            <span class=nb>open</span><span class=p>(</span><span class=s1>&#39;/professor/box.bmp&#39;</span><span class=p>,</span> <span class=s1>&#39;rb&#39;</span><span class=p>),</span>
+            <span class=s1>&#39;/blue/institution.pdf&#39;</span><span class=p>,</span>
+            <span class=nb>open</span><span class=p>(</span><span class=s1>&#39;/blue/institution.pdf&#39;</span><span class=p>,</span> <span class=s1>&#39;rb&#39;</span><span class=p>),</span>
             <span class=s1>&#39;text/plain&#39;</span>
         <span class=p>),</span>
         <span class=s1>&#39;random-filepath-ct-header&#39;</span><span class=p>:</span> <span class=p>(</span>
-            <span class=s1>&#39;/real/event.json&#39;</span><span class=p>,</span>
-            <span class=nb>open</span><span class=p>(</span><span class=s1>&#39;/real/event.json&#39;</span><span class=p>,</span> <span class=s1>&#39;rb&#39;</span><span class=p>),</span>
+            <span class=s1>&#39;/peace/trouble.png&#39;</span><span class=p>,</span>
+            <span class=nb>open</span><span class=p>(</span><span class=s1>&#39;/peace/trouble.png&#39;</span><span class=p>,</span> <span class=s1>&#39;rb&#39;</span><span class=p>),</span>
             <span class=s1>&#39;text/csv&#39;</span><span class=p>,</span>
             <span class=p>{</span>
                 <span class=s1>&#39;Accept-Charset&#39;</span><span class=p>:</span> <span class=s1>&#39;utf-8&#39;</span>
@@ -1315,7 +1313,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
     <span class=n>headers</span><span class=o>=</span><span class=p>{</span>
         <span class=s1>&#39;Content-Type&#39;</span><span class=p>:</span> <span class=s1>&#39;application/json&#39;</span>
     <span class=p>},</span>
-    <span class=n>seed</span><span class=o>=</span><span class=mi>5843</span><span class=p>,</span>
+    <span class=n>seed</span><span class=o>=</span><span class=mi>3273</span><span class=p>,</span>
     <span class=n>parameters</span><span class=o>=</span><span class=p>[</span>
         <span class=p>{</span>
             <span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;fixed-value&#39;</span><span class=p>,</span>
@@ -1412,25 +1410,24 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
     <span class=s1>&#39;https://github.com/mondeja/http-request-codegen&#39;</span><span class=p>,</span>
     <span class=n>json</span><span class=o>=</span><span class=p>{</span>
         <span class=s1>&#39;fixed-value&#39;</span><span class=p>:</span> <span class=mi>3</span><span class=p>,</span>
-        <span class=s1>&#39;dinamic-value-by-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;1&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;dinamic-value-by-function&#39;</span><span class=p>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-values-by-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;foo&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-values-by-function&#39;</span><span class=p>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-values-by-function-path&#39;</span><span class=p>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-value-by-faker-provider-function-path&#39;</span><span class=p>:</span> <span class=p>(</span><span class=s1>&#39;Data processing mana&#39;</span>
-                                                         <span class=s1>&#39;ger&#39;</span><span class=p>),</span>
-        <span class=s1>&#39;random-string&#39;</span><span class=p>:</span> <span class=s1>&#39;heavy&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-integer&#39;</span><span class=p>:</span> <span class=s1>&#39;-29481&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-integer-in-range&#39;</span><span class=p>:</span> <span class=s1>&#39;3&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-float&#39;</span><span class=p>:</span> <span class=s1>&#39;-47508.23735615247&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-rounded-float-in-range&#39;</span><span class=p>:</span> <span class=s1>&#39;1.693&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-boolean&#39;</span><span class=p>:</span> <span class=s1>&#39;true&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-boolean-nullable&#39;</span><span class=p>:</span> <span class=s1>&#39;true&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-type&#39;</span><span class=p>:</span> <span class=s1>&#39;until&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-unique-identifier&#39;</span><span class=p>:</span> <span class=s1>&#39;92d49eb4757f4a2e994f7c3ab570ee30&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-id&#39;</span><span class=p>:</span> <span class=s1>&#39;18028&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-name-from-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;before&#39;</span><span class=p>,</span>
-        <span class=s1>&#39;random-name-from-function&#39;</span><span class=p>:</span> <span class=s1>&#39;table&#39;</span>
+        <span class=s1>&#39;dinamic-value-by-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;2&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;dinamic-value-by-function&#39;</span><span class=p>:</span> <span class=s1>&#39;7&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-values-by-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;bar&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-values-by-function&#39;</span><span class=p>:</span> <span class=s1>&#39;7&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-values-by-function-path&#39;</span><span class=p>:</span> <span class=s1>&#39;7&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-value-by-faker-provider-function-path&#39;</span><span class=p>:</span> <span class=s1>&#39;Engineer, water&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-string&#39;</span><span class=p>:</span> <span class=s1>&#39;southern&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-integer&#39;</span><span class=p>:</span> <span class=s1>&#39;63385&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-integer-in-range&#39;</span><span class=p>:</span> <span class=s1>&#39;5&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-float&#39;</span><span class=p>:</span> <span class=s1>&#39;-1075.3128345962905&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-rounded-float-in-range&#39;</span><span class=p>:</span> <span class=s1>&#39;2.047&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-boolean&#39;</span><span class=p>:</span> <span class=s1>&#39;false&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-boolean-nullable&#39;</span><span class=p>:</span> <span class=s1>&#39;false&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-type&#39;</span><span class=p>:</span> <span class=s1>&#39;let&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-unique-identifier&#39;</span><span class=p>:</span> <span class=s1>&#39;523b595506844e7ca157503eb0e37ca9&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-id&#39;</span><span class=p>:</span> <span class=s1>&#39;64461&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-name-by-iterable&#39;</span><span class=p>:</span> <span class=s1>&#39;we&#39;</span><span class=p>,</span>
+        <span class=s1>&#39;random-name-by-function&#39;</span><span class=p>:</span> <span class=s1>&#39;lay&#39;</span>
     <span class=p>},</span>
     <span class=n>headers</span><span class=o>=</span><span class=p>{</span>
         <span class=s1>&#39;Content-Type&#39;</span><span class=p>:</span> <span class=s1>&#39;application/json&#39;</span>
@@ -1446,7 +1443,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
     <span class=n>headers</span><span class=o>=</span><span class=p>{</span>
         <span class=s1>&#39;Content-Type&#39;</span><span class=p>:</span> <span class=s1>&#39;text/plain&#39;</span>
     <span class=p>},</span>
-    <span class=n>seed</span><span class=o>=</span><span class=mi>5843</span><span class=p>,</span>
+    <span class=n>seed</span><span class=o>=</span><span class=mi>3273</span><span class=p>,</span>
     <span class=n>parameters</span><span class=o>=</span><span class=p>[</span>
         <span class=p>{</span>
             <span class=s1>&#39;name&#39;</span><span class=p>:</span> <span class=s1>&#39;random-values-by-iterable&#39;</span><span class=p>,</span>
@@ -1458,7 +1455,7 @@ pip install -e .<span class=o>[</span>dev<span class=o>]</span>
 
 <span class=n>req</span> <span class=o>=</span> <span class=n>requests</span><span class=o>.</span><span class=n>post</span><span class=p>(</span>
     <span class=s1>&#39;https://github.com/mondeja/http-request-codegen&#39;</span><span class=p>,</span>
-    <span class=n>data</span><span class=o>=</span><span class=s1>&#39;foo&#39;</span><span class=p>,</span>
+    <span class=n>data</span><span class=o>=</span><span class=s1>&#39;bar&#39;</span><span class=p>,</span>
     <span class=n>headers</span><span class=o>=</span><span class=p>{</span>
         <span class=s1>&#39;Content-Type&#39;</span><span class=p>:</span> <span class=s1>&#39;text/plain&#39;</span>
     <span class=p>}</span>
