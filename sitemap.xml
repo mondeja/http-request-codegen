@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
-         <loc>https://hrcgen.ml/</loc>
+         <loc>https://mondeja.github.io/http-request-codegen/</loc>
          <lastmod>2023-01-04</lastmod>
          <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="es" href="https://hrcgen.ml/es/"/>
+         <xhtml:link rel="alternate" hreflang="es" href="https://mondeja.github.io/http-request-codegen/es/"/>
     </url>
     <url>
-         <loc>https://hrcgen.ml/dev/</loc>
+         <loc>https://mondeja.github.io/http-request-codegen/dev/</loc>
          <lastmod>2023-01-04</lastmod>
          <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="es" href="https://hrcgen.ml/es/dev/"/>
+         <xhtml:link rel="alternate" hreflang="es" href="https://mondeja.github.io/http-request-codegen/es/dev/"/>
     </url>
     <url>
-         <loc>https://hrcgen.ml/reference/</loc>
+         <loc>https://mondeja.github.io/http-request-codegen/reference/</loc>
          <lastmod>2023-01-04</lastmod>
          <changefreq>daily</changefreq>
-         <xhtml:link rel="alternate" hreflang="es" href="https://hrcgen.ml/es/reference/"/>
+         <xhtml:link rel="alternate" hreflang="es" href="https://mondeja.github.io/http-request-codegen/es/reference/"/>
     </url>
 </urlset>
