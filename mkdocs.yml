@@ -52,11 +52,11 @@ plugins:
       default_handler: python
       handlers:
         python:
-          rendering:
+          paths:
+            - ./http-request-codegen
+          options:
             show_source: false
             show_root_toc_entry: false
-      watch:
-      - http_request_codegen
   - exclude:
       glob:
         - '*.py'
