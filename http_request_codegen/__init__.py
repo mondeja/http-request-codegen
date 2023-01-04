@@ -12,7 +12,7 @@ from http_request_codegen.hrc_valuer import (
 )
 
 
-__version__ = '0.0.8'
+__version__ = '0.1.0'
 __title__ = 'http-request-codegen'
 __all__ = (
     'generate_http_request_code',

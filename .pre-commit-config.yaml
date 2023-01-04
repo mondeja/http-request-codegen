@@ -1,12 +1,12 @@
 repos:
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.31.0
+    rev: v3.3.1
     hooks:
       - id: pyupgrade
         args:
-          - --py36-plus
+          - --py37-plus
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.1.0
+    rev: v4.4.0
     hooks:
       - id: trailing-whitespace
         name: trailing-whitespace
@@ -17,37 +17,31 @@ repos:
       - id: double-quote-string-fixer
         name: double-quote-string-fixer
   - repo: https://github.com/asottile/add-trailing-comma
-    rev: v2.2.1
+    rev: v2.4.0
     hooks:
       - id: add-trailing-comma
         name: add-trailing-comma
-        args:
-          - --py36-plus
-  - repo: https://github.com/asottile/setup-cfg-fmt
-    rev: v1.20.0
-    hooks:
-      - id: setup-cfg-fmt
   - repo: https://github.com/PyCQA/flake8
-    rev: 4.0.1
+    rev: 6.0.0
     hooks:
       - id: flake8
         additional_dependencies:
           - flake8-print
           - flake8-implicit-str-concat
   - repo: https://github.com/mondeja/pre-commit-hooks
-    rev: v1.5.2
+    rev: v1.8.0
     hooks:
       - id: root-editorconfig-required
       - id: dev-extras-required
   - repo: https://github.com/PyCQA/isort
-    rev: 5.10.1
+    rev: 5.11.4
     hooks:
       - id: isort
         args:
           - --filter-files
         files: \.py$
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.26.3
+    rev: v1.28.0
     hooks:
       - id: yamllint
         files: .+\.(yml|yaml)
@@ -55,19 +49,12 @@ repos:
           - -c
           - .yamllint
   - repo: https://github.com/mondeja/pre-commit-po-hooks
-    rev: v1.6.0
+    rev: v1.7.3
     hooks:
       - id: obsolete-messages
       - id: untranslated-messages
       - id: remove-metadata
-  - repo: https://github.com/mondeja/repo-stream
-    rev: v1.3.1
-    hooks:
-      - id: repo-stream
-        args:
-          - -config=https://github.com/mondeja/repo-stream-config
-          - -updater=upstream
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-    rev: 2.4.0
+    rev: 2.6.2
     hooks:
       - id: editorconfig-checker
