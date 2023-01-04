@@ -1,6 +1,6 @@
 <h1 align="center">http-request-codegen</h1>
 
-<h2 align="center">Documentation: <a href="https://hrcgen.ml">en</a> - <a href="https://hrcgen.ml/es/">es</a></h2>
+<h2 align="center">Documentation: <a href="https://mondeja.github.io/http-request-codegen/">en</a> - <a href="https://mondeja.github.io/http-request-codegen/es/">es</a></h2>
 
 <!--start-intro-->
 **http-request-codegen** generates HTTP request code snippets for different
@@ -29,9 +29,9 @@ Supports the following features:
 
 [pypi-version-image]: https://img.shields.io/pypi/v/http-request-codegen?label=version
 [pypi-link]: https://pypi.org/project/http-request-codegen
-[test-image]: https://img.shields.io/github/workflow/status/mondeja/http-request-codegen/CI?label=tests&logo=github
+[test-image]: https://img.shields.io/github/actions/workflow/status/mondeja/http-request-codegen/ci.yml?branch=master&label=tests&logo=github
 [test-link]: https://github.com/mondeja/http-request-codegen/actions?query=workflow%3ACI
-[docs-image]: https://img.shields.io/github/workflow/status/mondeja/http-request-codegen/Github%20Pages?label=docs&logo=github
-[docs-link]: https://hrcgen.ml
+[docs-image]: https://img.shields.io/github/actions/workflow/status/mondeja/http-request-codegen/gh-pages.yml?branch=master&label=docs&logo=github
+[docs-link]: https://mondeja.github.io/http-request-codegen/
 [coverage-image]: https://img.shields.io/coveralls/github/mondeja/http-request-codegen?logo=coveralls
 [coverage-link]: https://coveralls.io/github/mondeja/http-request-codegen
