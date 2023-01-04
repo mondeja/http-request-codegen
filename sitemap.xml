@@ -1,33 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     <url>
          <loc>https://hrcgen.ml/</loc>
-         <lastmod>2022-01-02</lastmod>
+         <lastmod>2023-01-04</lastmod>
          <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="es" href="https://hrcgen.ml/es/"/>
     </url>
     <url>
          <loc>https://hrcgen.ml/dev/</loc>
-         <lastmod>2022-01-02</lastmod>
+         <lastmod>2023-01-04</lastmod>
          <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="es" href="https://hrcgen.ml/es/dev/"/>
     </url>
     <url>
          <loc>https://hrcgen.ml/reference/</loc>
-         <lastmod>2022-01-02</lastmod>
+         <lastmod>2023-01-04</lastmod>
          <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://hrcgen.ml/es/</loc>
-         <lastmod>2022-01-02</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://hrcgen.ml/es/dev/</loc>
-         <lastmod>2022-01-02</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://hrcgen.ml/es/reference/</loc>
-         <lastmod>2022-01-02</lastmod>
-         <changefreq>daily</changefreq>
+         <xhtml:link rel="alternate" hreflang="es" href="https://hrcgen.ml/es/reference/"/>
     </url>
 </urlset>
