@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.3.1
+    rev: v3.7.0
     hooks:
       - id: pyupgrade
         args:
@@ -17,7 +17,7 @@ repos:
       - id: double-quote-string-fixer
         name: double-quote-string-fixer
   - repo: https://github.com/asottile/add-trailing-comma
-    rev: v2.4.0
+    rev: v2.5.1
     hooks:
       - id: add-trailing-comma
         name: add-trailing-comma
@@ -34,14 +34,14 @@ repos:
       - id: root-editorconfig-required
       - id: dev-extras-required
   - repo: https://github.com/PyCQA/isort
-    rev: 5.11.4
+    rev: 5.12.0
     hooks:
       - id: isort
         args:
           - --filter-files
         files: \.py$
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.28.0
+    rev: v1.32.0
     hooks:
       - id: yamllint
         files: .+\.(yml|yaml)
@@ -55,6 +55,6 @@ repos:
       - id: untranslated-messages
       - id: remove-metadata
   - repo: https://github.com/editorconfig-checker/editorconfig-checker.python
-    rev: 2.6.2
+    rev: 2.7.2
     hooks:
       - id: editorconfig-checker
